@@ -2,7 +2,7 @@ import React from 'react';
 import GoogleFontLoader from "react-google-font-loader";
 import GlobalStyle from "../../assets/styles/globalStyles";
 import {Switch, Route} from "react-router";
-import SignIn from "../SignIn/SignIn";
+import SignInController from "../SignIn/SignInController";
 import SignUp from "../SignUp/SignUp";
 import Dashboard from "../Dashboard/Dashboard";
 import Trainings from "../Trainings/Trainings";
@@ -28,7 +28,7 @@ const App: React.FC = () => {
             />
             <GlobalStyle/>
             <Switch>
-                <Route path="/sign-in" component={SignIn}/>
+                <Route path="/sign-in" component={SignInController}/>
                 <Route path="/sign-up" component={SignUp}/>
                 <Route path="/dashboard" component={Dashboard}/>
                 <Route path="/trainings" component={Trainings}/>
