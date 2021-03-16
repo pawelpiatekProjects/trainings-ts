@@ -9,7 +9,7 @@ interface Props extends RouteComponentProps{ }
 
 const SignInController: React.FC<Props> = ({history}) => {
 
-    const {onLogIn} = useContext(UserAuthenticationContext)
+    const {onLogIn} = useContext(UserAuthenticationContext);
 
     const SignInSchema = Yup.object().shape({
         email: Yup.string()
