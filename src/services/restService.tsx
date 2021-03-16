@@ -13,6 +13,11 @@ export const onAddAuthorizationHeader = (token: string) => {
     instance.defaults.headers.common['Authorization'] = `Bearer ' + ${token}`;
 }
 
+// Deleting authorization token header from axios instance (logout)
+export const onDeleteAuthorizationHeader = () => {
+    delete instance.defaults.headers.common['Authorization'];
+}
+
 export function post<T>(endpoint: string, data?: PostDataSchema) {
     return instance.post<T>(endpoint, data);
 }

@@ -13,6 +13,7 @@ import USerAccount from "../UserAccount/UserAccount";
 import Settings from "../Settings/Settings";
 import Exercises from "../Exercises/Exercises";
 import UserAuthenticationContextProvider from "../../contexts/UserAuthenticationContext";
+import PageNotFound from "../PageNotFound/PageNotFound";
 
 
 const App: React.FC = () => {
@@ -30,16 +31,17 @@ const App: React.FC = () => {
             <GlobalStyle/>
             <UserAuthenticationContextProvider>
                 <Switch>
-                    <Route path="/sign-in" component={SignInController}/>
-                    <Route path="/sign-up" component={SignUpController}/>
-                    <Route path="/dashboard" component={Dashboard}/>
-                    <Route path="/trainings" component={Trainings}/>
-                    <Route path="/calendar" component={Calendar}/>
-                    <Route path="/statistics" component={Statistics}/>
-                    <Route path="/user-account" component={USerAccount}/>
-                    <Route path="/settings" component={Settings}/>
-                    <Route path="/exercises" component={Exercises}/>
-                    <Route path="/" component={Intro}/>
+                    <Route path="/sign-in" exact component={SignInController}/>
+                    <Route path="/sign-up" exact component={SignUpController}/>
+                    <Route path="/dashboard" exact component={Dashboard}/>
+                    <Route path="/trainings" exact component={Trainings}/>
+                    <Route path="/calendar" exact component={Calendar}/>
+                    <Route path="/statistics" exact component={Statistics}/>
+                    <Route path="/user-account" exact component={USerAccount}/>
+                    <Route path="/settings" exact component={Settings}/>
+                    <Route path="/exercises" exact component={Exercises}/>
+                    <Route path="/" exact component={Intro}/>
+                    <Route path="*" component={PageNotFound}/>
                 </Switch>
             </UserAuthenticationContextProvider>
 

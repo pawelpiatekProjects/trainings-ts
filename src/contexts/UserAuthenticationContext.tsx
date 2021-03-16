@@ -1,4 +1,5 @@
 import React, {useState, createContext} from 'react';
+import {onAddAuthorizationHeader, onDeleteAuthorizationHeader} from '../services/restService';
 
 interface AuthenticatedUserData {
     token: string,
@@ -19,10 +20,16 @@ const UserAuthenticationContextProvider: React.FC = ({children}) => {
 
     const onLogIn = (token: string, userId: string) => {
         setAuthenticatedUser({token, userId});
+
+        // Adding authorization header with valid token
+        onAddAuthorizationHeader(token);
     }
 
     const onLogOut = () => {
         setAuthenticatedUser({} as AuthenticatedUserData);
+
+        // Removing authorization header when during logout process
+        onDeleteAuthorizationHeader();
     }
 
     return (
