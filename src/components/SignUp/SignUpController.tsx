@@ -1,8 +1,12 @@
 import React from 'react';
 import SignUp from "./SignUp";
 import * as Yup from 'yup';
+import {post} from '../../services/restService';
+import {RouteComponentProps} from "react-router-dom";
 
-const SignUpController: React.FC = () => {
+interface Props extends RouteComponentProps{ }
+
+const SignUpController: React.FC<Props> = ({history}) => {
 
     const SignUpSchema = Yup.object().shape({
         name: Yup.string()
@@ -26,8 +30,26 @@ const SignUpController: React.FC = () => {
 
     });
 
-    const onSignUp = (name: string, lastName: string, email: string, password: string) => {
+     const onSignUp = async (name: string, lastName: string, email: string, password: string) => {
         console.log(`name: ${name}, lastNAme: ${lastName}, email: ${email}, password: ${password}`);
+
+        try {
+            const response = await post<any>('auth/signup', {
+                email: email,
+                name: lastName,
+                lastName: lastName,
+                password: password
+            });
+
+            console.log(response);
+
+            // todo: Add pop up after sign up with message and redirect button
+            history.push('/dashboard');
+
+
+        } catch (e) {
+            console.log('Error: ', e);
+        }
     }
     return (
         <>
