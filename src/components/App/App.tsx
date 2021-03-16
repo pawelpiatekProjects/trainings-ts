@@ -12,6 +12,7 @@ import Statistics from "../Statistics/Statistics";
 import USerAccount from "../UserAccount/UserAccount";
 import Settings from "../Settings/Settings";
 import Exercises from "../Exercises/Exercises";
+import UserAuthenticationContextProvider from "../../contexts/UserAuthenticationContext";
 
 
 const App: React.FC = () => {
@@ -27,18 +28,21 @@ const App: React.FC = () => {
                 subsets={['cyrillic-ext', 'greek', 'latin']}
             />
             <GlobalStyle/>
-            <Switch>
-                <Route path="/sign-in" component={SignInController}/>
-                <Route path="/sign-up" component={SignUpController}/>
-                <Route path="/dashboard" component={Dashboard}/>
-                <Route path="/trainings" component={Trainings}/>
-                <Route path="/calendar" component={Calendar}/>
-                <Route path="/statistics" component={Statistics}/>
-                <Route path="/user-account" component={USerAccount}/>
-                <Route path="/settings" component={Settings}/>
-                <Route path="/exercises" component={Exercises}/>
-                <Route path="/" component={Intro}/>
-            </Switch>
+            <UserAuthenticationContextProvider>
+                <Switch>
+                    <Route path="/sign-in" component={SignInController}/>
+                    <Route path="/sign-up" component={SignUpController}/>
+                    <Route path="/dashboard" component={Dashboard}/>
+                    <Route path="/trainings" component={Trainings}/>
+                    <Route path="/calendar" component={Calendar}/>
+                    <Route path="/statistics" component={Statistics}/>
+                    <Route path="/user-account" component={USerAccount}/>
+                    <Route path="/settings" component={Settings}/>
+                    <Route path="/exercises" component={Exercises}/>
+                    <Route path="/" component={Intro}/>
+                </Switch>
+            </UserAuthenticationContextProvider>
+
         </div>
     );
 }

@@ -1,9 +1,15 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import SignIn from "./SignIn";
 import * as Yup from 'yup';
 import {post} from '../../services/restService';
+import { RouteComponentProps} from 'react-router-dom';
+import {UserAuthenticationContext} from "../../contexts/UserAuthenticationContext";
 
-const SignInController: React.FC = () => {
+interface Props extends RouteComponentProps{ }
+
+const SignInController: React.FC<Props> = ({history}) => {
+
+    const {onLogIn} = useContext(UserAuthenticationContext)
 
     const SignInSchema = Yup.object().shape({
         email: Yup.string()
@@ -21,12 +27,16 @@ const SignInController: React.FC = () => {
         console.log(`email: ${email}, password: ${password}`)
 
         try {
-            const response = await post<any>('auth/login', {
+            const {data: {token, userId}} = await post<any>('auth/login', {
                 email: email,
                 password: password
             });
 
-            console.log('Login response: ', response);
+            // Emitting new authenticated user
+            onLogIn(token, userId);
+
+            // Redirecting to Dashboard component
+            history.push('/dashboard');
         } catch (e) {
             console.log('Error: ', e)
         }
