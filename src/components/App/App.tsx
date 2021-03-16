@@ -3,7 +3,7 @@ import GoogleFontLoader from "react-google-font-loader";
 import GlobalStyle from "../../assets/styles/globalStyles";
 import {Switch, Route} from "react-router";
 import SignInController from "../SignIn/SignInController";
-import SignUp from "../SignUp/SignUp";
+import SignUpController from "../SignUp/SignUpController";
 import Dashboard from "../Dashboard/Dashboard";
 import Trainings from "../Trainings/Trainings";
 import Calendar from "../Calendar/Calendar";
@@ -29,7 +29,7 @@ const App: React.FC = () => {
             <GlobalStyle/>
             <Switch>
                 <Route path="/sign-in" component={SignInController}/>
-                <Route path="/sign-up" component={SignUp}/>
+                <Route path="/sign-up" component={SignUpController}/>
                 <Route path="/dashboard" component={Dashboard}/>
                 <Route path="/trainings" component={Trainings}/>
                 <Route path="/calendar" component={Calendar}/>
