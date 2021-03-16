@@ -1,6 +1,7 @@
 import React from 'react';
 import SignIn from "./SignIn";
 import * as Yup from 'yup';
+import {post} from '../../services/restService';
 
 const SignInController: React.FC = () => {
 
@@ -16,8 +17,19 @@ const SignInController: React.FC = () => {
             .required('Password is required'),
     });
 
-    const onSignIn = (email: string, password: string) => {
+    const onSignIn = async(email: string, password: string) => {
         console.log(`email: ${email}, password: ${password}`)
+
+        try {
+            const response = await post<any>('auth/login', {
+                email: email,
+                password: password
+            });
+
+            console.log('Login response: ', response);
+        } catch (e) {
+            console.log('Error: ', e)
+        }
     }
 
     return (
