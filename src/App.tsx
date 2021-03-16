@@ -1,26 +1,23 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import GoogleFontLoader from "react-google-font-loader";
+import GlobalStyle from "./assets/styles/globalStyles";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+const App: React.FC = () => {
+    return (
+        <div className="App">
+            <GoogleFontLoader
+                fonts={[
+                    {
+                        font: 'Montserrat',
+                        weights: [400, 700],
+                    },
+                ]}
+                subsets={['cyrillic-ext', 'greek', 'latin']}
+            />
+            <GlobalStyle/>
+        </div>
+    );
 }
 
 export default App;
