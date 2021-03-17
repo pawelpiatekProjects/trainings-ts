@@ -1,15 +1,14 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import SignIn from "./SignIn";
 import * as Yup from 'yup';
 import {post} from '../../services/restService';
 import { RouteComponentProps} from 'react-router-dom';
-import {UserAuthenticationContext} from "../../contexts/UserAuthenticationContext";
+import {storeAuthenticatedUser} from '../../services/authenticationService';
+
 
 interface Props extends RouteComponentProps{ }
 
 const SignInController: React.FC<Props> = ({history}) => {
-
-    const {onLogIn} = useContext(UserAuthenticationContext);
 
     const SignInSchema = Yup.object().shape({
         email: Yup.string()
@@ -33,7 +32,7 @@ const SignInController: React.FC<Props> = ({history}) => {
             });
 
             // Emitting new authenticated user
-            onLogIn(token, userId);
+            storeAuthenticatedUser(token, userId);
 
             // Redirecting to Dashboard component
             history.push('/dashboard');

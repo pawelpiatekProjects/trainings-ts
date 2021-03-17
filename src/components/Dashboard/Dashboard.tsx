@@ -1,19 +1,29 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import TopNav from "../Navigation/TopNav/TopNav";
-import {UserAuthenticationContext} from "../../contexts/UserAuthenticationContext";
+import {clearAuthenticatedUSerData} from '../../services/authenticationService';
+import {get} from '../../services/restService';
+import {RouteComponentProps} from "react-router-dom";
 
-const Dashboard: React.FC = () => {
-    const {onLogOut} = useContext(UserAuthenticationContext)
+interface Props extends RouteComponentProps{ }
 
-    const testLogOut = () => {
-        // onLogOut();
-        console.log('log out')
+const Dashboard: React.FC<Props> = ({history}) => {
+
+
+     const onTestInterceptor = async() => {
+        const test = await get<any>('someWrong');
+    }
+
+    const logOut = () => {
+         console.log('logged out')
+        clearAuthenticatedUSerData();
+        history.push('/sign-in');
     }
     return (
         <>
             <TopNav/>
             <p>Dashboard works</p>
-            <button onClick={() => onLogOut()}>Log out</button>
+            <button onClick={() => logOut()}>Log out</button>
+            <button onClick={() => onTestInterceptor()}>Interceptor test</button>
         </>
     )
 };

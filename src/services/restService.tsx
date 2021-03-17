@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {clearAuthenticatedUSerData} from './authenticationService';
 
 interface PostDataSchema {
     [key: string]: string
@@ -25,3 +26,11 @@ export function post<T>(endpoint: string, data?: PostDataSchema) {
 export function get<T>(endpoint: string) {
     return instance.get<T>(endpoint);
 }
+
+instance.interceptors.response.use(response=> response, error => {
+    if(error.response.status === 401) {
+        clearAuthenticatedUSerData();
+    }
+})
+
+

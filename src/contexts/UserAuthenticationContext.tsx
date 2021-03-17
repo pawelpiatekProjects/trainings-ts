@@ -1,5 +1,6 @@
-import React, {useState, createContext} from 'react';
+import React, {useState, createContext, useEffect} from 'react';
 import {onAddAuthorizationHeader, onDeleteAuthorizationHeader} from '../services/restService';
+import {getTokenFromStorage, getUserIdFromStorage} from '../services/authenticationService';
 
 interface AuthenticatedUserData {
     token: string,
@@ -17,6 +18,21 @@ export const UserAuthenticationContext = createContext<ContextType>({} as Contex
 const UserAuthenticationContextProvider: React.FC = ({children}) => {
 
     const [authenticatedUser, setAuthenticatedUser] = useState<AuthenticatedUserData>({} as AuthenticatedUserData);
+
+    useEffect(() => {
+        const token = getTokenFromStorage();
+        const userId = getUserIdFromStorage();
+
+        if(token && userId) {
+            const authenticatedUser: AuthenticatedUserData = {
+                token: token,
+                userId: userId
+            }
+
+            setAuthenticatedUser(authenticatedUser);
+        }
+    }, [])
+
 
     const onLogIn = (token: string, userId: string) => {
         setAuthenticatedUser({token, userId});

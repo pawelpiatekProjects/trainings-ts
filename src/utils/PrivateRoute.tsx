@@ -1,14 +1,14 @@
 import React from "react";
 import {Route, Redirect, RouteProps, } from 'react-router-dom';
+import {isUserAuthenticated} from '../services/authenticationService';
 
 interface Props extends RouteProps{
-    isAuthenticated: boolean;
     component: any
 }
 
-const PrivateRoute: React.FC<Props> = ({isAuthenticated, component}) => {
-
-    return isAuthenticated ? <Route component={component}/> : <Redirect to='/sign-in'/>
+const PrivateRoute: React.FC<Props> = ({ component}) => {
+    const isAuth = isUserAuthenticated();
+    return isAuth ? <Route component={component}/> : <Redirect to='/sign-in'/>
 };
 
 export default PrivateRoute;
