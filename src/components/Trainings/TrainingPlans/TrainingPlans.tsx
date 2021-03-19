@@ -1,6 +1,11 @@
 import React from 'react';
+import {TrainingPlanIntro} from "../../../contexts/TrainingPlansContext";
 
-const TrainingPlans: React.FC = () => {
+interface Props {
+    plans: TrainingPlanIntro[]
+}
+
+const TrainingPlans: React.FC<Props> = ({plans}) => {
     return(
         <p>Training plans</p>
     )

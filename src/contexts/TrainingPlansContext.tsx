@@ -1,6 +1,6 @@
 import React, {createContext, useState} from 'react';
 
-interface TrainingPlanIntro {
+export interface TrainingPlanIntro {
     _id: string;
     name: string;
     description?: string;

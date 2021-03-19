@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import TopNav from "../../Navigation/TopNav/TopNav";
+
 
 const TrainingsWrapper = styled.div`
 
