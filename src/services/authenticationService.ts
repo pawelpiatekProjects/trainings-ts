@@ -1,3 +1,4 @@
+import {post} from "./restService";
 
 export const storeAuthenticatedUser = (token: string, userId: string) => {
     localStorage.setItem('token', token);
@@ -34,3 +35,5 @@ export const isUserAuthenticated = () => {
     }
     return expirationDate;
 }
+
+

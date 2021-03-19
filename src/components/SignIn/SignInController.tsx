@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 import {post} from '../../services/restService';
 import { RouteComponentProps} from 'react-router-dom';
 import {storeAuthenticatedUser} from '../../services/authenticationService';
+import {onAddAuthorizationHeader} from '../../services/restService';
 
 
 interface Props extends RouteComponentProps{ }
@@ -36,6 +37,9 @@ const SignInController: React.FC<Props> = ({history}) => {
 
             // Redirecting to Dashboard component
             history.push('/dashboard');
+
+            // Adding authorization token to header
+            onAddAuthorizationHeader(token);
         } catch (e) {
             console.log('Error: ', e)
         }

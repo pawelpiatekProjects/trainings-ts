@@ -14,6 +14,7 @@ import Settings from "../Settings/Settings";
 import Exercises from "../Exercises/Exercises";
 import PageNotFound from "../PageNotFound/PageNotFound";
 import PrivateRoute from "../../utils/PrivateRoute";
+import TrainingPlanContextProvider from "../../contexts/TrainingPlansContext";
 
 
 
@@ -33,18 +34,18 @@ const App: React.FC = () => {
             />
             <GlobalStyle/>
             <Switch>
-
                 <PrivateRoute
                     path='/dashboard'
                     exact
                     component={Dashboard}
                 />
-
-                <PrivateRoute
-                    path='/trainings'
-                    exact
-                    component={TrainingsController}
-                />
+                <TrainingPlanContextProvider>
+                    <PrivateRoute
+                        path='/trainings'
+                        exact
+                        component={TrainingsController}
+                    />
+                </TrainingPlanContextProvider>
                 <PrivateRoute
                     path='/calendar'
                     exact
