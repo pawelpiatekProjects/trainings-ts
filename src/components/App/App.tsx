@@ -5,7 +5,6 @@ import {Switch, Route} from "react-router";
 import SignInController from "../SignIn/SignInController";
 import SignUpController from "../SignUp/SignUpController";
 import Dashboard from "../Dashboard/Dashboard";
-import TrainingsController from "../Trainings/TrainingsController";
 import Calendar from "../Calendar/Calendar";
 import Intro from "../Intro/Intro";
 import Statistics from "../Statistics/Statistics";
@@ -14,7 +13,7 @@ import Settings from "../Settings/Settings";
 import Exercises from "../Exercises/Exercises";
 import PageNotFound from "../PageNotFound/PageNotFound";
 import PrivateRoute from "../../utils/PrivateRoute";
-import TrainingPlanContextProvider from "../../contexts/TrainingPlansContext";
+import TrainingsController from "../Trainings/TrainingsController";
 
 
 
@@ -39,13 +38,10 @@ const App: React.FC = () => {
                     exact
                     component={Dashboard}
                 />
-                <TrainingPlanContextProvider>
-                    <PrivateRoute
-                        path='/trainings'
-                        exact
-                        component={TrainingsController}
-                    />
-                </TrainingPlanContextProvider>
+                <PrivateRoute
+                    path='/trainings'
+                    component={TrainingsController}
+                />
                 <PrivateRoute
                     path='/calendar'
                     exact

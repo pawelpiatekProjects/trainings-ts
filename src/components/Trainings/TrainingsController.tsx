@@ -3,10 +3,8 @@ import Trainings from "./Trainings";
 
 const TrainingsController: React.FC = () => {
     return (
-        <>
-            <Trainings/>
-        </>
+        <Trainings/>
     )
-};
+}
 
 export default TrainingsController;

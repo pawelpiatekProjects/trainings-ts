@@ -3,7 +3,7 @@ import {Route, Redirect, RouteProps, } from 'react-router-dom';
 import {isUserAuthenticated} from '../services/authenticationService';
 
 interface Props extends RouteProps{
-    component: any
+    component?: any;
 }
 
 const PrivateRoute: React.FC<Props> = ({ component}) => {
