@@ -15,7 +15,7 @@ const Trainings: React.FC = () => {
             <SideNavLeft/>
             <Switch>
                 <PrivateRoute exact component={TrainingListController} path='/trainings/trainings-list'/>
-                <PrivateRoute exact component={TrainingPlansController} path='/trainings/training-plans'/>
+                <PrivateRoute  component={TrainingPlansController} path='/trainings/training-plans'/>
                 <PrivateRedirect path='/trainings' redirectPath='/trainings/trainings-list'/>
             </Switch>
 
