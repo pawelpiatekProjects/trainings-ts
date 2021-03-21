@@ -10,25 +10,24 @@ import TrainingPlanController from "./TrainingPlan/TrainingPlanController";
 
 const TrainingPlansController: React.FC = () => {
 
-    const {trainingPlans, setTrainingPlans} = useContext(TrainingPlanContext);
-    console.log('training plans: ', trainingPlans)
+    const {setTrainingPlans} = useContext(TrainingPlanContext);
 
-    const fetchTrainingPlans = async() => {
+
+    const fetchTrainingPlans = async () => {
         const {data} = await get<any>('plans/all');
         // console.log(data);
         setTrainingPlans(data.plans);
     }
 
     useEffect(() => {
-     fetchTrainingPlans();
+        fetchTrainingPlans();
     }, [])
-    return(
-        // <TrainingPlans plans={trainingPlans}/>
-        <Switch>
+    return (
 
-            <PrivateRoute exact component={() => <TrainingPlans plans={trainingPlans}/>} path='/trainings/training-plans'/>
+        <Switch>
+            <PrivateRoute exact component={TrainingPlans} path='/trainings/training-plans'/>
             <PrivateRoute exact component={TrainingPlanController} path='/trainings/training-plans/:id'/>
-            {/*<PrivateRedirect path='/trainings' redirectPath='/trainings/trainings-list'/>*/}
+
         </Switch>
     )
 };

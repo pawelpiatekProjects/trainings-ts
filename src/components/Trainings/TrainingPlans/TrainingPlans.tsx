@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import styled from 'styled-components';
-import {TrainingPlanIntro} from "../../../contexts/TrainingPlansContext";
+import {TrainingPlanContext, TrainingPlanIntro} from "../../../contexts/TrainingPlansContext";
 import {Link} from 'react-router-dom';
 
 const TrainingPlansWrapper = styled.div`
@@ -13,10 +13,11 @@ interface Props {
 
 const TrainingPlans: React.FC<Props> = ({plans}) => {
     console.log('plans from training plans: ', plans)
+    const {trainingPlans} = useContext(TrainingPlanContext);
     return (
         <TrainingPlansWrapper>
             <h1>Plans</h1>
-            {plans.map(plan => (
+            {trainingPlans.map(plan => (
                 <Link to={{pathname: `/trainings/training-plans/${plan._id}`, state: plan._id}}  key={plan._id} >
                     <p>{plan.name}</p>
                 </Link>

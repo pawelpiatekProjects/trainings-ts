@@ -10,8 +10,7 @@ const TrainingPlanController: React.FC = () => {
 
     const fetchTrainingPlan = async() => {
         const {data} = await get<any>(`plans/all/${state}`);
-        console.log('fetched plan', data);
-        setOpenedPlan(data);
+        setOpenedPlan(data.plan);
     }
 
     useEffect(() => {
@@ -19,7 +18,7 @@ const TrainingPlanController: React.FC = () => {
     },[])
 
     return (
-        <TrainingPlan/>
+        <TrainingPlan />
     )
 };
 

@@ -25,6 +25,7 @@ export interface TrainingDay {
 }
 
 export interface TrainingPlanExercise {
+    _id: string;
     exerciseName: string;
     respInSeries: number[];
     weight?: number;
@@ -37,7 +38,7 @@ export interface TrainingPlanExercise {
 interface ContextType {
     trainingPlans: TrainingPlanIntro[];
     setTrainingPlans: (plans: TrainingPlanIntro[]) => void;
-    openedPlan: TrainingPlanAll;
+    openedPlan: TrainingPlanAll ;
     setOpenedPlan: (plan: TrainingPlanAll) => void;
 }
 
