@@ -17,7 +17,7 @@ const TrainingPlans: React.FC<Props> = ({plans}) => {
         <TrainingPlansWrapper>
             <h1>Plans</h1>
             {plans.map(plan => (
-                <Link to={`/trainings/training-plans/${plan._id}`}  key={plan._id}>
+                <Link to={{pathname: `/trainings/training-plans/${plan._id}`, state: plan._id}}  key={plan._id} >
                     <p>{plan.name}</p>
                 </Link>
 
