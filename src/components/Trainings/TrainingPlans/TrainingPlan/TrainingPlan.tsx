@@ -11,22 +11,20 @@ const TrainingPlanWrapper = styled.div`
 const TrainingPlan: React.FC = () => {
 
     const {openedPlan} = useContext(TrainingPlanContext)!;
-    // const plan = openedPlan ?? Object.keys(openedPlan).length > 0;
 
-
-    console.log('opened plan', openedPlan)
+    console.log('opened plan', openedPlan.trainingDays)
 
 
     return (
         <TrainingPlanWrapper>
-            <p>Name: {openedPlan.trainingPlanName}</p>
-            <p>Description: {openedPlan.description }</p>
-            <p>Training days: {openedPlan.trainingDays.length}</p>
+            <p>Name: {openedPlan.trainingPlanName && openedPlan.trainingPlanName}</p>
+            <p>Description: {openedPlan.description && openedPlan.description}</p>
+            {openedPlan.trainingDays ? <p>Training days: {openedPlan.trainingDays.length}</p> : null}
             <hr/>
             <h4>Training Days</h4>
-            {openedPlan.trainingDays.map(trainingDay => (
+            {openedPlan.trainingDays ? openedPlan.trainingDays.map(trainingDay => (
                 <TrainingDay key={trainingDay._id} trainingDay={trainingDay}/>
-            ))}
+            )) : null}
         </TrainingPlanWrapper>
     )
 
