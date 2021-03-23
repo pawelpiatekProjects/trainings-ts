@@ -43,17 +43,6 @@ position: relative;
   background: ${variables.yellowPrimary};
 `;
 
-export const HeroImgWrapper = styled.div`
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  
-  svg {
-  height: 90%;
-  }
-`;
-
 export const SideButtons = styled.ul`
 position: absolute;
 top: 2rem;

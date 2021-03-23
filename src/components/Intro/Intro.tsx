@@ -1,7 +1,6 @@
-import React, {useRef, useEffect} from 'react';
+import React from 'react';
 import {NavLink, RouteComponentProps} from "react-router-dom";
-import gsap from "gsap";
-import {ReactComponent as HeroImg} from '../../assets/images/svg/home-hero.svg';
+import HeroImg from "./HeroImg";
 import * as variables from '../../assets/styles/variables'
 
 import {
@@ -14,8 +13,7 @@ import {
     IntroRight,
     SideButtons,
     SideButton,
-    Separator,
-    HeroImgWrapper
+    Separator
 } from './IntroStyles';
 
 
@@ -23,25 +21,6 @@ interface Props extends RouteComponentProps {
 }
 
 const Intro: React.FC<Props> = ({history}) => {
-    const wrapper = useRef<HTMLDivElement>(null);
-
-
-    useEffect(() => {
-        const elements: HTMLDivElement = wrapper.current!;
-
-        const lines = elements.querySelector('#lines');
-        const body = elements.querySelector('#body');
-
-        gsap.set([body, lines], {autoAlpha: 0});
-        gsap.set(lines, {transformOrigin: '50% 50%'});
-
-
-        const tl = gsap.timeline({defaults: {ease: 'power3.inOut'}});
-
-        tl.fromTo(body, {x: '-=80'}, {duration: 1, x: '+=80', autoAlpha: 1})
-            .fromTo(lines, {scaleY: .85}, {ease: 'power3.inOut', duration: .4, autoAlpha: 1, scaleY: 1})
-
-    }, [])
     return (
         <IntroWrapper>
             <IntroLeft>
@@ -72,9 +51,7 @@ const Intro: React.FC<Props> = ({history}) => {
                         <NavLink to='sign-up'>Sign Up</NavLink>
                     </SideButton>
                 </SideButtons>
-                <HeroImgWrapper ref={wrapper}>
-                    <HeroImg/>
-                </HeroImgWrapper>
+               <HeroImg/>
             </IntroRight>
 
         </IntroWrapper>
