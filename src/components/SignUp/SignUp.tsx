@@ -1,10 +1,14 @@
 import React from 'react';
-import styled from 'styled-components';
-import SignUpForm from "./SignUpForm";
+import SignUpForm from "./SignUpForm/SignUpForm";
+import {
+    SignUpWrapper,
+    SignUpLeft,
+    SignUpLeftContent,
+    SignUpRight
+} from './SignUpStyles';
+import SignInHeroImg from "../../utils/SignInHeroImg";
 
-const SignUpWrapper = styled.div`
 
-`;
 
 interface Props {
     validationSchema: any,
@@ -14,7 +18,14 @@ interface Props {
 const SignUp: React.FC<Props> = ({validationSchema, handleSignUp}) => {
     return (
         <SignUpWrapper>
-            <SignUpForm validationSchema={validationSchema} handleSignUp={handleSignUp}/>
+            <SignUpLeft>
+                <SignUpLeftContent>
+                    <SignUpForm validationSchema={validationSchema} handleSignUp={handleSignUp}/>
+                </SignUpLeftContent>
+            </SignUpLeft>
+            <SignUpRight>
+                <SignInHeroImg/>
+            </SignUpRight>
         </SignUpWrapper>
     )
 };

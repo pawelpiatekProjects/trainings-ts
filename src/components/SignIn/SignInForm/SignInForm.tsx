@@ -6,8 +6,9 @@ import {Facebook, MailOutline, Lock} from '@material-ui/icons';
 import {GoogleOutlined} from '@ant-design/icons';
 import {SecondaryButton} from '../../../assets/styles/customStylesComponents/buttons';
 
+import {FormWrapper, ForgotPassword} from './SignInFormStyles';
+
 import {
-    FormWrapper,
     FormHeader,
     FormParagraph,
     SocialMediaSignUp,
@@ -16,9 +17,9 @@ import {
     FieldLabel,
     FieldWrapper,
     Error,
-    ErrorIcon,
-    ForgotPassword
-} from './SignInFormStyles';
+    ErrorIcon
+} from '../../../assets/styles/customStylesComponents/formComponents';
+
 
 
 interface Props {
@@ -32,7 +33,7 @@ const SignInForm: React.FC<Props> = ({validationSchema, handleSignIn}) => {
             <FormHeader>Sign In</FormHeader>
             <FormParagraph>
                 Don't have an account?
-                <Link to='Sign Up'>Sign Up</Link>
+                <Link to='sign-up'>Sign Up</Link>
             </FormParagraph>
             <SocialMediaSignUp>
                 <SocialMediaButton color={variables.googleOrange}>
@@ -55,17 +56,13 @@ const SignInForm: React.FC<Props> = ({validationSchema, handleSignIn}) => {
                     handleSignIn(email, password);
                 }}>
                 {({errors, touched}) => (
-
                     <Form>
                         <FieldLabel>e-mail</FieldLabel>
-                        {/*Todo: add validation on fronted*/}
                         <FieldWrapper isError={errors.email} touched={touched.email}>
                             <MailOutline/>
                             <Field name='email' placeholder='your e-mail'/>
                             <ErrorIcon fontSize='large' isError={errors.email} touched={touched.email}/>
                         </FieldWrapper>
-
-
                         {errors.email && touched.email ? (
                             <Error>{errors.email}</Error>
                         ) : <Error></Error>}
@@ -75,16 +72,12 @@ const SignInForm: React.FC<Props> = ({validationSchema, handleSignIn}) => {
                             <Field name='password' placeholder='your password' type='password'/>
                             <ErrorIcon fontSize='large' isError={errors.password} touched={touched.password}/>
                         </FieldWrapper>
-
-
                         {errors.password && touched.password ? (
                             <Error>{errors.password}</Error>
                         ) : <Error></Error>}
 
                         <ForgotPassword to='/#'>Forgot your password?</ForgotPassword>
                         <SecondaryButton>Sign In</SecondaryButton>
-
-
                     </Form>
                 )}
             </Formik>

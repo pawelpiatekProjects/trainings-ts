@@ -4,10 +4,9 @@ import {
     SignInWrapper,
     SignInLeft,
     SignInRight,
-    SignInRightContent,
-    HeroWrapper
+    SignInRightContent
 } from './SignInStyles';
-import SignInHeroImg from "./SignInHeroImg";
+import SignInHeroImg from "../../utils/SignInHeroImg";
 
 interface Props {
     validationSchema: any,
@@ -18,9 +17,7 @@ const SignIn: React.FC<Props> = ({validationSchema, handleSignIn}) => {
     return (
         <SignInWrapper>
             <SignInLeft>
-                <HeroWrapper>
-                    <SignInHeroImg/>
-                </HeroWrapper>
+                <SignInHeroImg/>
             </SignInLeft>
             <SignInRight>
                 <SignInRightContent>

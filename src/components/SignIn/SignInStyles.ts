@@ -17,8 +17,6 @@ export const SignInLeft = styled.div`
   align-items: center;
 `;
 
-export const HeroWrapper = styled.div`
-`;
 
 export const SignInRight = styled.div`
   height: 100%;

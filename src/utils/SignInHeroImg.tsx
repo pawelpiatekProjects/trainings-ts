@@ -1,10 +1,13 @@
 import React, {useEffect, useRef} from 'react';
 import styled from 'styled-components';
 import gsap from "gsap";
-import {ReactComponent as HeroImg} from '../../assets/images/svg/sign-hero.svg';
+import {ReactComponent as HeroImg} from '../assets/images/svg/sign-hero.svg';
 
 const HeroImgWrapper = styled.div`
   height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   
   svg {
     transform: scale(1.3);
