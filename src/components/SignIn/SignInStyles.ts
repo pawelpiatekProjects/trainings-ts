@@ -30,6 +30,9 @@ export const SignInRight = styled.div`
 `;
 
 export const SignInRightContent = styled.div`
-
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 

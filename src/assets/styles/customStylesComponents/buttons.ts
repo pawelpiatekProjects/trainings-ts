@@ -27,3 +27,17 @@ export const PrimaryButton = styled.button`
     transform: scale(1.05);
   }
 `;
+
+export const SecondaryButton = styled.button`
+  padding:  1rem 2.5rem;
+  background: ${variables.yellowPrimary};
+  border: 6px solid ${variables.yellowSecondary};
+  font-size: ${variables.textMedium};
+  border-radius: 1rem;
+  
+  transition: all .3s;
+  
+  &:hover {
+  transform: scale(1.05);
+  }
+`;
