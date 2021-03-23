@@ -40,3 +40,5 @@ export const textSmall = `1.4rem`;
 export const textMedium = `1.6rem`;
 export const textLarge = `1.8rem`;
 export const textExtraLarge = `2rem`;
+
+export const textHeader = `3rem`;

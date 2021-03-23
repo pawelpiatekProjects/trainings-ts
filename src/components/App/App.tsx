@@ -26,7 +26,7 @@ const App: React.FC = () => {
                 fonts={[
                     {
                         font: 'Montserrat',
-                        weights: [400, 700],
+                        weights: [400, 500, 700],
                     },
                 ]}
                 subsets={['cyrillic-ext', 'greek', 'latin']}

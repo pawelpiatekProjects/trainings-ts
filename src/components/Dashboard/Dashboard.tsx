@@ -5,15 +5,15 @@ import {onDeleteAuthorizationHeader} from '../../services/restService';
 
 import {RouteComponentProps} from "react-router-dom";
 
-interface Props extends RouteComponentProps{ }
+interface Props extends RouteComponentProps {
+}
 
 const Dashboard: React.FC<Props> = ({history}) => {
 
-
     const logOut = () => {
-         console.log('logged out')
+        console.log('logged out')
         clearAuthenticatedUSerData();
-         onDeleteAuthorizationHeader();
+        onDeleteAuthorizationHeader();
         history.push('/sign-in');
     }
     return (
