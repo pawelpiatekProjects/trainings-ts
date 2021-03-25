@@ -2,6 +2,7 @@ import styled from "styled-components";
 import * as variables from '../variables';
 
 import { ErrorOutline} from '@material-ui/icons';
+import {yellowPrimary} from "../variables";
 
 interface IError {
     isError: any;
@@ -41,9 +42,9 @@ export const SocialMediaButton = styled.button<ISocialButton>`
  padding: 1rem 1.5rem;
  border: 2px solid ${variables.thirdGray};
  border-radius: 1rem;
- width: 20rem;
+ width: calc(50% - 2rem);
  display: flex;
- justify-content: start;
+ justify-content: space-evenly;
  align-items: center;
  transition: all .3s;
  
@@ -52,7 +53,7 @@ export const SocialMediaButton = styled.button<ISocialButton>`
  }
  
  svg {
- margin-right: .3rem;
+    font-size: 1.75rem;
  }
  
  span {
@@ -96,6 +97,17 @@ export const FieldLabel = styled.label`
   font-weight: 500;
 `;
 
+export const FieldGroup = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const FieldGroupItem = styled.div`
+   width: calc(50% - 2rem);
+`;
+
 export const FieldWrapper = styled.div<IError>`
   width: 100%;
   padding: 1rem 1.5rem;
@@ -103,11 +115,16 @@ export const FieldWrapper = styled.div<IError>`
   border-color: ${props => props.isError && props.touched ? variables.errorRed : variables.thirdGray};
   background: ${props => props.isError && props.touched ? variables.errorRedRgba : variables.light};
   position: relative;
-  
   border-radius: 1rem;
   display: flex;
   justify-content: start;
   align-items: center;
+  transition: all .3s;
+  
+  &:hover {
+    border-color: ${yellowPrimary};
+    cursor: pointer;
+  }
   
   input {
     border: none;
@@ -119,13 +136,12 @@ export const FieldWrapper = styled.div<IError>`
     outline: none;
     }
     
-    
   }
   
   svg {
     margin-right: .5rem;
-    color: ${variables.thirdGray};
-      color: ${variables.textColorTertiary}
+    color: ${variables.textColorTertiary};
+    font-size: 1.75rem;
   }
 `;
 
@@ -134,6 +150,13 @@ export const Error = styled.p`
   margin: .2rem 0 1.5rem 0;
   height: 1.6rem;
   color: ${variables.errorRed};
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  
+  svg {
+    margin-right: .3rem;
+  }
   
 `;
 

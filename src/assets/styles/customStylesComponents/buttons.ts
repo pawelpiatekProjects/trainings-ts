@@ -40,4 +40,9 @@ export const SecondaryButton = styled.button`
   &:hover {
   transform: scale(1.05);
   }
+  
+  &:disabled {
+    transform: scale(1)!important;
+    cursor: not-allowed;
+  }
 `;

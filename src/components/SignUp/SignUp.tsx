@@ -12,7 +12,7 @@ import SignInHeroImg from "../../utils/SignInHeroImg";
 
 interface Props {
     validationSchema: any,
-    handleSignUp: (name: string, lastName: string, email: string, password: string) => void
+    handleSignUp: (name: string, lastName: string, userName: string, email: string, password: string) => void
 }
 
 const SignUp: React.FC<Props> = ({validationSchema, handleSignUp}) => {

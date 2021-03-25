@@ -10,9 +10,14 @@ const SignUpController: React.FC<Props> = ({history}) => {
 
     const SignUpSchema = Yup.object().shape({
         name: Yup.string()
-            .required('Name is required'),
+            .required('Name is required')
+            .max(20, 'To Long'),
         lastName: Yup .string()
-            .required('Last name is required'),
+            .required('Last name is required')
+            .max(20, 'Too Long'),
+        userName: Yup.string()
+            .required('User name is required')
+            .max(20, 'Too Long'),
         email: Yup.string()
             .min(2, 'Too Short')
             .max(50, 'Too Long')
@@ -30,7 +35,7 @@ const SignUpController: React.FC<Props> = ({history}) => {
 
     });
 
-     const onSignUp = async (name: string, lastName: string, email: string, password: string) => {
+     const onSignUp = async (name: string, lastName: string, userName: string, email: string, password: string) => {
         console.log(`name: ${name}, lastNAme: ${lastName}, email: ${email}, password: ${password}`);
 
         try {
@@ -38,6 +43,7 @@ const SignUpController: React.FC<Props> = ({history}) => {
                 email: email,
                 name: lastName,
                 lastName: lastName,
+                userName: userName,
                 password: password
             });
 

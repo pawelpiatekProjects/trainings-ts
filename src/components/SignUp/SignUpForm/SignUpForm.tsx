@@ -9,18 +9,20 @@ import {
     SocialMediaButton,
     Divider,
     Error,
+    FieldGroup,
+    FieldGroupItem,
     FieldWrapper,
     FieldLabel
 } from '../../../assets/styles/customStylesComponents/formComponents';
 import {FormWrapper} from './SignUpformStyles';
 import {SecondaryButton} from '../../../assets/styles/customStylesComponents/buttons';
 import * as variables from "../../../assets/styles/variables";
-import {Facebook, Person, MailOutline, Lock} from "@material-ui/icons";
+import {Facebook, Person, MailOutline, Lock, AccountCircle, ErrorOutline} from "@material-ui/icons";
 
 
 interface Props {
     validationSchema: any,
-    handleSignUp: (name: string, lastName: string, email: string, password: string) => void
+    handleSignUp: (name: string, lastName: string, userName: string, email: string, password: string) => void
 }
 
 const SignUpForm: React.FC<Props> = ({validationSchema, handleSignUp}) => {
@@ -46,64 +48,106 @@ const SignUpForm: React.FC<Props> = ({validationSchema, handleSignUp}) => {
                 initialValues={{
                     name: '',
                     lastName: '',
+                    userName: '',
                     email: '',
                     password: '',
                     confirmPassword: ''
                 }}
                 validationSchema={validationSchema}
-                onSubmit={({name, lastName, email, password}) => {
-                    handleSignUp(name, lastName, email, password);
+                onSubmit={({name, lastName, userName, email, password}) => {
+                    handleSignUp(name, lastName, userName, email, password);
                 }}>
-                {({errors, touched, isValid}) => (
+                {({errors, touched, isValid, dirty}) => (
                     <Form>
-                        <FieldLabel>name</FieldLabel>
-                        <FieldWrapper isError={errors.name} touched={touched.name}>
-                            <Person/>
-                            <Field name='name' placeholder='Name'/>
-                        </FieldWrapper>
-                        {errors.name && touched.name ? (
-                            <Error>{errors.name}</Error>
-                        ) : <Error></Error>}
+                        <FieldGroup>
+                            <FieldGroupItem>
+                                {console.log(dirty.toString())}
+                                <FieldLabel>name</FieldLabel>
+                                <FieldWrapper isError={errors.name} touched={touched.name}>
+                                    <Person/>
+                                    <Field name='name' placeholder='enter name'/>
+                                </FieldWrapper>
+                                {errors.name && touched.name ? (
+                                    <Error>
+                                        <ErrorOutline/>
+                                        {errors.name}
+                                    </Error>
+                                ) : <Error></Error>}
+                            </FieldGroupItem>
+                            <FieldGroupItem>
+                                <FieldLabel>last name</FieldLabel>
+                                <FieldWrapper isError={errors.lastName} touched={touched.lastName}>
+                                    <Person/>
+                                    <Field name='lastName' placeholder='enter lastname'/>
+                                </FieldWrapper>
+                                {errors.lastName && touched.lastName ? (
+                                    <Error>
+                                        <ErrorOutline/>
+                                        {errors.lastName}
+                                    </Error>
+                                ) : <Error></Error>}
+                            </FieldGroupItem>
+                        </FieldGroup>
 
-                        <FieldLabel>last name</FieldLabel>
-                        <FieldWrapper isError={errors.lastName} touched={touched.lastName}>
-                            <Person/>
-                            <Field name='lastName' placeholder='Last Name'/>
-                        </FieldWrapper>
-                        {errors.lastName && touched.lastName ? (
-                            <Error>{errors.lastName}</Error>
-                        ) : <Error></Error>}
+                        <FieldGroup>
+                            <FieldGroupItem>
+                                <FieldLabel>username</FieldLabel>
+                                <FieldWrapper isError={errors.userName} touched={touched.userName}>
+                                    <AccountCircle/>
+                                    <Field name='userName' placeholder='enter username' type='text'/>
+                                </FieldWrapper>
+                                {errors.userName && touched.userName ? (
+                                    <Error>
+                                        <ErrorOutline/>
+                                        {errors.userName}
+                                    </Error>
+                                ) : <Error></Error>}
+                            </FieldGroupItem>
+                            <FieldGroupItem>
+                                <FieldLabel>e-mail</FieldLabel>
+                                <FieldWrapper isError={errors.email} touched={touched.email}>
+                                    <MailOutline/>
+                                    <Field name='email' placeholder='enter e-mail'/>
+                                </FieldWrapper>
+                                {errors.email && touched.email ? (
+                                    <Error>
+                                        <ErrorOutline/>
+                                        {errors.email}
+                                    </Error>
+                                ) : <Error></Error>}
+                            </FieldGroupItem>
+                        </FieldGroup>
 
-                        <FieldLabel>e-mail</FieldLabel>
-                        <FieldWrapper isError={errors.email} touched={touched.email}>
-                            <MailOutline/>
-                            <Field name='email' placeholder='Email'/>
-                        </FieldWrapper>
-                        {errors.email && touched.email ? (
-                            <Error>{errors.email}</Error>
-                        ) : <Error></Error>}
+                        <FieldGroup>
+                            <FieldGroupItem>
+                                <FieldLabel>password</FieldLabel>
+                                <FieldWrapper isError={errors.password} touched={touched.password}>
+                                    <Lock/>
+                                    <Field name='password' placeholder='8+ characters' type='password'/>
+                                </FieldWrapper>
+                                {errors.password && touched.password ? (
+                                    <Error>
+                                        <ErrorOutline/>
+                                        {errors.password}
+                                    </Error>
+                                ) : <Error></Error>}
+                            </FieldGroupItem>
+                            <FieldGroupItem>
+                                <FieldLabel>confirm password</FieldLabel>
+                                <FieldWrapper isError={errors.confirmPassword} touched={touched.confirmPassword}>
+                                    <Lock/>
+                                    <Field name='confirmPassword' placeholder='8+ characters' type='password'/>
+                                </FieldWrapper>
+                                {errors.confirmPassword && touched.confirmPassword ? (
+                                    <Error>
+                                        <ErrorOutline/>
+                                        {errors.confirmPassword}
+                                    </Error>
+                                ) : <Error></Error>}
+                            </FieldGroupItem>
+                        </FieldGroup>
 
-                        <FieldLabel>password</FieldLabel>
-                        <FieldWrapper isError={errors.password} touched={touched.password}>
-                            <Lock/>
-                            <Field name='password' placeholder='Password' type='password'/>
-                        </FieldWrapper>
-                        {errors.password && touched.password ? (
-                            <Error>{errors.password}</Error>
-                        ) : <Error></Error>}
-
-                        <FieldLabel>confirm password</FieldLabel>
-                        <FieldWrapper isError={errors.confirmPassword} touched={touched.confirmPassword}>
-                            <Lock/>
-                            <Field name='confirmPassword' placeholder='Confirm Password' type='password'/>
-                        </FieldWrapper>
-                        {errors.confirmPassword && touched.confirmPassword ? (
-                            <Error>{errors.confirmPassword}</Error>
-                        ) : <Error></Error>}
-
-                        <SecondaryButton type='submit'>Sign Up</SecondaryButton>
-
-
+                        <SecondaryButton disabled={!(isValid && dirty)} type='submit'>Sign Up</SecondaryButton>
                     </Form>
                 )}
             </Formik>

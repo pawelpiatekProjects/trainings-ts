@@ -55,7 +55,7 @@ const SignInForm: React.FC<Props> = ({validationSchema, handleSignIn}) => {
                 onSubmit={({email, password}) => {
                     handleSignIn(email, password);
                 }}>
-                {({errors, touched}) => (
+                {({errors, touched, isValid, dirty}) => (
                     <Form>
                         <FieldLabel>e-mail</FieldLabel>
                         <FieldWrapper isError={errors.email} touched={touched.email}>
@@ -77,7 +77,7 @@ const SignInForm: React.FC<Props> = ({validationSchema, handleSignIn}) => {
                         ) : <Error></Error>}
 
                         <ForgotPassword to='/#'>Forgot your password?</ForgotPassword>
-                        <SecondaryButton>Sign In</SecondaryButton>
+                        <SecondaryButton disabled={!(isValid && dirty)} type='submit'>Sign In</SecondaryButton>
                     </Form>
                 )}
             </Formik>

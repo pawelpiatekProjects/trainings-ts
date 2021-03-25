@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
 export const FormWrapper = styled.div`
-  width: 50%;
+  width: 60%;
   margin: 0 auto;
 `;
