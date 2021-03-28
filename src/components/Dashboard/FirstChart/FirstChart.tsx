@@ -52,7 +52,6 @@ const FirstChart: React.FC = () => {
                         </BarChart>
                     </ResponsiveContainer>
                 </ChartContent>
-
             </FirstChartWrapper>
 
     )

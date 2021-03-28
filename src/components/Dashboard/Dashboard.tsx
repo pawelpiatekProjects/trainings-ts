@@ -1,5 +1,6 @@
-import React from "react";
+import React, {useRef, useEffect} from "react";
 import PersonalRecords from "./PersonalRecords/PersonalRecords";
+
 import TopNavController from "../Navigation/TopNav/TopNavController";
 import {
     DashboardWrapper,
