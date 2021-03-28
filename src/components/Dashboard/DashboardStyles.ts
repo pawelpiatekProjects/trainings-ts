@@ -33,5 +33,9 @@ export const DashboardRow = styled.div`
   //align-items: center;
 `;
 
+export const ChartWrapper = styled(GlassmorphismContainer)`
+  //height: 10rem;
+  width: 55%;
+`;
 
 

@@ -4,11 +4,14 @@ import TopNavController from "../Navigation/TopNav/TopNavController";
 import {
     DashboardWrapper,
     DashboardContent,
-    DashboardRow
+    DashboardRow,
 } from './DashboardStyles';
-import FirstChart from "./FirstChart/FirstChart";
+
+import FirstChart from "./Firstchart/FirstChart";
+
 
 const Dashboard: React.FC = () => {
+
 
     return (
         <DashboardWrapper>
@@ -18,6 +21,8 @@ const Dashboard: React.FC = () => {
                     <PersonalRecords/>
                     <FirstChart/>
                 </DashboardRow>
+
+
 
             </DashboardContent>
         </DashboardWrapper>
