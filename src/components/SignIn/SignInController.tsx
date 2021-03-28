@@ -1,15 +1,18 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import SignIn from "./SignIn";
 import * as Yup from 'yup';
 import {post} from '../../services/restService';
 import { RouteComponentProps} from 'react-router-dom';
 import {storeAuthenticatedUser} from '../../services/authenticationService';
 import {onAddAuthorizationHeader} from '../../services/restService';
+import {PopUpContext} from "../../contexts/PopUpContext";
 
 
 interface Props extends RouteComponentProps{ }
 
 const SignInController: React.FC<Props> = ({history}) => {
+
+    const {onOpenModal} = useContext(PopUpContext);
 
     const SignInSchema = Yup.object().shape({
         email: Yup.string()
@@ -42,9 +45,10 @@ const SignInController: React.FC<Props> = ({history}) => {
             onAddAuthorizationHeader(token);
         } catch (e) {
             console.log('Error: ', e)
+            // TODO: add fetching http errors
+            onOpenModal('Could not to sign in. Please check your email and password');
         }
     }
-
     return (
         <>
            <SignIn validationSchema={SignInSchema} handleSignIn={onSignIn}/>

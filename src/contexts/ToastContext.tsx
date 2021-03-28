@@ -1,7 +1,7 @@
 import React, {useState, createContext} from 'react';
 
 interface ContextType {
-    popUpMessage: string;
+    toastMessage: string;
     emitNewMessage: (message: string) => void;
 }
 
@@ -9,17 +9,17 @@ export const ToastContext = createContext({} as ContextType);
 
 const ToastContextProvider: React.FC = ({children}) => {
 
-    const [popUpMessage, setPopUpMessage] = useState('');
+    const [toastMessage, setToastMessage] = useState('');
 
     const emitNewMessage = (message: string) => {
-        setPopUpMessage(message);
+        setToastMessage(message);
         setTimeout(() => {
-            setPopUpMessage('');
+            setToastMessage('');
         }, 3000);
     }
 
     return (
-        <ToastContext.Provider value={{popUpMessage, emitNewMessage}}>
+        <ToastContext.Provider value={{toastMessage, emitNewMessage}}>
             {children}
         </ToastContext.Provider>
     )

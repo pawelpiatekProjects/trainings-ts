@@ -16,6 +16,7 @@ import PrivateRoute from "../../utils/PrivateRoute";
 import TrainingsController from "../Trainings/TrainingsController";
 import PopUp from "../../utils/PopUp/PopUp";
 import ToastContextProvider from "../../contexts/ToastContext";
+import PopUpContextProvider from "../../contexts/PopUpContext";
 
 
 
@@ -24,60 +25,61 @@ const App: React.FC = () => {
     return (
 
         <div className="App">
-            <ToastContextProvider>
-                {/*<PopUp/>*/}
-                <GoogleFontLoader
-                    fonts={[
-                        {
-                            font: 'Montserrat',
-                            weights: [400, 500, 700],
-                        },
-                    ]}
-                    subsets={['cyrillic-ext', 'greek', 'latin']}
-                />
-                <GlobalStyle/>
-                <Switch>
-                    <PrivateRoute
-                        path='/dashboard'
-                        exact
-                        component={DashboardController}
+            <PopUpContextProvider>
+                <ToastContextProvider>
+                    <PopUp/>
+                    <GoogleFontLoader
+                        fonts={[
+                            {
+                                font: 'Montserrat',
+                                weights: [400, 500, 700],
+                            },
+                        ]}
+                        subsets={['cyrillic-ext', 'greek', 'latin']}
                     />
-                    <PrivateRoute
-                        path='/trainings'
-                        component={TrainingsController}
-                    />
-                    <PrivateRoute
-                        path='/calendar'
-                        exact
-                        component={Calendar}
-                    />
-                    <PrivateRoute
-                        path='/statistics'
-                        exact
-                        component={Statistics}
-                    />
-                    <PrivateRoute
-                        path='/user-account'
-                        exact
-                        component={USerAccount}
-                    />
-                    <PrivateRoute
-                        path='/settings'
-                        exact
-                        component={Settings}
-                    />
-                    <PrivateRoute
-                        path='/exercises'
-                        exact
-                        component={Exercises}
-                    />
-                    <Route path="/sign-in" exact component={SignInController}/>
-                    <Route path="/sign-up" exact component={SignUpController}/>
-                    <Route path="/" exact component={Intro}/>
-                    <Route path="*" component={PageNotFound}/>
-                </Switch>
-            </ToastContextProvider>
-
+                    <GlobalStyle/>
+                    <Switch>
+                        <PrivateRoute
+                            path='/dashboard'
+                            exact
+                            component={DashboardController}
+                        />
+                        <PrivateRoute
+                            path='/trainings'
+                            component={TrainingsController}
+                        />
+                        <PrivateRoute
+                            path='/calendar'
+                            exact
+                            component={Calendar}
+                        />
+                        <PrivateRoute
+                            path='/statistics'
+                            exact
+                            component={Statistics}
+                        />
+                        <PrivateRoute
+                            path='/user-account'
+                            exact
+                            component={USerAccount}
+                        />
+                        <PrivateRoute
+                            path='/settings'
+                            exact
+                            component={Settings}
+                        />
+                        <PrivateRoute
+                            path='/exercises'
+                            exact
+                            component={Exercises}
+                        />
+                        <Route path="/sign-in" exact component={SignInController}/>
+                        <Route path="/sign-up" exact component={SignUpController}/>
+                        <Route path="/" exact component={Intro}/>
+                        <Route path="*" component={PageNotFound}/>
+                    </Switch>
+                </ToastContextProvider>
+            </PopUpContextProvider>
         </div>
     );
 }

@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import * as variables from '../../assets/styles/variables';
 import {backdropZIndex} from "../../assets/styles/variables";
+import {GlassmorphismContainer} from "../../components/Dashboard/DashboardStyles";
 
 interface IWrapper {
     isOpen: boolean;
@@ -18,6 +19,10 @@ export const Backdrop = styled.div`
   top: 0;
   left: 0;
   z-index: ${backdropZIndex};
+  
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export const PopUpContent = styled.div`
@@ -28,6 +33,23 @@ export const PopUpContent = styled.div`
   background: ${variables.light};
   width: 40%;
   padding: 3rem;
-  height: 5rem;
   z-index: ${backdropZIndex + 1};
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  box-shadow: ${variables.dashboardItemBoxShadow};
+  
+  svg {
+    font-size: 4rem;
+    color: ${variables.errorRed};
+  }
+  
+
+`;
+
+export const PopUpText = styled.p`
+  margin-left: 3rem;
+  font-size: ${variables.textLarge};
+  color: ${variables.textColorTertiary};
+  font-weight: 500;
 `;
