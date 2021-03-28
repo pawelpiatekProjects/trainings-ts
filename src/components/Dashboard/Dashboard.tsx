@@ -1,27 +1,26 @@
-import React from 'react';
-import TopNav from "../Navigation/TopNav/TopNav";
-import {clearAuthenticatedUSerData} from '../../services/authenticationService';
-import {onDeleteAuthorizationHeader} from '../../services/restService';
+import React from "react";
+import PersonalRecords from "./PersonalRecords/PersonalRecords";
+import TopNavController from "../Navigation/TopNav/TopNavController";
+import {
+    DashboardWrapper,
+    DashboardContent,
+    DashboardRow
+} from './DashboardStyles';
+import FirstChart from "./FirstChart/FirstChart";
 
-import {RouteComponentProps} from "react-router-dom";
+const Dashboard: React.FC = () => {
 
-interface Props extends RouteComponentProps {
-}
-
-const Dashboard: React.FC<Props> = ({history}) => {
-
-    const logOut = () => {
-        console.log('logged out')
-        clearAuthenticatedUSerData();
-        onDeleteAuthorizationHeader();
-        history.push('/sign-in');
-    }
     return (
-        <>
-            <TopNav/>
-            <p>Dashboard works</p>
-            <button onClick={() => logOut()}>Log out</button>
-        </>
+        <DashboardWrapper>
+            <TopNavController/>
+            <DashboardContent>
+                <DashboardRow>
+                    <PersonalRecords/>
+                    <FirstChart/>
+                </DashboardRow>
+
+            </DashboardContent>
+        </DashboardWrapper>
     )
 };
 

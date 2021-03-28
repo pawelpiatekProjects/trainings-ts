@@ -1,59 +1,13 @@
 import React from 'react'
-import styled from 'styled-components';
 import {NavLink} from "react-router-dom";
+import {TopNavWrapper, Navigation, NavigationItem, UserButton} from './TopNavStyles';
+import {Face} from '@material-ui/icons';
 
-import * as variables from '../../../assets/styles/variables';
+interface Props {
+    logOut: () => any
+}
 
-const TopNavWrapper = styled.nav`
-width: 100%;
-padding: 3rem;
-`;
-
-const Navigation = styled.ul`
-  list-style: none;
-  display: flex;
-  justify-content: start;
-  align-items: center;
-`;
-
-const NavigationItem = styled.li`
-  margin: 0 4rem;
-  position: relative;
-  
-  &:after {
-    position: absolute;
-    content: '';
-    width: 100%;
-    height: 2px;
-    left: 0;
-    bottom: -.5rem;
-    background: ${variables.yellowPrimary};
-    transform: scaleX(0);
-    transition: all .3s;
-    transform-origin: left;
-  }
-  
-  
-  a {
-    text-decoration: none;
-    font-size: ${variables.textMedium};
-    font-weight: 500;
-    color: ${variables.textColorPrimary};
-    transition: all .3s;
-  }
-  
-  &:hover {
-    a{
-      color: ${variables.yellowPrimary};
-    }
-  }
-  
-  &:hover:after {
-    transform: scaleX(1);
-  }
-`;
-
-const TopNav: React.FC = () => {
+const TopNav: React.FC<Props> = ({logOut}) => {
     return (
         <TopNavWrapper>
             <Navigation>
@@ -73,6 +27,9 @@ const TopNav: React.FC = () => {
                     <NavLink to='/exercises'>Exercises</NavLink>
                 </NavigationItem>
             </Navigation>
+            <UserButton onClick={() => logOut()}>
+                <Face/>
+            </UserButton>
         </TopNavWrapper>
     )
 };

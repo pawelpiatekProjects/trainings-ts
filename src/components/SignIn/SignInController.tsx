@@ -35,7 +35,7 @@ const SignInController: React.FC<Props> = ({history}) => {
             // Emitting new authenticated user
             storeAuthenticatedUser(token, userId);
 
-            // Redirecting to Dashboard component
+            // Redirecting to DashboardController component
             history.push('/dashboard');
 
             // Adding authorization token to header

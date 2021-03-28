@@ -4,7 +4,7 @@ import GlobalStyle from "../../assets/styles/globalStyles";
 import {Switch, Route} from "react-router";
 import SignInController from "../SignIn/SignInController";
 import SignUpController from "../SignUp/SignUpController";
-import Dashboard from "../Dashboard/Dashboard";
+import DashboardController from "../Dashboard/DashboardController";
 import Calendar from "../Calendar/Calendar";
 import Intro from "../Intro/Intro";
 import Statistics from "../Statistics/Statistics";
@@ -38,7 +38,7 @@ const App: React.FC = () => {
                 <PrivateRoute
                     path='/dashboard'
                     exact
-                    component={Dashboard}
+                    component={DashboardController}
                 />
                 <PrivateRoute
                     path='/trainings'

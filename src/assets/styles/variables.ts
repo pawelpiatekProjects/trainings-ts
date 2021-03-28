@@ -7,6 +7,7 @@ export const textColorSecondary = '#9F9FA3';
 export const textColorTertiary = `#6D6E70`;
 export const light = '#fff';
 export const yellowPrimary = '#F9C409';
+export const yellowPrimaryRgba = 'rgba(249, 196, 9, .2)'
 export const yellowSecondary = `#F9E498`;
 export const yellowPrimaryDarken = '#E8b308';
 export const grayPrimary = '#eee';
