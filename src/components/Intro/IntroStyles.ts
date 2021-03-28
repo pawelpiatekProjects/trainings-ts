@@ -15,11 +15,11 @@ export const IntroLeft = styled.div`
  display: flex;
  justify-content: start;
  align-items: center;
- padding: 6rem;
+ padding: 10rem;
 `;
 
 export const IntroLeftContent = styled.div`
-  width: 70%;
+  width: 75%;
 `;
 
 export const IntroLeftHeader = styled.h1`

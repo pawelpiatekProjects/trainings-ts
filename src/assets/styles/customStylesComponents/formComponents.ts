@@ -126,11 +126,14 @@ export const FieldWrapper = styled.div<IError>`
     cursor: pointer;
   }
   
+  
+  
   input {
     border: none;
-    font-size: ${variables.textSmall};
+    font-size: ${variables.textMedium};
     background: transparent;
     color: ${variables.textColorTertiary};
+    
     
     &:focus {
     outline: none;

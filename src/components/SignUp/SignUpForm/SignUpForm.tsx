@@ -61,7 +61,6 @@ const SignUpForm: React.FC<Props> = ({validationSchema, handleSignUp}) => {
                     <Form>
                         <FieldGroup>
                             <FieldGroupItem>
-                                {console.log(dirty.toString())}
                                 <FieldLabel>name</FieldLabel>
                                 <FieldWrapper isError={errors.name} touched={touched.name}>
                                     <Person/>

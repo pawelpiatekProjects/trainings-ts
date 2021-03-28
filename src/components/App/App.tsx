@@ -14,6 +14,7 @@ import Exercises from "../Exercises/Exercises";
 import PageNotFound from "../PageNotFound/PageNotFound";
 import PrivateRoute from "../../utils/PrivateRoute";
 import TrainingsController from "../Trainings/TrainingsController";
+import PopUp from "../../utils/PopUp/PopUp";
 
 
 
@@ -22,6 +23,7 @@ const App: React.FC = () => {
     return (
 
         <div className="App">
+            {/*<PopUp/>*/}
             <GoogleFontLoader
                 fonts={[
                     {

@@ -15,5 +15,5 @@ export const ForgotPassword = styled(Link)`
   margin-bottom: 3rem;
   display: block;
   text-decoration: none;
-  
+  width: 40%;
 `;

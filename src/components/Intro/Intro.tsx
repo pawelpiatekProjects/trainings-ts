@@ -27,9 +27,9 @@ const Intro: React.FC<Props> = ({history}) => {
                 <IntroLeftContent>
                     <IntroLeftHeader>Lorem ipsum</IntroLeftHeader>
                     <IntroLeftText>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer tristique, nibh eu suscipit
-                        maximus, leo nulla facilisis lacus, sit amet pellentesque magna dui et erat. Integer ligula
-                        nisl, dapibus eu rhoncus tincidunt, dignissim ut lorem.
+                        Hello new user, you have come to the right place. We are glad you want to join our active
+                        community. Just click the ‘Join Us’ button to start an incredible journey with us. In case you
+                        have any questions, you are welcome to send us a message anytime you want. Let’s get started!
                     </IntroLeftText>
                     <IntroLeftButton
                         color={variables.yellowPrimary}
@@ -51,7 +51,7 @@ const Intro: React.FC<Props> = ({history}) => {
                         <NavLink to='sign-up'>Sign Up</NavLink>
                     </SideButton>
                 </SideButtons>
-               <HeroImg/>
+                <HeroImg/>
             </IntroRight>
 
         </IntroWrapper>
