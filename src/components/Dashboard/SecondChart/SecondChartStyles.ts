@@ -1,8 +1,7 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 import {DashboardHeader, GlassmorphismContainer} from "../DashboardStyles";
 
-
-export const FirstChartWrapper = styled(GlassmorphismContainer)`
+export const SecondChartWrapper = styled(GlassmorphismContainer)`
   width: 55%;
   padding: 3rem;
 `;
@@ -13,6 +12,6 @@ export const ChartContent = styled.div`
   margin-top: 1.5rem;
 `;
 
-export const FirstChartHeader = styled(DashboardHeader)`
+export const SecondChartHeader = styled(DashboardHeader)`
   width: 20%;
 `;

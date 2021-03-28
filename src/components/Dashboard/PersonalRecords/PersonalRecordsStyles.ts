@@ -1,19 +1,14 @@
 import styled from 'styled-components';
 import * as variables from "../../../assets/styles/variables";
-import {GlassmorphismContainer} from "../DashboardStyles";
+import {DashboardHeader, GlassmorphismContainer} from "../DashboardStyles";
 
 export const PersonalRecordsWrapper = styled(GlassmorphismContainer)`
   width: 40%;
   padding: 3rem;
 `;
 
-export const PersonalRecordsHeader = styled.h1`
-  font-weight: 500;
-  margin: 0;
+export const PersonalRecordsHeader = styled(DashboardHeader)`
   width: 20%;
-  border-bottom: 3px solid ${variables.yellowPrimary}; 
-  padding-bottom: .5rem;
- 
 `;
 
 export const PersonalRecordsContent = styled.ul`

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import * as variables from '../../assets/styles/variables';
 import backgroundImg from '../../assets/images/png/dashboard-background-large.png';
-import {textMedium} from "../../assets/styles/variables";
+
 
 export const DashboardWrapper = styled.div`
   width: 100%;
@@ -11,16 +11,24 @@ export const DashboardWrapper = styled.div`
   background-size: cover;
 `;
 
+export const DashboardHeader = styled.h1`
+  font-weight: 500;
+  margin: 0;
+  border-bottom: 3px solid ${variables.yellowPrimary}; 
+  padding-bottom: .5rem;
+ 
+`;
+
 export const DashboardContent = styled.div`
-  padding: 3rem;
+  padding: 0 3rem;
 `;
 
  export const GlassmorphismContainer = styled.div`
 
-background: rgba( 255, 255, 255, 0.35 );
+background: rgba( 255, 255, 255, 0.05 );
 box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-backdrop-filter: blur( 5.0px );
--webkit-backdrop-filter: blur( 5.0px );
+backdrop-filter: blur( 12.5px );
+-webkit-backdrop-filter: blur( 12.5px );
 border-radius: 10px;
 border: 1px solid rgba( 255, 255, 255, 0.18 );
 `;
@@ -30,12 +38,9 @@ export const DashboardRow = styled.div`
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
-  //align-items: center;
+  margin-bottom: 3rem;
 `;
 
-export const ChartWrapper = styled(GlassmorphismContainer)`
-  //height: 10rem;
-  width: 55%;
-`;
+
 
 
