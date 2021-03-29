@@ -6,20 +6,25 @@ import SideNavLeft from "../Navigation/SideNavLeft/SideNavLeft";
 import TrainingListController from "./TrainingsList/TrainingListController";
 import TrainingPlansController from "./TrainingPlans/TrainingPlansController";
 import TopNavController from "../Navigation/TopNav/TopNavController";
+import {TrainingsWrapper, ContentWrapper, SideNavWrapper} from './TrainingsStyles';
 
 const Trainings: React.FC = () => {
 
     return (
-        <>
-            <TopNavController />
-            <SideNavLeft/>
-            <Switch>
-                <PrivateRoute exact component={TrainingListController} path='/trainings/trainings-list'/>
-                <PrivateRoute  component={TrainingPlansController} path='/trainings/training-plans'/>
-                <PrivateRedirect path='/trainings' redirectPath='/trainings/trainings-list'/>
-            </Switch>
+        <TrainingsWrapper>
+            <SideNavWrapper>
+                <SideNavLeft/>
+            </SideNavWrapper>
 
-        </>
+            <ContentWrapper>
+                <TopNavController/>
+                <Switch>
+                    <PrivateRoute exact component={TrainingListController} path='/trainings/trainings-list'/>
+                    <PrivateRoute component={TrainingPlansController} path='/trainings/training-plans'/>
+                    <PrivateRedirect path='/trainings' redirectPath='/trainings/trainings-list'/>
+                </Switch>
+            </ContentWrapper>
+        </TrainingsWrapper>
     )
 };
 

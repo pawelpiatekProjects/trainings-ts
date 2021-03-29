@@ -133,7 +133,7 @@ export const FieldWrapper = styled.div<IError>`
     font-size: ${variables.textMedium};
     background: transparent;
     color: ${variables.textColorTertiary};
-    
+    width: 90%;
     
     &:focus {
     outline: none;
@@ -145,6 +145,7 @@ export const FieldWrapper = styled.div<IError>`
     margin-right: .5rem;
     color: ${variables.textColorTertiary};
     font-size: 1.75rem;
+    
   }
 `;
 

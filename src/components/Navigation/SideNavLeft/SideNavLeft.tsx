@@ -1,28 +1,37 @@
 import React from 'react';
-import styled from 'styled-components';
+import {
+    SideNavWrapper,
+    Navigation,
+    NavigationItem,
+    NavigationItemContent
+} from './SideNavLeftStyles';
 import {NavLink} from "react-router-dom";
+import {List, FitnessCenter} from '@material-ui/icons';
+import * as variables from "../../../assets/styles/variables";
 
-const SideNavWrapper = styled.nav`
 
-`;
-
-const Navigation = styled.ul`
-
-`;
-
-const NavigationItem = styled.li`
-
-`;
 
 const SideNavLeft: React.FC = () => {
+
+    const activeStyle = {
+        color:  variables.textColorPrimary
+    }
     return (
         <SideNavWrapper>
             <Navigation>
                 <NavigationItem>
-                    <NavLink to='/trainings/trainings-list'>Trainings List</NavLink>
+                    <NavLink activeStyle={activeStyle} to='/trainings/trainings-list'>
+                        <NavigationItemContent>
+                            <List/>
+                        </NavigationItemContent>
+                    </NavLink>
                 </NavigationItem>
                 <NavigationItem>
-                    <NavLink to='/trainings/training-plans'>Training Plans</NavLink>
+                    <NavLink activeStyle={activeStyle} to='/trainings/training-plans'>
+                        <NavigationItemContent>
+                            <FitnessCenter/>
+                        </NavigationItemContent>
+                    </NavLink>
                 </NavigationItem>
             </Navigation>
         </SideNavWrapper>
