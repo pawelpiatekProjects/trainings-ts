@@ -15,3 +15,11 @@ export const SideNavWrapper = styled.div`
 export const ContentWrapper = styled.div`
   width: 95%;
 `;
+
+export const TopNavWrapper = styled.div`
+  height: 15%;
+`;
+
+export const SwitchWrapper = styled.div`
+  height: 85%;
+`;

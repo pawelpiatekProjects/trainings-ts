@@ -8,7 +8,8 @@ export interface TrainingPlanIntro {
     description?: string;
     creator: string;
     image: string;
-    trainingDaysNum: number
+    trainingDaysNum: number,
+    createdAt: string
 }
 
 export interface TrainingPlanAll {
