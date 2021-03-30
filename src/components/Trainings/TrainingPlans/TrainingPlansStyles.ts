@@ -21,8 +21,8 @@ export const TrainingPlansHeader = styled.h1`
 
 export const TrainingPlansList = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  width: 80%;
+  grid-template-columns: repeat(4, 1fr);
+  width: 90%;
   margin: 3rem auto 0 auto;
   grid-gap: 3rem;
 `;

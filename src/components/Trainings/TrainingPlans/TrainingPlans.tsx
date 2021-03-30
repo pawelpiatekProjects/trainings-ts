@@ -8,8 +8,6 @@ import {
 import * as variables from '../../../assets/styles/variables';
 import {PrimaryButton} from '../../../assets/styles/customStylesComponents/buttons';
 import {TrainingPlanContext, TrainingPlanIntro} from "../../../contexts/TrainingPlansContext";
-import {Link} from 'react-router-dom';
-import CreateNewPlanForm from "./CreateNewPlanForm/CreateNewPlanForm";
 import TrainingPlanCard from "./TrainingPlanCard/TrainingPlanCard";
 
 
@@ -27,7 +25,6 @@ const TrainingPlans: React.FC<Props> = ({validationSchema}) => {
                 <PrimaryButton color={variables.yellowPrimary}>New</PrimaryButton>
             </TrainingPlansHeading>
 
-            {/*<CreateNewPlanForm validationSchema={validationSchema}/>*/}
             <TrainingPlansList>
                 {trainingPlans.map(plan => (
                     <TrainingPlanCard plan={plan} key={plan._id}/>

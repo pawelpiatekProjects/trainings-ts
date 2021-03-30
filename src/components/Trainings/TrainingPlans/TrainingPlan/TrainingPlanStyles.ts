@@ -56,3 +56,22 @@ export const TrainingPlanIntroElement = styled.p`
         font-weight: 500;
     }
 `;
+
+export const TrainingDaysWrapper = styled.div`
+  width: 80%;
+  margin: 2rem auto;
+`;
+
+export const TrainingDaysEmpty = styled.div`
+  width: 100%;
+  border: 1px dashed ${variables.textColorTertiary};
+  padding: 8rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const TrainingDaysEmptyHeader = styled.h1`
+  color: ${variables.textColorTertiary};
+`;

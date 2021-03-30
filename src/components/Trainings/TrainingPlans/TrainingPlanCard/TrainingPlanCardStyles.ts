@@ -14,7 +14,7 @@ export const TrainingPlanCardWrapper = styled.div`
 `;
 
 export const TrainingPlanCardInfoWrapper = styled.div`
-  padding: 3rem;
+  padding: 1rem 3rem 3rem 3rem;
 `;
 
 export const TrainingPlanHeader = styled.h1`
@@ -23,6 +23,7 @@ export const TrainingPlanHeader = styled.h1`
 
 export const Created = styled.p`
 color: ${variables.textColorTertiary};
+  font-size: ${variables.textSmall};
   span {
     font-weight: 500;
   }
@@ -32,7 +33,7 @@ color: ${variables.textColorTertiary};
 export const More = styled(Link)`
   color: ${variables.yellowPrimary};
   text-decoration: none;
-  font-size: ${variables.textMedium};
+  font-size: ${variables.textSmall};
   position: relative;
   
   &:after {

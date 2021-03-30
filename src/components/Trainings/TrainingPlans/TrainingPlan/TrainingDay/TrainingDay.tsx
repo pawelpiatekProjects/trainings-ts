@@ -1,11 +1,9 @@
 import React from "react";
-import styled from 'styled-components';
+import {TrainingDayWrapper} from './TrainingDayStyles';
 import {TrainingDay as TrainingDayType} from "../../../../../contexts/TrainingPlansContext";
 import Exercise from "./Exercise/Exercise";
 
-const TrainingDayWrapper = styled.div`
-  background: white;
-`;
+
 
 interface Props {
     trainingDay: TrainingDayType;
