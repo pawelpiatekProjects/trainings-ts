@@ -1,5 +1,10 @@
 import styled from 'styled-components';
 import * as variables from '../../../assets/styles/variables';
+import {NavLink} from 'react-router-dom';
+
+interface INestedNavItems {
+    isActive: boolean
+}
 
 export const SideNavWrapper = styled.nav`
   width: 100%;
@@ -30,25 +35,28 @@ export const NavigationBottom = styled.ul`
 `;
 
 export const NavigationItem = styled.li`
-  margin-bottom: 1rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  margin-top: 1rem;
   transition: all .3s;
-
-  &:hover {
-    background: ${variables.light};
-    
-    p, svg {
-      color: ${variables.textColorPrimary};
-    }
-
-  }
-
+  
   a {
+    width: 100%;
+    text-align: center;
     color: ${variables.light};
     transition: all .3s;
     text-decoration: none;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding-left: 1.5rem;
+
+    &:hover {
+      background: ${variables.light};
+
+      p, svg {
+        color: ${variables.textColorPrimary};
+      }
+
+    }
 
   }
 `;
@@ -57,13 +65,47 @@ export const NavigationItemContent = styled.div`
   display: flex;
   justify-content: start;
   align-items: center;
-  
+
   p {
-    font-size: ${variables.textextraSmall};
+    font-size: ${variables.textSmall};
     margin-left: .5rem;
+    font-weight: 500;
   }
-  
+
   svg {
     font-size: 2.5rem;
   }
 `;
+
+
+export const NestedNavItems = styled.ul<INestedNavItems>`
+  
+  list-style: none;
+  background: ${variables.light};
+  display: ${props => props.isActive ? 'flex' : 'none'};
+  justify-content: flex-end;
+  align-items: center;
+  flex-direction: column;
+  padding: .5rem 0 .5rem 1rem;
+`;
+
+export const NestedNavItem = styled.li`
+  width: 70%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  margin-bottom: .75rem;
+`;
+
+export const NestedNavLink = styled(NavLink)`
+  text-decoration: none;
+  font-size: ${variables.textSmall};
+  color: ${variables.textColorTertiary};
+  transition: all .3s;
+
+  &:hover {
+    color: ${variables.textColorPrimary};
+  }
+
+`;
+

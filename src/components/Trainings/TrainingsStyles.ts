@@ -9,11 +9,11 @@ export const TrainingsWrapper = styled.div`
 `;
 
 export const SideNavWrapper = styled.div`
-  width: 5%;
+  width: 10%;
 `;
 
 export const ContentWrapper = styled.div`
-  width: 95%;
+  width: 90%;
 `;
 
 export const TopNavWrapper = styled.div`

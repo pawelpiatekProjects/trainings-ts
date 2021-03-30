@@ -23,9 +23,6 @@ const Trainings: React.FC = () => {
             </SideNavWrapper>
 
             <ContentWrapper>
-                <TopNavWrapper>
-                    <TopNavController/>
-                </TopNavWrapper>
                 <SwitchWrapper>
                     <Switch>
                         <PrivateRoute exact component={TrainingListController} path='/trainings/trainings-list'/>

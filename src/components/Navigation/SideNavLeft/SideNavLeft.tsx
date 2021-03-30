@@ -1,11 +1,15 @@
 import React from 'react';
+import {useLocation} from 'react-router-dom';
 import {
     SideNavWrapper,
     Navigation,
     NavigationTop,
     NavigationBottom,
     NavigationItem,
-    NavigationItemContent
+    NavigationItemContent,
+    NestedNavItems,
+    NestedNavItem,
+    NestedNavLink
 } from './SideNavLeftStyles';
 import {NavLink} from "react-router-dom";
 import {
@@ -22,9 +26,17 @@ import * as variables from "../../../assets/styles/variables";
 
 
 const SideNavLeft: React.FC = () => {
+    const location = useLocation().pathname.split('/')[1];
+    console.log('location: ', location === 'trainings')
 
     const activeStyle = {
-        color: variables.textColorPrimary
+        color: variables.textColorPrimary,
+        background: variables.light
+    }
+
+    const activeStyleNested = {
+        color: variables.textColorPrimary,
+
     }
     return (
         <SideNavWrapper>
@@ -33,66 +45,76 @@ const SideNavLeft: React.FC = () => {
                     <NavigationItem>
                         <NavLink activeStyle={activeStyle} to='/dashboard'>
                             <NavigationItemContent>
-                                <Dashboard/>
-                                <p>Dashboard</p>
+                                    <Dashboard/>
+                                    <p>Dashboard</p>
+                            </NavigationItemContent>
+                        </NavLink>
+                    </NavigationItem>
+
+                    <NavigationItem>
+                        <NavLink activeStyle={activeStyle} to='/trainings'>
+                            <NavigationItemContent>
+                                    <FitnessCenter/>
+                                    <p>Trainings</p>
+                            </NavigationItemContent>
+                        </NavLink>
+                    </NavigationItem>
+                    <NestedNavItems isActive={location === 'trainings'}>
+                        <NestedNavItem>
+                            <NestedNavLink activeStyle={activeStyleNested} to='/trainings/trainings-list'>Trainings List</NestedNavLink>
+                        </NestedNavItem>
+                        <NestedNavItem>
+                            <NestedNavLink activeStyle={activeStyleNested} to='/trainings/training-plans'>Training Plans</NestedNavLink>
+                        </NestedNavItem>
+                    </NestedNavItems>
+
+                    <NavigationItem>
+                        <NavLink activeStyle={activeStyle} to='/calendar'>
+                            <NavigationItemContent>
+                                    <CalendarToday/>
+                                    <p>Calendar</p>
                             </NavigationItemContent>
                         </NavLink>
                     </NavigationItem>
                     <NavigationItem>
-                        <NavLink activeStyle={activeStyle} to='/trainings'>
+                        <NavLink activeStyle={activeStyle} to='/statistics'>
                             <NavigationItemContent>
-                                <FitnessCenter/>
-                                <p>Trainings</p>
+                                    <TrendingUp/>
+                                    <p>Statistics</p>
                             </NavigationItemContent>
                         </NavLink>
                     </NavigationItem>
                     <NavigationItem>
-                        <NavLink activeStyle={activeStyle} to='/trainings'>
+                        <NavLink activeStyle={activeStyle} to='/exercises'>
                             <NavigationItemContent>
-                                <CalendarToday/>
-                                <p>Calendar</p>
-                            </NavigationItemContent>
-                        </NavLink>
-                    </NavigationItem>
-                    <NavigationItem>
-                        <NavLink activeStyle={activeStyle} to='/trainings'>
-                            <NavigationItemContent>
-                                <TrendingUp/>
-                                <p>Statistics</p>
-                            </NavigationItemContent>
-                        </NavLink>
-                    </NavigationItem>
-                    <NavigationItem>
-                        <NavLink activeStyle={activeStyle} to='/trainings'>
-                            <NavigationItemContent>
-                                <Folder/>
-                                <p>Exercises</p>
+                                    <Folder/>
+                                    <p>Exercises</p>
                             </NavigationItemContent>
                         </NavLink>
                     </NavigationItem>
                 </NavigationTop>
                <NavigationBottom>
                    <NavigationItem>
-                       <NavLink activeStyle={activeStyle} to='/trainings'>
+                       <NavLink activeStyle={activeStyle} to='/settings'>
                            <NavigationItemContent>
-                               <Settings/>
-                               <p>Settings</p>
+                                   <Settings/>
+                                   <p>Settings</p>
                            </NavigationItemContent>
                        </NavLink>
                    </NavigationItem>
                    <NavigationItem>
-                       <NavLink activeStyle={activeStyle} to='/trainings'>
+                       <NavLink activeStyle={activeStyle} to='/account'>
                            <NavigationItemContent>
-                               <Face/>
-                               <p>Account</p>
+                                   <Face/>
+                                   <p>Account</p>
                            </NavigationItemContent>
                        </NavLink>
                    </NavigationItem>
                    <NavigationItem>
-                       <NavLink activeStyle={activeStyle} to='/trainings'>
+                       <NavLink activeStyle={activeStyle} to='/log-out'>
                            <NavigationItemContent>
-                               <LogoutOutlined/>
-                               <p>Log out</p>
+                                   <LogoutOutlined/>
+                                   <p>Log out</p>
                            </NavigationItemContent>
                        </NavLink>
                    </NavigationItem>
