@@ -19,6 +19,8 @@ export interface TrainingPlanAll {
     creator: string;
     image: string;
     trainingDays: TrainingDay[];
+    createdAt: string;
+    updatedAt: string;
 }
 
 export interface TrainingDay {

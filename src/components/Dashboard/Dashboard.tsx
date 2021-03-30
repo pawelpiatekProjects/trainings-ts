@@ -1,16 +1,16 @@
 import React, {useRef, useEffect} from "react";
 import PersonalRecords from "./PersonalRecords/PersonalRecords";
-
-import TopNavController from "../Navigation/TopNav/TopNavController";
 import {
     DashboardWrapper,
     DashboardContent,
     DashboardRow,
+    SideNavWrapper
 } from './DashboardStyles';
 
-import FirstChart from "./Firstchart/FirstChart";
+import FirstChart from "./FirstChart/FirstChart";
 import LastTraining from "./LastTraining/LastTraining";
 import SecondChart from "./SecondChart/SecondChart";
+import SideNavLeftController from "../Navigation/SideNavLeft/SideNavLeftController";
 
 
 const Dashboard: React.FC = () => {
@@ -18,7 +18,9 @@ const Dashboard: React.FC = () => {
 
     return (
         <DashboardWrapper>
-            <TopNavController/>
+            <SideNavWrapper>
+                <SideNavLeftController/>
+            </SideNavWrapper>
             <DashboardContent>
                 <DashboardRow>
                     <PersonalRecords/>

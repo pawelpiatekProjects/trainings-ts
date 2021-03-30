@@ -11,19 +11,6 @@ export const PopUpWrapper = styled.div<IWrapper>`
   display: ${props => props.isOpen ?  'block' : 'none'};
 `;
 
-export const Backdrop = styled.div`
-  width: 100%;
-  height: 100vh;
-  background: ${variables.backdropRGBA};
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: ${backdropZIndex};
-  
-  &:hover {
-    cursor: pointer;
-  }
-`;
 
 export const PopUpContent = styled.div`
   position: fixed;

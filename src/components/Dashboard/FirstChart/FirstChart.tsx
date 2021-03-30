@@ -1,9 +1,10 @@
 import React from "react";
+
 import {
     FirstChartWrapper,
     FirstChartHeader,
     ChartContent
-} from './FirstChartstyles';
+} from './FirstChartStyles';
 import {Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis} from "recharts";
 import * as variables from "../../../assets/styles/variables";
 
@@ -34,25 +35,25 @@ const FirstChart: React.FC = () => {
     ];
     return (
 
-            <FirstChartWrapper>
-                <FirstChartHeader>Statistics</FirstChartHeader>
-                <ChartContent>
-                    <ResponsiveContainer>
-                        <BarChart
-                            style={{zIndex: 1}}
-                            data={data}
-                        >
-                            <CartesianGrid strokeDasharray="3 3"/>
-                            <XAxis dataKey="name"/>
-                            <YAxis/>
-                            <Tooltip/>
-                            <Legend/>
-                            <Bar dataKey="pv" fill={variables.graySecondary}/>
-                            {/*<Bar dataKey="uv" fill="#82ca9d" />*/}
-                        </BarChart>
-                    </ResponsiveContainer>
-                </ChartContent>
-            </FirstChartWrapper>
+        <FirstChartWrapper>
+            <FirstChartHeader>Statistics</FirstChartHeader>
+            <ChartContent>
+                <ResponsiveContainer>
+                    <BarChart
+                        style={{zIndex: 1}}
+                        data={data}
+                    >
+                        <CartesianGrid strokeDasharray="3 3"/>
+                        <XAxis dataKey="name"/>
+                        <YAxis/>
+                        <Tooltip/>
+                        <Legend/>
+                        <Bar dataKey="pv" fill={variables.graySecondary}/>
+                        {/*<Bar dataKey="uv" fill="#82ca9d" />*/}
+                    </BarChart>
+                </ResponsiveContainer>
+            </ChartContent>
+        </FirstChartWrapper>
 
     )
 };

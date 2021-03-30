@@ -10,8 +10,7 @@ interface Props extends RouteComponentProps {
 }
 
 const DashboardController: React.FC<Props> = ({history}) => {
-
-
+    
     return (
         <Dashboard/>
     )

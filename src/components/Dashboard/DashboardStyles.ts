@@ -2,13 +2,14 @@ import styled from "styled-components";
 import * as variables from '../../assets/styles/variables';
 import backgroundImg from '../../assets/images/png/dashboard-background-large.png';
 
-
 export const DashboardWrapper = styled.div`
   width: 100%;
   height: 100vh;
   background-image: url(${backgroundImg});
   background-position: center;
   background-size: cover;
+  display: flex;
+  align-items: center;
 `;
 
 export const DashboardHeader = styled.h1`
@@ -21,6 +22,12 @@ export const DashboardHeader = styled.h1`
 
 export const DashboardContent = styled.div`
   padding: 0 3rem;
+  width: 90%;
+`;
+
+export const SideNavWrapper = styled.div`
+  width: 10%;
+ height: 100%;
 `;
 
  export const GlassmorphismContainer = styled.div`
@@ -35,10 +42,9 @@ border: 1px solid rgba( 255, 255, 255, 0.18 );
 
 export const DashboardRow = styled.div`
   width: 90%;
-  margin: 0 auto;
+  margin: 0 auto 3rem auto;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 3rem;
 `;
 
 

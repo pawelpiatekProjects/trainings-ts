@@ -2,9 +2,9 @@ import React,{useContext} from 'react';
 import {
     PopUpWrapper,
     PopUpContent,
-    Backdrop,
     PopUpText
 } from './PopUpStyles';
+import {Backdrop} from '../../assets/styles/customStylesComponents/backdrop'
 import {PopUpContext} from "../../contexts/PopUpContext";
 import {ErrorOutline} from '@material-ui/icons';
 

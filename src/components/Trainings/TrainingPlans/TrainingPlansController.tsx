@@ -40,7 +40,6 @@ const TrainingPlansController: React.FC = () => {
         <Switch>
             <PrivateRoute exact component={() => <TrainingPlans validationSchema={CreateNewPlanSchema}/>} path='/trainings/training-plans'/>
             <PrivateRoute exact component={TrainingPlanController} path='/trainings/training-plans/:id'/>
-
         </Switch>
     )
 };

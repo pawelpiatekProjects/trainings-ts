@@ -10,38 +10,60 @@ export const SideNavWrapper = styled.nav`
   align-items: start;
 `;
 
-export const Navigation = styled.ul`
-  list-style: none;
+export const Navigation = styled.div`
+  
   margin-top: 10rem;
+  width: 100%;
+  height: calc(100% - 10rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+`;
+
+export const NavigationTop = styled.ul`
+  list-style: none;
+`;
+
+export const NavigationBottom = styled.ul`
+  list-style: none;
 `;
 
 export const NavigationItem = styled.li`
-  margin-bottom: 3rem;
-  width: 4rem;
-  height: 4rem;
+  margin-bottom: 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 1rem;
   transition: all .3s;
-  //background: ${variables.yellowPrimaryDarken};
-  
+
   &:hover {
     background: ${variables.light};
     
-    a{
+    p, svg {
       color: ${variables.textColorPrimary};
     }
+
   }
+
   a {
     color: ${variables.light};
     transition: all .3s;
-    svg {
-      font-size: 3rem;
-    }
+    text-decoration: none;
+
   }
 `;
 
 export const NavigationItemContent = styled.div`
-
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  
+  p {
+    font-size: ${variables.textextraSmall};
+    margin-left: .5rem;
+  }
+  
+  svg {
+    font-size: 2.5rem;
+  }
 `;

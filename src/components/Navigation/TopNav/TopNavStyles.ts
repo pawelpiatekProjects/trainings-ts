@@ -3,7 +3,7 @@ import * as variables from '../../../assets/styles/variables';
 
 export const TopNavWrapper = styled.nav`
 width: 100%;
-padding: 3rem;
+padding: 1.5rem;
 display: flex;
 align-items: center;
 justify-content: space-between;

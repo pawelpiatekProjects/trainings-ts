@@ -4,6 +4,13 @@ import {Link} from "react-router-dom";
 
 export const TrainingPlanCardWrapper = styled.div`
   background: ${variables.light};
+  transition: all .3s;
+
+  &:hover {
+    background: ${variables.grayPrimary};
+    box-shadow: ${variables.dashboardItemBoxShadow};
+    transform: scale(1.05);
+  }
 `;
 
 export const TrainingPlanCardInfoWrapper = styled.div`

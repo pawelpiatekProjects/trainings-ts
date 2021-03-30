@@ -17,9 +17,9 @@ export const ContentWrapper = styled.div`
 `;
 
 export const TopNavWrapper = styled.div`
-  height: 15%;
+  height: 10%;
 `;
 
 export const SwitchWrapper = styled.div`
-  height: 85%;
+  height: 90%;
 `;
