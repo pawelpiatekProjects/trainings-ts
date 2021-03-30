@@ -32,7 +32,7 @@ export interface TrainingDay {
 export interface TrainingPlanExercise {
     _id: string;
     exerciseName: string;
-    respInSeries: number[];
+    repsInSeries: number[];
     weight?: number;
     pause?: number;
     rate?: number;

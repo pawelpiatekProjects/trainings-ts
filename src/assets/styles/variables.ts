@@ -18,6 +18,7 @@ export const errorRedRgba = `rgba(248, 90, 64, .3)`;
 export const primaryBlue = '#0cb9c1';
 export const googleOrange = '#ea4335';
 export const facebookBlue = '#3b5998';
+export const ytRed = `#ff0000`;
 
 // box shadow
 
