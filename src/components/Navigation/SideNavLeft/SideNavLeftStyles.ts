@@ -32,6 +32,7 @@ export const NavigationTop = styled.ul`
 
 export const NavigationBottom = styled.ul`
   list-style: none;
+  padding-bottom: 3rem;
 `;
 
 export const NavigationItem = styled.li`
@@ -79,7 +80,7 @@ export const NavigationItemContent = styled.div`
 
 
 export const NestedNavItems = styled.ul<INestedNavItems>`
-  
+  border-top: 1px solid ${variables.graySecondary};
   list-style: none;
   background: ${variables.light};
   display: ${props => props.isActive ? 'flex' : 'none'};
@@ -90,7 +91,7 @@ export const NestedNavItems = styled.ul<INestedNavItems>`
 `;
 
 export const NestedNavItem = styled.li`
-  width: 70%;
+  width: 90%;
   display: flex;
   justify-content: start;
   align-items: center;
@@ -99,9 +100,19 @@ export const NestedNavItem = styled.li`
 
 export const NestedNavLink = styled(NavLink)`
   text-decoration: none;
-  font-size: ${variables.textSmall};
-  color: ${variables.textColorTertiary};
   transition: all .3s;
+  display: flex;
+  align-items: center;
+  
+  p {
+    margin: 0;
+    font-size: ${variables.textSmall};
+    color: ${variables.textColorTertiary};
+  }
+  
+  svg {
+    color: ${variables.textColorTertiary};
+  }
 
   &:hover {
     color: ${variables.textColorPrimary};

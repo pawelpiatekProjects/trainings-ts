@@ -20,6 +20,7 @@ import {
     Folder,
     Settings,
     Face,
+    KeyboardArrowRight
 } from '@material-ui/icons';
 import {LogoutOutlined} from '@ant-design/icons'
 import * as variables from "../../../assets/styles/variables";
@@ -59,12 +60,19 @@ const SideNavLeft: React.FC = () => {
                             </NavigationItemContent>
                         </NavLink>
                     </NavigationItem>
+                    {/*Nested menu - only on active page*/}
                     <NestedNavItems isActive={location === 'trainings'}>
                         <NestedNavItem>
-                            <NestedNavLink activeStyle={activeStyleNested} to='/trainings/trainings-list'>Trainings List</NestedNavLink>
+                            <NestedNavLink activeStyle={activeStyleNested} to='/trainings/trainings-list'>
+                                <KeyboardArrowRight/>
+                                <p>Trainings List</p>
+                            </NestedNavLink>
                         </NestedNavItem>
                         <NestedNavItem>
-                            <NestedNavLink activeStyle={activeStyleNested} to='/trainings/training-plans'>Training Plans</NestedNavLink>
+                            <NestedNavLink activeStyle={activeStyleNested} to='/trainings/training-plans'>
+                                <KeyboardArrowRight/>
+                                <p>Training Plans</p>
+                            </NestedNavLink>
                         </NestedNavItem>
                     </NestedNavItems>
 

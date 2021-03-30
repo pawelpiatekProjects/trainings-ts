@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import * as variables from '../../../assets/styles/variables'
 
 export const TrainingPlansWrapper = styled.div`
-  padding:  0 3rem 3rem 3rem;
+  padding:  0 3rem 1rem 3rem;
   overflow-y: scroll;
   height: 100%;
 `;

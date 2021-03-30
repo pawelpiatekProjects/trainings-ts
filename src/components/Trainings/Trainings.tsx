@@ -10,7 +10,6 @@ import {
     TrainingsWrapper,
     ContentWrapper,
     SideNavWrapper,
-    TopNavWrapper,
     SwitchWrapper
 } from './TrainingsStyles';
 
@@ -21,7 +20,6 @@ const Trainings: React.FC = () => {
             <SideNavWrapper>
                 <SideNavLeft/>
             </SideNavWrapper>
-
             <ContentWrapper>
                 <SwitchWrapper>
                     <Switch>
