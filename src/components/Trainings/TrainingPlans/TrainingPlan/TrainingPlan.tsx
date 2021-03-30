@@ -52,6 +52,7 @@ const TrainingPlan: React.FC = () => {
                     <TrainingPlanHeading>
                         <TrainingPlanHeader> {openedPlan.trainingPlanName && openedPlan.trainingPlanName}</TrainingPlanHeader>
                         <HeadingButtons>
+                            <Button color={variables.yellowPrimary}>Add</Button>
                             <Button color={variables.yellowPrimary}>Edit</Button>
                             <Button color={variables.yellowPrimary}>Delete</Button>
                         </HeadingButtons>

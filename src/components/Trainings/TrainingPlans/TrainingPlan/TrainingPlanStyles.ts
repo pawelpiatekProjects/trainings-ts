@@ -29,7 +29,7 @@ export const TrainingPlanHeading = styled.div`
 `;
 
 export const HeadingButtons = styled.div`
-    width: 20%;
+    width: 30%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -39,7 +39,7 @@ export const TrainingPlanHeader = styled.h1`
     font-weight: 400;
     font-size: ${variables.textHeader};
     margin: 0;
-    width: 80%;
+    width: 70%;
 `;
 
 export const Button = styled(PrimaryButton)`
