@@ -18,6 +18,7 @@ import ToastContextProvider from "../../contexts/ToastContext";
 import PopUpContextProvider from "../../contexts/PopUpContext";
 import PopUpController from "../../utils/PopUp/PopUpController";
 import TrainingPlanContextProvider from "../../contexts/TrainingPlansContext";
+import Toast from "../../utils/Toast/Toast";
 
 
 const App: React.FC = () => {
@@ -29,6 +30,7 @@ const App: React.FC = () => {
                 <PopUpContextProvider>
                     <ToastContextProvider>
                         <PopUpController/>
+                        <Toast/>
                         <GoogleFontLoader
                             fonts={[
                                 {

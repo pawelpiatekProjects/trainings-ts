@@ -10,11 +10,13 @@ import {SecondaryButton} from '../../../../assets/styles/customStylesComponents/
 import * as Yup from "yup";
 import {TrainingPlanContext} from "../../../../contexts/TrainingPlansContext";
 import {PopUpContext} from "../../../../contexts/PopUpContext";
+import {ToastContext} from "../../../../contexts/ToastContext";
 
 
 const CreateTrainingDayForm: React.FC = () => {
     const {onCreateNewTrainingDay} = useContext(TrainingPlanContext);
     const {onCloseModal} = useContext(PopUpContext);
+    const {emitNewMessage} = useContext(ToastContext);
 
 
     const NewTrainingDaySchema = Yup.object().shape({
@@ -34,6 +36,7 @@ const CreateTrainingDayForm: React.FC = () => {
                         onCreateNewTrainingDay(name);
                         resetForm();
                         onCloseModal();
+                        emitNewMessage('Created new training day');
                     }}>
                 {({errors, touched, isValid, dirty}) => (
                     <Form>
