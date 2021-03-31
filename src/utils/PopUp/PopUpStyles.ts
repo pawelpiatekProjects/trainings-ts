@@ -9,10 +9,12 @@ interface IWrapper {
 
 export const PopUpWrapper = styled.div<IWrapper>`
   display: ${props => props.isOpen ?  'block' : 'none'};
+  
 `;
 
 
 export const PopUpContent = styled.div`
+  max-height: 90vh;
   position: fixed;
   top: 50%;
   left: 50%;

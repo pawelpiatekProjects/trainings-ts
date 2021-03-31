@@ -1,19 +1,19 @@
 import React, {useContext} from "react";
 import {
-    TrainingDayWrapper,
-    TrainingDayHeading,
-    TrainingDayHeader,
-    ExercisesWrapper,
-    TopButtons,
-    TopButton,
-    EmptyExercisesWrapper,
+    Button,
     EmptyExercisesHeader,
-    Button
+    EmptyExercisesWrapper,
+    ExercisesWrapper,
+    TopButton,
+    TopButtons,
+    TrainingDayHeader,
+    TrainingDayHeading,
+    TrainingDayWrapper
 } from './TrainingDayStyles';
 import {TrainingDay as TrainingDayType} from "../../../../../contexts/TrainingPlansContext";
 import Exercise from "./Exercise/Exercise";
 import * as variables from '../../../../../assets/styles/variables';
-import {PopUpContext} from "../../../../../contexts/PopUpContext";
+import {ContentType, PopUpContext} from "../../../../../contexts/PopUpContext";
 
 interface Props {
     trainingDay: TrainingDayType;
@@ -23,12 +23,16 @@ const TrainingDay: React.FC<Props> = ({trainingDay}) => {
     console.log('exercises: ',trainingDay.exercises);
     const {onOpenModal} = useContext(PopUpContext);
 
+    const handleOpenModal = () => {
+        onOpenModal(ContentType.AddExercise, trainingDay._id);
+    }
+
     let result;
     if(trainingDay.exercises.length <= 0) {
         result = (
             <EmptyExercisesWrapper>
                 <EmptyExercisesHeader>Your exercises list is empty. Add new training day</EmptyExercisesHeader>
-                <Button color={variables.yellowPrimary}>Add</Button>
+                <Button onClick={() => handleOpenModal()} color={variables.yellowPrimary}>Add</Button>
             </EmptyExercisesWrapper>
         )
     } else {
@@ -42,7 +46,7 @@ const TrainingDay: React.FC<Props> = ({trainingDay}) => {
             <TrainingDayHeading>
                 <TrainingDayHeader>{trainingDay.trainingDayName}</TrainingDayHeader>
                 <TopButtons>
-                    <TopButton>Add exercise</TopButton>
+                    <TopButton onClick={() => handleOpenModal()}>Add exercise</TopButton>
                     <TopButton>Edit</TopButton>
                     <TopButton>Delete</TopButton>
                 </TopButtons>

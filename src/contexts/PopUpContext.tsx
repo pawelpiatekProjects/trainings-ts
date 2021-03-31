@@ -3,18 +3,21 @@ import React, {useState, createContext} from 'react';
 export enum ContentType {
     Error,
     AddTrainingPlan,
-    AddTrainingDay
+    AddTrainingDay,
+    AddExercise
 }
 
 interface PopUpConfig {
     isPopUpOpen: boolean;
     content: ContentType;
+    dayId?: string;
     message?: string;
+
 }
 
 interface ContextType {
     popUpConfig: PopUpConfig;
-    onOpenModal: (contentType: ContentType, message?: string) => void;
+    onOpenModal: (contentType: ContentType,  dayId?: string, message?: string) => void;
     onCloseModal: () => void;
 }
 
@@ -24,17 +27,19 @@ const PopUpContextProvider: React.FC = ({children}) => {
 
     const [popUpConfig, setPopUpConfig] = useState({} as PopUpConfig);
 
-    const onOpenModal = (contentType: ContentType, message?: string) => {
+    const onOpenModal = (contentType: ContentType, dayId?: string, message?: string) => {
         if(message) {
             setPopUpConfig({
                 isPopUpOpen: true,
                 content: contentType,
+                dayId: dayId,
                 message: message
             })
         } else {
             setPopUpConfig({
                 isPopUpOpen: true,
-                content: contentType
+                content: contentType,
+                dayId: dayId
             })
         }
     }

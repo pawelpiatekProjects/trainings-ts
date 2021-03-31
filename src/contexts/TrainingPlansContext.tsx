@@ -48,6 +48,16 @@ interface ContextType {
     setOpenedPlan: (plan: TrainingPlanAll) => void;
     onCreateNewPlan: (name: string, description: string, image: string) => void;
     onCreateNewTrainingDay: (trainingDayName: string) => void;
+    onAddTrainingDayExercise: (
+        dayId: string,
+        name: string,
+        series?: string,
+        weight?: string,
+        pauseTime?: string,
+        rate?: string,
+        ytLink?: string,
+        description?: string
+    ) => void;
 }
 
 export const TrainingPlanContext = createContext({} as ContextType);
@@ -96,9 +106,50 @@ const TrainingPlanContextProvider: React.FC = ({children}) => {
         }
     }
 
+    const onAddTrainingDayExercise = async (
+        dayId: string,
+        name: string,
+        series?: string,
+        weight?: string,
+        pauseTime?: string,
+        rate?: string,
+        ytLink?: string,
+        description?: string
+        ) => {
+
+        const userId = getUserIdFromStorage()!;
+
+        try {
+            const response = await post<any>('plans/addTrainingExercise', {
+                userId: userId,
+                planId: openedPlan._id,
+                dayId: dayId,
+                name: name,
+                series: series ? series : '',
+                weight: weight ? weight : '',
+                rate: rate ? rate : '',
+                ytLink: ytLink ? ytLink : '',
+                description: description ? description : ''
+            })
+        } catch (e) {
+            console.log(e)
+        } finally {
+            const {data} = await get<any>(`plans/all/${openedPlan._id}`);
+            setOpenedPlan(data.plan);
+        }
+    }
+
     return (
         <TrainingPlanContext.Provider
-            value={{trainingPlans, setTrainingPlans, openedPlan, setOpenedPlan, onCreateNewPlan, onCreateNewTrainingDay}}>
+            value={{
+                trainingPlans,
+                setTrainingPlans,
+                openedPlan,
+                setOpenedPlan,
+                onCreateNewPlan,
+                onCreateNewTrainingDay,
+                onAddTrainingDayExercise
+            }}>
             {children}
         </TrainingPlanContext.Provider>
     )
