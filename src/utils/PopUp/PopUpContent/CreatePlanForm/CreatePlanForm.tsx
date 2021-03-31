@@ -65,7 +65,7 @@ const CreatePlanForm: React.FC = () => {
                         {errors.image && touched.image ? (
                             <Error>{errors.image}</Error>
                         ) : <Error></Error>}
-                        <SecondaryButton type='submit'>Create</SecondaryButton>
+                        <SecondaryButton disabled={!(isValid && dirty)} type='submit'>Create</SecondaryButton>
                     </Form>
                 )}
 

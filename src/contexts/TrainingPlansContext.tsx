@@ -47,6 +47,7 @@ interface ContextType {
     openedPlan: TrainingPlanAll;
     setOpenedPlan: (plan: TrainingPlanAll) => void;
     onCreateNewPlan: (name: string, description: string, image: string) => void;
+    onCreateNewTrainingDay: (trainingDayName: string) => void;
 }
 
 export const TrainingPlanContext = createContext({} as ContextType);
@@ -74,12 +75,30 @@ const TrainingPlanContextProvider: React.FC = ({children}) => {
             const newTrainingPlans = await get<any>('plans/all');
             setTrainingPlans(newTrainingPlans.data.plans);
         }
+    }
 
+    const onCreateNewTrainingDay = async (trainingDayName: string) => {
+        const userId = getUserIdFromStorage()!;
+
+        try {
+            const response = await post<any>('plans/addTrainingDay', {
+                name: trainingDayName,
+                userId: userId,
+                planId: openedPlan._id
+            });
+
+        } catch (e) {
+            console.log(e);
+        } finally {
+            const {data} = await get<any>(`plans/all/${openedPlan._id}`);
+
+            setOpenedPlan(data.plan);
+        }
     }
 
     return (
         <TrainingPlanContext.Provider
-            value={{trainingPlans, setTrainingPlans, openedPlan, setOpenedPlan, onCreateNewPlan}}>
+            value={{trainingPlans, setTrainingPlans, openedPlan, setOpenedPlan, onCreateNewPlan, onCreateNewTrainingDay}}>
             {children}
         </TrainingPlanContext.Provider>
     )

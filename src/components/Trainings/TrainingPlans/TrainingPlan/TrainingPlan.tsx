@@ -1,28 +1,32 @@
 import React, {useContext} from 'react';
 import {
-    TrainingPlanWrapper,
+    Button,
+    HeadingButtons,
+    TrainingDaysEmpty,
+    TrainingDaysEmptyHeader,
+    TrainingDaysWrapper,
     TrainingPlanContent,
     TrainingPlanContentData,
-    TrainingPlanHeading,
     TrainingPlanHeader,
-    HeadingButtons,
-    Button,
+    TrainingPlanHeading,
     TrainingPlanIntroData,
     TrainingPlanIntroElement,
-    TrainingDaysWrapper,
-    TrainingDaysEmpty,
-    TrainingDaysEmptyHeader
+    TrainingPlanWrapper
 } from './TrainingPlanStyles';
 import {ReactComponent as ThemeImg} from '../../../../assets/images/svg/dummbell-big.svg';
-import {TrainingPlanAll, TrainingPlanContext} from "../../../../contexts/TrainingPlansContext";
-import TrainingDay from "./TrainingDay/TrainingDay";
+import {TrainingPlanContext} from "../../../../contexts/TrainingPlansContext";
 import * as variables from '../../../../assets/styles/variables';
 import TrainingDayController from "./TrainingDay/TrainingDayController";
+import {ContentType, PopUpContext} from "../../../../contexts/PopUpContext";
 
 
 const TrainingPlan: React.FC = () => {
-
+    const {onOpenModal} = useContext(PopUpContext)
     const {openedPlan} = useContext(TrainingPlanContext)!;
+
+    const handleModalOpen = () => {
+        onOpenModal(ContentType.AddTrainingDay)
+    }
 
     let trainingDaysWrapperContent;
     if(openedPlan.trainingDays) {
@@ -36,14 +40,13 @@ const TrainingPlan: React.FC = () => {
                     <TrainingDaysEmptyHeader>
                         Your training plan is empty. Add training days
                     </TrainingDaysEmptyHeader>
-                    <Button color={variables.yellowPrimary}>Add</Button>
+                    <Button onClick={() => handleModalOpen()} color={variables.yellowPrimary}>Add</Button>
                 </TrainingDaysEmpty>
             )
         }
     } else {
         trainingDaysWrapperContent = null;
     }
-
     return (
         <TrainingPlanWrapper>
             <TrainingPlanContent>
@@ -52,7 +55,7 @@ const TrainingPlan: React.FC = () => {
                     <TrainingPlanHeading>
                         <TrainingPlanHeader> {openedPlan.trainingPlanName && openedPlan.trainingPlanName}</TrainingPlanHeader>
                         <HeadingButtons>
-                            <Button color={variables.yellowPrimary}>Add</Button>
+                            <Button onClick={() => handleModalOpen()} color={variables.yellowPrimary}>Add</Button>
                             <Button color={variables.yellowPrimary}>Edit</Button>
                             <Button color={variables.yellowPrimary}>Delete</Button>
                         </HeadingButtons>

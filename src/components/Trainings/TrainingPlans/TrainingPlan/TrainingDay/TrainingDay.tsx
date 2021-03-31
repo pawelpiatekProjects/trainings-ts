@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext} from "react";
 import {
     TrainingDayWrapper,
     TrainingDayHeading,
@@ -12,13 +12,13 @@ import Exercise from "./Exercise/Exercise";
 
 
 
+
 interface Props {
     trainingDay: TrainingDayType;
 }
 
 const TrainingDay: React.FC<Props> = ({trainingDay}) => {
     console.log(trainingDay);
-
 
     return (
         <TrainingDayWrapper>

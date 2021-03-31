@@ -23,17 +23,6 @@ const TrainingPlansController: React.FC = () => {
         setTrainingPlans(data.plans);
     }
 
-    // const CreateNewPlanSchema = Yup.object().shape({
-    //     name: Yup.string()
-    //         .required('Name is required')
-    //         .min(2, 'Too Short')
-    //         .max(50, 'Too Long'),
-    //     description: Yup .string()
-    //         .required('Last name is required')
-    //         .max(250, 'Too Long'),
-    //     image: Yup.string()
-    //         .required('Email is required')
-    // });
 
     const onAddNewPlan = () => {
         onOpenModal(ContentType.AddTrainingPlan);

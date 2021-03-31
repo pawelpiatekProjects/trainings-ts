@@ -2,7 +2,8 @@ import React, {useState, createContext} from 'react';
 
 export enum ContentType {
     Error,
-    AddTrainingPlan
+    AddTrainingPlan,
+    AddTrainingDay
 }
 
 interface PopUpConfig {
