@@ -36,8 +36,8 @@ const CreatePlanForm: React.FC = () => {
                 image: ''
             }}
                 validationSchema={NewPlanSchema}
-                    onSubmit={({name, description, image}, {resetForm}) => {
-                        onCreateNewPlan(name, description, image);
+                    onSubmit={async({name, description, image}, {resetForm}) => {
+                        await onCreateNewPlan(name, description, image);
                         onCloseModal();
                         resetForm();
                     }}
@@ -65,7 +65,7 @@ const CreatePlanForm: React.FC = () => {
                         {errors.image && touched.image ? (
                             <Error>{errors.image}</Error>
                         ) : <Error></Error>}
-                        <SecondaryButton>Create</SecondaryButton>
+                        <SecondaryButton type='submit'>Create</SecondaryButton>
                     </Form>
                 )}
 

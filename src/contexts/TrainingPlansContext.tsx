@@ -1,6 +1,7 @@
 import React, {createContext, useState} from 'react';
-import {post} from '../services/restService';
-import {getUserIdFromStorage} from '../services/authenticationService';
+import {get, post} from '../services/restService';
+import {getUserIdFromStorage, getTokenFromStorage} from '../services/authenticationService';
+import axios from "axios";
 
 export interface TrainingPlanIntro {
     _id: string;
@@ -43,7 +44,7 @@ export interface TrainingPlanExercise {
 interface ContextType {
     trainingPlans: TrainingPlanIntro[];
     setTrainingPlans: (plans: TrainingPlanIntro[]) => void;
-    openedPlan: TrainingPlanAll ;
+    openedPlan: TrainingPlanAll;
     setOpenedPlan: (plan: TrainingPlanAll) => void;
     onCreateNewPlan: (name: string, description: string, image: string) => void;
 }
@@ -52,29 +53,33 @@ export const TrainingPlanContext = createContext({} as ContextType);
 
 const TrainingPlanContextProvider: React.FC = ({children}) => {
 
-    const [trainingPlans, setTrainingPlans] = useState<TrainingPlanIntro[]>([] );
+    const [trainingPlans, setTrainingPlans] = useState<TrainingPlanIntro[]>([]);
     const [openedPlan, setOpenedPlan] = useState<TrainingPlanAll>({} as TrainingPlanAll);
 
-    const onCreateNewPlan = async(name: string, description: string, image: string) => {
+    const onCreateNewPlan = async (name: string, description: string, image: string) => {
+        console.log('on add plan')
         const userId = getUserIdFromStorage()!;
-        const {data} = await post<any>('plans/addPlan', {
-            trainingPlanName: name,
-            description: description,
-            userId: userId,
-            image: image
-        });
 
-        const createdPlan: TrainingPlanIntro = {
-            ...data.plan
+        try {
+            const {data} = await post<any>('plans/addPlan', {
+                trainingPlanName: name,
+                description: description,
+                userId: userId,
+                image: image
+            });
+
+        } catch (e) {
+            console.log('Error: ', e)
+        } finally {
+            const newTrainingPlans = await get<any>('plans/all');
+            setTrainingPlans(newTrainingPlans.data.plans);
         }
 
-        setTrainingPlans([...trainingPlans, createdPlan]);
-
-        console.log('New plan added: ',createdPlan);
     }
 
     return (
-        <TrainingPlanContext.Provider value={{trainingPlans, setTrainingPlans, openedPlan, setOpenedPlan, onCreateNewPlan}}>
+        <TrainingPlanContext.Provider
+            value={{trainingPlans, setTrainingPlans, openedPlan, setOpenedPlan, onCreateNewPlan}}>
             {children}
         </TrainingPlanContext.Provider>
     )
