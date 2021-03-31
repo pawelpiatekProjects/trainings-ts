@@ -1,9 +1,29 @@
 import styled from "styled-components";
-import * as variables from '../../../../../../assets/styles/variables'
+import * as variables from '../../../../../../assets/styles/variables';
+import {TopButton} from '../TrainingDayStyles';
 
-export const ExercisesWrapper = styled.ul`
+export const ExercisesWrapper = styled.div`
+ display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+`;
+
+export const ExerciseButtons = styled.div`
+  width: 15%;
+  padding-left:  3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const ExerciseButton = styled(TopButton)`
+    
+`;
+
+export const ExerciseItems = styled.ul`
   list-style: none;
-  width: 80%;
+  width: 85%;
   border-bottom: 2px solid ${variables.textColorTertiary};
   padding-bottom: 1rem;
   display: flex;

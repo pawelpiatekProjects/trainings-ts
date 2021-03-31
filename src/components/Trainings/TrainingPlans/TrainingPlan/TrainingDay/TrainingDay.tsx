@@ -1,8 +1,11 @@
 import React from "react";
 import {
     TrainingDayWrapper,
+    TrainingDayHeading,
     TrainingDayHeader,
-    ExercisesWrapper
+    ExercisesWrapper,
+    TopButtons,
+    TopButton
 } from './TrainingDayStyles';
 import {TrainingDay as TrainingDayType} from "../../../../../contexts/TrainingPlansContext";
 import Exercise from "./Exercise/Exercise";
@@ -19,7 +22,14 @@ const TrainingDay: React.FC<Props> = ({trainingDay}) => {
 
     return (
         <TrainingDayWrapper>
-            <TrainingDayHeader>{trainingDay.trainingDayName}</TrainingDayHeader>
+            <TrainingDayHeading>
+                <TrainingDayHeader>{trainingDay.trainingDayName}</TrainingDayHeader>
+                <TopButtons>
+                    <TopButton>Edit</TopButton>
+                    <TopButton>Delete</TopButton>
+                </TopButtons>
+            </TrainingDayHeading>
+
             <ExercisesWrapper>
                 {trainingDay.exercises.map(exercise => (
                     <Exercise exercise={exercise} key={exercise._id}/>
