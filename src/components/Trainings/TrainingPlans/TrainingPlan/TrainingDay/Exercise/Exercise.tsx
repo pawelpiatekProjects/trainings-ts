@@ -25,32 +25,36 @@ const Exercise: React.FC<Props> = ({exercise}) => {
                 <ExerciseItem>
                     <p>{exercise.exerciseName}</p>
                 </ExerciseItem>
-                {console.log('reps in series: ', exercise.repsInSeries)}
+                <ExerciseItem>
+                    <p>{exercise.weight ? exercise.weight : '-'}</p>
+                </ExerciseItem>
                 <ExerciseItem>
                     <p>[{exercise.repsInSeries.map((num, index) => {
                         return index === exercise.repsInSeries.length - 1 ? (
-                            <span>{num}</span>
+                            <span key={num}>{num}</span>
                         ) : (
-                            <span>{num}, </span>
+                            <span key={num}>{num}, </span>
                         )
                     })}]</p>
 
                 </ExerciseItem>
                 <ExerciseItem>
-                    <p>{exercise.rate && exercise.rate}</p>
+                    <p>{exercise.rate ? exercise.rate: '-'}</p>
                 </ExerciseItem>
                 <ExerciseItem>
-                    <p>{exercise.pause && exercise.pause}</p>
+                    <p>{exercise.pause ? exercise.pause: '-'}</p>
                 </ExerciseItem>
                 <ExerciseItem>{exercise.ytLink ? (
                     <a href={exercise.ytLink}>
                         <YouTube/>
                     </a>
-                ) : null}</ExerciseItem>
+                ) : '-'}</ExerciseItem>
                 <ExerciseItem>
-                    <button>
-                        <Info/>
-                    </button>
+                    {exercise.description ? (
+                        <button>
+                            <Info/>
+                        </button>
+                    ): '-'}
                 </ExerciseItem>
             </ExerciseItems>
             <ExerciseButtons>

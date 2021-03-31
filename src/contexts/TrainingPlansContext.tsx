@@ -127,6 +127,7 @@ const TrainingPlanContextProvider: React.FC = ({children}) => {
                 name: name,
                 series: series ? series : '',
                 weight: weight ? weight : '',
+                pauseTime: pauseTime ? pauseTime : '',
                 rate: rate ? rate : '',
                 ytLink: ytLink ? ytLink : '',
                 description: description ? description : ''
