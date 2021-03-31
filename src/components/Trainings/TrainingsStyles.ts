@@ -6,6 +6,7 @@ export const TrainingsWrapper = styled.div`
   display: flex;
   height: 100vh;
   width: 100%;
+
 `;
 
 export const SideNavWrapper = styled.div`

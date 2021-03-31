@@ -6,11 +6,15 @@ import PrivateRoute from "../../../utils/PrivateRoute";
 
 import {Switch} from "react-router-dom";
 import TrainingPlanController from "./TrainingPlan/TrainingPlanController";
-import * as Yup from "yup";
+import {PopUpContext} from "../../../contexts/PopUpContext";
+import {ContentType} from "../../../contexts/PopUpContext";
+
+
 
 const TrainingPlansController: React.FC = () => {
 
     const {setTrainingPlans} = useContext(TrainingPlanContext);
+    const {onOpenModal} = useContext(PopUpContext)
 
 
     const fetchTrainingPlans = async () => {
@@ -19,28 +23,41 @@ const TrainingPlansController: React.FC = () => {
         setTrainingPlans(data.plans);
     }
 
-    const CreateNewPlanSchema = Yup.object().shape({
-        name: Yup.string()
-            .required('Name is required')
-            .min(2, 'Too Short')
-            .max(50, 'Too Long'),
-        description: Yup .string()
-            .required('Last name is required')
-            .max(250, 'Too Long'),
-        image: Yup.string()
-            .required('Email is required')
-    });
+    // const CreateNewPlanSchema = Yup.object().shape({
+    //     name: Yup.string()
+    //         .required('Name is required')
+    //         .min(2, 'Too Short')
+    //         .max(50, 'Too Long'),
+    //     description: Yup .string()
+    //         .required('Last name is required')
+    //         .max(250, 'Too Long'),
+    //     image: Yup.string()
+    //         .required('Email is required')
+    // });
+
+    const onAddNewPlan = () => {
+        onOpenModal(ContentType.AddTrainingPlan);
+    }
 
 
     useEffect(() => {
         fetchTrainingPlans();
     }, [])
     return (
+        <>
+            <Switch>
+                <PrivateRoute
+                    exact
+                    component={() => <TrainingPlans onAddNewPlan={onAddNewPlan}/>}
+                    path='/trainings/training-plans'
+                />
+                <PrivateRoute
+                    exact
+                    component={TrainingPlanController} path='/trainings/training-plans/:id'
+                />
+            </Switch>
+        </>
 
-        <Switch>
-            <PrivateRoute exact component={() => <TrainingPlans validationSchema={CreateNewPlanSchema}/>} path='/trainings/training-plans'/>
-            <PrivateRoute exact component={TrainingPlanController} path='/trainings/training-plans/:id'/>
-        </Switch>
     )
 };
 

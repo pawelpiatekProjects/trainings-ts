@@ -46,7 +46,7 @@ const SignInController: React.FC<Props> = ({history}) => {
         } catch (e) {
             console.log('Error: ', e)
             // TODO: add fetching http errors
-            onOpenModal('Could not to sign in. Please check your email and password');
+            // onOpenModal('Could not to sign in. Please check your email and password');
         }
     }
     return (

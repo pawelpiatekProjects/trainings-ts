@@ -8,15 +8,16 @@ import {Backdrop} from '../../assets/styles/customStylesComponents/backdrop'
 import {PopUpContext} from "../../contexts/PopUpContext";
 import {ErrorOutline} from '@material-ui/icons';
 
-const PopUp: React.FC = () => {
-    const {popUpMessage, onCloseModal} = useContext(PopUpContext);
+interface Props {
+    isOpen: boolean
+}
+
+const PopUp: React.FC<Props> = ({isOpen, children}) => {
+    const {onCloseModal} = useContext(PopUpContext);
     return (
-        <PopUpWrapper isOpen={!!popUpMessage}>
-        {/*<PopUpWrapper isOpen={true}>*/}
+        <PopUpWrapper isOpen={isOpen}>
             <PopUpContent>
-                <ErrorOutline/>
-                <PopUpText>{popUpMessage && popUpMessage}</PopUpText>
-                {/*<PopUpText>Sign in Error</PopUpText>*/}
+                {children}
             </PopUpContent>
             <Backdrop onClick={() => onCloseModal()}/>
         </PopUpWrapper>

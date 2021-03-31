@@ -10,19 +10,17 @@ import {PrimaryButton} from '../../../assets/styles/customStylesComponents/butto
 import {TrainingPlanContext, TrainingPlanIntro} from "../../../contexts/TrainingPlansContext";
 import TrainingPlanCard from "./TrainingPlanCard/TrainingPlanCard";
 
-
-
 interface Props {
-    validationSchema: any;
+    onAddNewPlan: () => void
 }
 
-const TrainingPlans: React.FC<Props> = ({validationSchema}) => {
+const TrainingPlans: React.FC<Props> = ({onAddNewPlan}) => {
     const {trainingPlans} = useContext(TrainingPlanContext);
     return (
         <TrainingPlansWrapper>
             <TrainingPlansHeading>
                 <TrainingPlansHeader>TrainingPlans</TrainingPlansHeader>
-                <PrimaryButton color={variables.yellowPrimary}>New</PrimaryButton>
+                <PrimaryButton onClick={() => onAddNewPlan()} color={variables.yellowPrimary}>New</PrimaryButton>
             </TrainingPlansHeading>
 
             <TrainingPlansList>

@@ -1,8 +1,19 @@
 import React, {useState, createContext} from 'react';
 
+export enum ContentType {
+    Error,
+    AddTrainingPlan
+}
+
+interface PopUpConfig {
+    isPopUpOpen: boolean;
+    content: ContentType;
+    message?: string;
+}
+
 interface ContextType {
-    popUpMessage: string;
-    onOpenModal: (message: string) => void;
+    popUpConfig: PopUpConfig;
+    onOpenModal: (contentType: ContentType, message?: string) => void;
     onCloseModal: () => void;
 }
 
@@ -10,17 +21,32 @@ export const PopUpContext = createContext({} as ContextType);
 
 const PopUpContextProvider: React.FC = ({children}) => {
 
-    const [popUpMessage, setPopUpMessage] = useState('');
+    const [popUpConfig, setPopUpConfig] = useState({} as PopUpConfig);
 
-    const onOpenModal = (message: string) => {
-        setPopUpMessage(message);
+    const onOpenModal = (contentType: ContentType, message?: string) => {
+        if(message) {
+            setPopUpConfig({
+                isPopUpOpen: true,
+                content: contentType,
+                message: message
+            })
+        } else {
+            setPopUpConfig({
+                isPopUpOpen: true,
+                content: contentType
+            })
+        }
     }
 
     const onCloseModal = () => {
-        setPopUpMessage('');
+        setPopUpConfig({
+            ...popUpConfig,
+            isPopUpOpen: false
+        });
     }
+
     return (
-        <PopUpContext.Provider value={{popUpMessage, onOpenModal, onCloseModal}}>
+        <PopUpContext.Provider value={{ popUpConfig, onOpenModal, onCloseModal}}>
             {children}
         </PopUpContext.Provider>
     )

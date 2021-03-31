@@ -8,17 +8,17 @@ const TrainingPlanController: React.FC = () => {
     const {state} = useLocation();
     const {setOpenedPlan} = useContext(TrainingPlanContext);
 
-    const fetchTrainingPlan = async() => {
+    const fetchTrainingPlan = async () => {
         const {data} = await get<any>(`plans/all/${state}`);
         setOpenedPlan(data.plan);
     }
 
     useEffect(() => {
         fetchTrainingPlan();
-    },[])
+    }, [])
 
     return (
-        <TrainingPlan />
+        <TrainingPlan/>
     )
 };
 
