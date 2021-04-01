@@ -7,6 +7,7 @@ interface Props {
 }
 
 const TrainingDayController: React.FC<Props> = ({trainingDay}) => {
+
     return (
         <TrainingDay trainingDay={trainingDay}/>
     )

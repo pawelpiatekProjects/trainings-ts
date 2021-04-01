@@ -39,7 +39,7 @@ const TrainingDay: React.FC<Props> = ({trainingDay}) => {
         )
     } else {
         result = trainingDay.exercises.map(exercise => (
-            <Exercise exercise={exercise} key={exercise._id}/>
+            <Exercise trainingDayId={trainingDay._id} exercise={exercise} key={exercise._id}/>
         ))
     }
 

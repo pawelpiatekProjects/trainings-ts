@@ -1,17 +1,19 @@
 import React, {useContext} from "react";
 import {ExerciseButton, ExerciseButtons, ExerciseItem, ExerciseItems, ExercisesWrapper} from './ExerciseStyles';
-import {TrainingPlanExercise} from "../../../../../../contexts/TrainingPlansContext";
+import {TrainingPlanContext, TrainingPlanExercise} from "../../../../../../contexts/TrainingPlansContext";
 import {Info, YouTube} from '@material-ui/icons';
 import {ContentType, PopUpContext} from "../../../../../../contexts/PopUpContext";
 
 
 interface Props {
     exercise: TrainingPlanExercise;
+    trainingDayId: string
 }
 
-const Exercise: React.FC<Props> = ({exercise}) => {
+const Exercise: React.FC<Props> = ({exercise, trainingDayId}) => {
     console.log('exercise: ', exercise)
     const {onOpenModal} = useContext(PopUpContext);
+    const {onDeleteExercise} = useContext(TrainingPlanContext)!;
     return (
         <ExercisesWrapper>
             <ExerciseItems>
@@ -57,7 +59,7 @@ const Exercise: React.FC<Props> = ({exercise}) => {
             </ExerciseItems>
             <ExerciseButtons>
                 <ExerciseButton>Edit</ExerciseButton>
-                <ExerciseButton>Delete</ExerciseButton>
+                <ExerciseButton onClick={() => onDeleteExercise(trainingDayId, exercise._id)}>Delete</ExerciseButton>
             </ExerciseButtons>
         </ExercisesWrapper>
 

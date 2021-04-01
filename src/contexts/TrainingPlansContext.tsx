@@ -1,7 +1,7 @@
 import React, {createContext, useState} from 'react';
-import {get, post} from '../services/restService';
+import {get, post, deleteRequest} from '../services/restService';
 import {getUserIdFromStorage, getTokenFromStorage} from '../services/authenticationService';
-import axios from "axios";
+
 
 export interface TrainingPlanIntro {
     _id: string;
@@ -58,6 +58,7 @@ interface ContextType {
         ytLink?: string,
         description?: string
     ) => void;
+    onDeleteExercise: (dayId: string, exerciseId: string) => void;
 }
 
 export const TrainingPlanContext = createContext({} as ContextType);
@@ -140,6 +141,24 @@ const TrainingPlanContextProvider: React.FC = ({children}) => {
         }
     }
 
+    const onDeleteExercise = async( dayId: string, exerciseId: string) => {
+        const userId = getUserIdFromStorage()!;
+
+        try {
+            const response = await deleteRequest<any>('plans/deleteExercise', {
+                userId: userId,
+                planId: openedPlan._id,
+                dayId: dayId,
+                exerciseId: exerciseId
+            })
+        } catch (e) {
+            console.log(e)
+        } finally {
+            const {data} = await get<any>(`plans/all/${openedPlan._id}`);
+            setOpenedPlan(data.plan);
+        }
+    }
+
     return (
         <TrainingPlanContext.Provider
             value={{
@@ -149,7 +168,8 @@ const TrainingPlanContextProvider: React.FC = ({children}) => {
                 setOpenedPlan,
                 onCreateNewPlan,
                 onCreateNewTrainingDay,
-                onAddTrainingDayExercise
+                onAddTrainingDayExercise,
+                onDeleteExercise
             }}>
             {children}
         </TrainingPlanContext.Provider>

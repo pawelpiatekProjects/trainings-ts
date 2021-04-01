@@ -35,6 +35,16 @@ export function get<T>(endpoint: string) {
     return instance.get<T>(endpoint);
 }
 
+export function deleteRequest<T>(endpoint: string, params:PostDataSchema) {
+    const token = getTokenFromStorage();
+    if(token) {
+        onAddAuthorizationHeader(token);
+    }
+    return instance.delete<T>(endpoint, {
+        params: params
+    });
+}
+
 instance.interceptors.response.use(response=> response, error => {
     if(error.response.status === 401) {
         clearAuthenticatedUSerData();
