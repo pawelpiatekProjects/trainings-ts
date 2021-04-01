@@ -4,7 +4,8 @@ export enum ContentType {
     Error,
     AddTrainingPlan,
     AddTrainingDay,
-    AddExercise
+    AddExercise,
+    ShowExerciseDescription
 }
 
 interface PopUpConfig {

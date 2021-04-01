@@ -2,6 +2,10 @@ import styled from "styled-components";
 import * as variables from '../../../../../assets/styles/variables';
 import {PrimaryButton} from '../../../../../assets/styles/customStylesComponents/buttons';
 
+interface IExerciseIntroItem {
+    width: number;
+}
+
 export const TrainingDayWrapper = styled.div`
   background: ${variables.grayPrimary};
   padding: 2rem;
@@ -64,6 +68,23 @@ export const EmptyExercisesHeader = styled.h1`
 
 export const Button = styled(PrimaryButton)`
 
+`;
+
+export const ExerciseIntro = styled.ul`
+  list-style: none;
+  width: 85%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+`;
+
+export const ExerciseIntroItem = styled.li<IExerciseIntroItem>`
+  width: ${props => props.width}%;
+  
+  p {
+    font-weight: 500;
+  }
 `;
 
 

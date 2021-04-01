@@ -38,7 +38,7 @@ export interface TrainingPlanExercise {
     pause?: number;
     rate?: number;
     ytLink?: string;
-    description?: string;
+    exerciseDescription?: string;
 }
 
 interface ContextType {

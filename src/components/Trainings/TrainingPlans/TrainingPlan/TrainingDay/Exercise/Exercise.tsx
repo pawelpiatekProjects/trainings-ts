@@ -1,13 +1,8 @@
-import React from "react";
-import {
-    ExercisesWrapper,
-    ExerciseItems,
-    ExerciseItem,
-    ExerciseButtons,
-    ExerciseButton
-} from './ExerciseStyles';
+import React, {useContext} from "react";
+import {ExerciseButton, ExerciseButtons, ExerciseItem, ExerciseItems, ExercisesWrapper} from './ExerciseStyles';
 import {TrainingPlanExercise} from "../../../../../../contexts/TrainingPlansContext";
-import {YouTube, Info} from '@material-ui/icons';
+import {Info, YouTube} from '@material-ui/icons';
+import {ContentType, PopUpContext} from "../../../../../../contexts/PopUpContext";
 
 
 interface Props {
@@ -16,19 +11,21 @@ interface Props {
 
 const Exercise: React.FC<Props> = ({exercise}) => {
     console.log('exercise: ', exercise)
+    const {onOpenModal} = useContext(PopUpContext);
     return (
         <ExercisesWrapper>
             <ExerciseItems>
-                <ExerciseItem>
+                <ExerciseItem width={10}>
                     <p>1.</p>
                 </ExerciseItem>
-                <ExerciseItem>
+                <ExerciseItem width={25}>
                     <p>{exercise.exerciseName}</p>
                 </ExerciseItem>
-                <ExerciseItem>
+                <ExerciseItem width={10}>
+
                     <p>{exercise.weight ? exercise.weight : '-'}</p>
                 </ExerciseItem>
-                <ExerciseItem>
+                <ExerciseItem width={15}>
                     <p>[{exercise.repsInSeries.map((num, index) => {
                         return index === exercise.repsInSeries.length - 1 ? (
                             <span key={num}>{num}</span>
@@ -38,20 +35,21 @@ const Exercise: React.FC<Props> = ({exercise}) => {
                     })}]</p>
 
                 </ExerciseItem>
-                <ExerciseItem>
+                <ExerciseItem width={10}>
                     <p>{exercise.rate ? exercise.rate: '-'}</p>
                 </ExerciseItem>
-                <ExerciseItem>
+                <ExerciseItem width={10}>
                     <p>{exercise.pause ? exercise.pause: '-'}</p>
                 </ExerciseItem>
-                <ExerciseItem>{exercise.ytLink ? (
+                <ExerciseItem width={10}>{exercise.ytLink ? (
                     <a href={exercise.ytLink}>
                         <YouTube/>
                     </a>
                 ) : '-'}</ExerciseItem>
-                <ExerciseItem>
-                    {exercise.description ? (
-                        <button>
+                <ExerciseItem width={10}>
+                    {exercise.exerciseDescription ? (
+                        <button
+                            onClick={() => onOpenModal(ContentType.ShowExerciseDescription, '', exercise.exerciseDescription)}>
                             <Info/>
                         </button>
                     ): '-'}

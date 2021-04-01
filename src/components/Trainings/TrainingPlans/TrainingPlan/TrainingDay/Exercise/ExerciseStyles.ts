@@ -2,6 +2,10 @@ import styled from "styled-components";
 import * as variables from '../../../../../../assets/styles/variables';
 import {TopButton} from '../TrainingDayStyles';
 
+interface IExerciseItem  {
+    width: number;
+}
+
 export const ExercisesWrapper = styled.div`
  display: flex;
   justify-content: space-between;
@@ -32,10 +36,11 @@ export const ExerciseItems = styled.ul`
   align-items: start;
 `;
 
-export const ExerciseItem = styled.li`
+export const ExerciseItem = styled.li<IExerciseItem>`
   display: flex;
   justify-content: start;
   align-items: center;
+  width: ${props => props.width}%;
   
   p {
     margin: 0;
@@ -77,5 +82,13 @@ export const ExerciseItem = styled.li`
       transition: all .3s;
     }
   }
+`;
+
+
+
+export const Empty = styled.div`
+  width: 1rem;
+  height: 2px;
+  background: ${variables.yellowPrimary};
 `;
 
