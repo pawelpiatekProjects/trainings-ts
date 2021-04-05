@@ -8,7 +8,7 @@ const ExerciseDescription: React.FC = () => {
     return (
         <ExerciseDescriptionWrapper>
             <ExerciseDescriptionHeader>Description</ExerciseDescriptionHeader>
-            <ExerciseDescriptionText>{popUpConfig.message}</ExerciseDescriptionText>
+            <ExerciseDescriptionText>{popUpConfig.openModalData.message}</ExerciseDescriptionText>
         </ExerciseDescriptionWrapper>
     )
 };

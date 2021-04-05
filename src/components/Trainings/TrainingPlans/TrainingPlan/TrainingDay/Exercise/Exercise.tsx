@@ -23,6 +23,10 @@ const Exercise: React.FC<Props> = ({exercise, trainingDayId}) => {
     const onDeleteExercise = () => {
         onOpenModal({
             contentType: ContentType.DeleteExercise,
+            planConfig: {
+                dayId: trainingDayId,
+                exerciseId: exercise._id
+            },
             deleteType: 'exercise'
         })
     }

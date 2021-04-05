@@ -20,8 +20,9 @@ export interface TrainingPlanConfig {
 interface PopUpConfig {
     isPopUpOpen: boolean;
     content: ContentType;
-    planConfig?: TrainingPlanConfig;
-    message?: string;
+    openModalData: OpenModalData;
+    // planConfig?: TrainingPlanConfig;
+    // message?: string;
 
 }
 
@@ -44,22 +45,13 @@ const PopUpContextProvider: React.FC = ({children}) => {
 
     const [popUpConfig, setPopUpConfig] = useState({} as PopUpConfig);
 
-    // const onOpenModal = (contentType: ContentType, planConfig?: TrainingPlanConfig, message?: string) => {
     const onOpenModal = (openModalData: OpenModalData) => {
-        if(openModalData.message) {
-            setPopUpConfig({
-                isPopUpOpen: true,
-                content: openModalData.contentType,
-                planConfig: openModalData.planConfig,
-                message: openModalData.message
-            })
-        } else {
-            setPopUpConfig({
-                isPopUpOpen: true,
-                content: openModalData.contentType,
-                planConfig: openModalData.planConfig
-            })
-        }
+        setPopUpConfig({
+            isPopUpOpen: true,
+            content: openModalData.contentType,
+            openModalData: openModalData
+        });
+
     }
 
     const onCloseModal = () => {
