@@ -1,8 +1,8 @@
 import React, {useContext} from "react";
 import {
-    DeleteExerciseWrapper,
-    DeleteExerciseHeader,
-    DeleteExerciseParagraph,
+    DeleteItemWrapper,
+    DeleteItemHeader,
+    DeleteItemParagraph,
     ButtonsGroup,
     Button
 } from './DeleteItemStyle';
@@ -25,9 +25,9 @@ const DeleteExercise: React.FC = () => {
         emitNewMessage('Deleted exercise');
     }
     return (
-        <DeleteExerciseWrapper>
-            <DeleteExerciseHeader>Delete exercise</DeleteExerciseHeader>
-            <DeleteExerciseParagraph>Are you sure, you want to delete this exercise?</DeleteExerciseParagraph>
+        <DeleteItemWrapper>
+            <DeleteItemHeader>Delete exercise</DeleteItemHeader>
+            <DeleteItemParagraph>Are you sure, you want to delete this exercise?</DeleteItemParagraph>
             <ButtonsGroup>
                 <Button
                     color={variables.errorRed}
@@ -40,7 +40,7 @@ const DeleteExercise: React.FC = () => {
                     Cancel
                 </Button>
             </ButtonsGroup>
-        </DeleteExerciseWrapper>
+        </DeleteItemWrapper>
     )
 };
 

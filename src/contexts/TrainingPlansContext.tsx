@@ -48,6 +48,7 @@ interface ContextType {
     setOpenedPlan: (plan: TrainingPlanAll) => void;
     onCreateNewPlan: (name: string, description: string, image: string) => void;
     onCreateNewTrainingDay: (trainingDayName: string) => void;
+    onDeleteTrainingDay: (dayId: string) => void;
     onAddTrainingDayExercise: (
         dayId: string,
         name: string,
@@ -107,6 +108,24 @@ const TrainingPlanContextProvider: React.FC = ({children}) => {
         }
     }
 
+    const onDeleteTrainingDay = async (dayId: string) => {
+        const userId = getUserIdFromStorage()!;
+
+        try {
+            const {data} = await deleteRequest<any>('plans/deleteTrainingDay', {
+                userId: userId,
+                planId: openedPlan._id,
+                dayId: dayId
+            });
+
+        } catch (e) {
+            console.log(e);
+        } finally {
+            const {data} = await get<any>(`plans/all/${openedPlan._id}`);
+            setOpenedPlan(data.plan);
+        }
+    }
+
     const onAddTrainingDayExercise = async (
         dayId: string,
         name: string,
@@ -116,7 +135,7 @@ const TrainingPlanContextProvider: React.FC = ({children}) => {
         rate?: string,
         ytLink?: string,
         description?: string
-        ) => {
+    ) => {
 
         const userId = getUserIdFromStorage()!;
 
@@ -141,7 +160,7 @@ const TrainingPlanContextProvider: React.FC = ({children}) => {
         }
     }
 
-    const onDeleteExercise = async( dayId: string, exerciseId: string) => {
+    const onDeleteExercise = async (dayId: string, exerciseId: string) => {
         const userId = getUserIdFromStorage()!;
 
         try {
@@ -168,6 +187,7 @@ const TrainingPlanContextProvider: React.FC = ({children}) => {
                 setOpenedPlan,
                 onCreateNewPlan,
                 onCreateNewTrainingDay,
+                onDeleteTrainingDay,
                 onAddTrainingDayExercise,
                 onDeleteExercise
             }}>

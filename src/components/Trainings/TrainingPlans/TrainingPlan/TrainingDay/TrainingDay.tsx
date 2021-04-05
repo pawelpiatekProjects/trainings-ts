@@ -17,29 +17,24 @@ import Exercise from "./Exercise/Exercise";
 import * as variables from '../../../../../assets/styles/variables';
 import {ContentType, PopUpContext} from "../../../../../contexts/PopUpContext";
 
+// TODO: remove redundant controllers
+
 interface Props {
     trainingDay: TrainingDayType;
+    onAddExercise: () => void;
+    onDeleteTrainingDay: () => void;
 }
 
-const TrainingDay: React.FC<Props> = ({trainingDay}) => {
+const TrainingDay: React.FC<Props> = ({trainingDay, onAddExercise, onDeleteTrainingDay}) => {
     console.log('exercises: ', trainingDay.exercises);
-    const {onOpenModal} = useContext(PopUpContext);
 
-    const handleOpenModal = () => {
-        onOpenModal({
-            contentType: ContentType.AddExercise,
-            planConfig: {
-                dayId: trainingDay._id
-            }
-        })
-    }
 
     let result;
     if (trainingDay.exercises.length <= 0) {
         result = (
             <EmptyExercisesWrapper>
                 <EmptyExercisesHeader>Your exercises list is empty. Add new training day</EmptyExercisesHeader>
-                <Button onClick={() => handleOpenModal()} color={variables.yellowPrimary}>Add</Button>
+                <Button onClick={() => onAddExercise()} color={variables.yellowPrimary}>Add</Button>
             </EmptyExercisesWrapper>
         )
     } else {
@@ -53,9 +48,9 @@ const TrainingDay: React.FC<Props> = ({trainingDay}) => {
             <TrainingDayHeading>
                 <TrainingDayHeader>{trainingDay.trainingDayName}</TrainingDayHeader>
                 <TopButtons>
-                    <TopButton onClick={() => handleOpenModal()}>Add exercise</TopButton>
+                    <TopButton onClick={() => onAddExercise()}>Add exercise</TopButton>
                     <TopButton>Edit</TopButton>
-                    <TopButton>Delete</TopButton>
+                    <TopButton onClick={() => onDeleteTrainingDay()}>Delete</TopButton>
                 </TopButtons>
 
             </TrainingDayHeading>

@@ -6,6 +6,7 @@ import CreateTrainingDayForm from "./PopUpContent/CreateTrainingDayForm/CreateTr
 import AddTrainingDayExerciseForm from "./PopUpContent/AddTrainingDayExerciseForm/AddTrainingDayExerciseForm";
 import ExerciseDescription from "./PopUpContent/ExerciseDescription/ExerciseDescription";
 import DeleteExercise from "./PopUpContent/DeleteItem/DeleteExercise";
+import DeleteTrainingDay from "./PopUpContent/DeleteItem/DeleteTrainingDay";
 
 const PopUpController: React.FC = () => {
     const {popUpConfig} = useContext(PopUpContext);
@@ -26,6 +27,9 @@ const PopUpController: React.FC = () => {
             break;
         } case ContentType.DeleteExercise: {
             contentElement = <DeleteExercise/>;
+            break;
+        } case ContentType.DeleteTrainingDay: {
+            contentElement = <DeleteTrainingDay/>;
             break;
         }
     }
