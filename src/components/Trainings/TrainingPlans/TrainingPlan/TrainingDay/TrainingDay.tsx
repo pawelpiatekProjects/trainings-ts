@@ -23,9 +23,10 @@ interface Props {
     trainingDay: TrainingDayType;
     onAddExercise: () => void;
     onDeleteTrainingDay: () => void;
+    onEditTrainingDay: () => void;
 }
 
-const TrainingDay: React.FC<Props> = ({trainingDay, onAddExercise, onDeleteTrainingDay}) => {
+const TrainingDay: React.FC<Props> = ({trainingDay, onAddExercise, onDeleteTrainingDay, onEditTrainingDay}) => {
     console.log('exercises: ', trainingDay.exercises);
 
 
@@ -49,7 +50,7 @@ const TrainingDay: React.FC<Props> = ({trainingDay, onAddExercise, onDeleteTrain
                 <TrainingDayHeader>{trainingDay.trainingDayName}</TrainingDayHeader>
                 <TopButtons>
                     <TopButton onClick={() => onAddExercise()}>Add exercise</TopButton>
-                    <TopButton>Edit</TopButton>
+                    <TopButton onClick={() => onEditTrainingDay()}>Edit</TopButton>
                     <TopButton onClick={() => onDeleteTrainingDay()}>Delete</TopButton>
                 </TopButtons>
 

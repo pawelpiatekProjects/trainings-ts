@@ -80,6 +80,7 @@ const TrainingDayExerciseForm: React.FC = () => {
                                 ytLink,
                                 description
                             );
+                            emitNewMessage('Added new exercise');
                         } else {
                             onEditExercise(
                                 popUpConfig.openModalData.planConfig!.dayId!,
@@ -92,10 +93,11 @@ const TrainingDayExerciseForm: React.FC = () => {
                                 ytLink,
                                 description
                             )
+                            emitNewMessage('Changed exercise');
                         }
                         onCloseModal();
                         resetForm();
-                        emitNewMessage('Added new exercise');
+
                     }}
             >
                 {({errors, touched, isValid, dirty}) => (

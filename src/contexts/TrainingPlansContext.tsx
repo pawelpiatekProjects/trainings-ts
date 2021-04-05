@@ -50,6 +50,7 @@ interface ContextType {
     onDeleteTrainingPlan: () => void;
     onCreateNewTrainingDay: (trainingDayName: string) => void;
     onDeleteTrainingDay: (dayId: string) => void;
+    onEditTrainingDay: (dayId: string, name: string) => void;
     onAddTrainingDayExercise: (
         dayId: string,
         name: string,
@@ -154,6 +155,25 @@ const TrainingPlanContextProvider: React.FC = ({children}) => {
         }
     }
 
+    const onEditTrainingDay = async (dayId: string, name: string) => {
+        const userId = getUserIdFromStorage()!;
+
+        try {
+            const {data} = await put<any>('plans/editTrainingDay', {
+                userId: userId,
+                planId: openedPlan._id,
+                dayId: dayId,
+                name: name
+            })
+        } catch (e) {
+            console.log('error: ', e);
+        } finally {
+            const {data} = await get<any>(`plans/all/${openedPlan._id}`);
+            setOpenedPlan(data.plan);
+        }
+
+    }
+
     const onAddTrainingDayExercise = async (
         dayId: string,
         name: string,
@@ -250,6 +270,7 @@ const TrainingPlanContextProvider: React.FC = ({children}) => {
                 setOpenedPlan,
                 onCreateNewPlan,
                 onDeleteTrainingPlan,
+                onEditTrainingDay,
                 onCreateNewTrainingDay,
                 onDeleteTrainingDay,
                 onAddTrainingDayExercise,

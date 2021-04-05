@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import PopUp from "./PopUp";
 import {ContentType, PopUpContext} from "../../contexts/PopUpContext";
 import CreatePlanForm from "./PopUpContent/CreatePlanForm/CreatePlanForm";
-import CreateTrainingDayForm from "./PopUpContent/CreateTrainingDayForm/CreateTrainingDayForm";
+import TrainingDayForm from "./PopUpContent/TrainingDayForm/TrainingDayForm";
 import TrainingDayExerciseForm from "./PopUpContent/AddTrainingDayExerciseForm/TrainingDayExerciseForm";
 import ExerciseDescription from "./PopUpContent/ExerciseDescription/ExerciseDescription";
 import DeleteExercise from "./PopUpContent/DeleteItem/DeleteExercise";
@@ -18,7 +18,7 @@ const PopUpController: React.FC = () => {
             contentElement = <CreatePlanForm/>
             break;
         } case ContentType.AddTrainingDay: {
-            contentElement = <CreateTrainingDayForm/>
+            contentElement = <TrainingDayForm/>
             break
         } case ContentType.AddExercise: {
             contentElement = <TrainingDayExerciseForm/>
@@ -35,9 +35,11 @@ const PopUpController: React.FC = () => {
         } case ContentType.DeleteTrainingPlan: {
             contentElement = <DeleteTrainingPlan/>
             break;
-        }
-        case ContentType.EditExercise: {
+        } case ContentType.EditExercise: {
             contentElement = <TrainingDayExerciseForm/>
+            break;
+        } case ContentType.EditTrainingDay: {
+            contentElement = <TrainingDayForm/>
             break;
         }
     }

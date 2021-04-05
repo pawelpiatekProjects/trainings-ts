@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {Wrapper} from './CreateTrainingDayFormStyles';
+import {Wrapper} from './TrainingDayFormStyles';
 import {Formik, Field, Form} from 'formik';
 import {
     FormHeader,
@@ -8,15 +8,25 @@ import {
 } from '../../../../assets/styles/customStylesComponents/formComponents';
 import {SecondaryButton} from '../../../../assets/styles/customStylesComponents/buttons';
 import * as Yup from "yup";
-import {TrainingPlanContext} from "../../../../contexts/TrainingPlansContext";
+import {TrainingDay, TrainingPlanContext} from "../../../../contexts/TrainingPlansContext";
 import {PopUpContext} from "../../../../contexts/PopUpContext";
 import {ToastContext} from "../../../../contexts/ToastContext";
 
 
-const CreateTrainingDayForm: React.FC = () => {
-    const {onCreateNewTrainingDay} = useContext(TrainingPlanContext);
-    const {onCloseModal} = useContext(PopUpContext);
+const TrainingDayForm: React.FC = () => {
+    const {onCreateNewTrainingDay, openedPlan, onEditTrainingDay} = useContext(TrainingPlanContext);
+    const {onCloseModal, popUpConfig} = useContext(PopUpContext);
     const {emitNewMessage} = useContext(ToastContext);
+
+    const mode = popUpConfig.openModalData!.mode!;
+
+    let trainingDay: TrainingDay | null;
+
+    if(mode === 'edit') {
+        trainingDay = openedPlan.trainingDays.filter(trainingDay => trainingDay._id === popUpConfig.openModalData!.planConfig!.dayId!)[0];
+    } else {
+        trainingDay = null;
+    }
 
     const NewTrainingDaySchema = Yup.object().shape({
         name: Yup.string()
@@ -25,17 +35,21 @@ const CreateTrainingDayForm: React.FC = () => {
     });
     return (
         <Wrapper>
-            <FormHeader>Create Training Day</FormHeader>
+            <FormHeader>{mode === 'edit' ? 'Edit' : 'Create'} Training Day</FormHeader>
             <Formik initialValues={{
-                name: ''
+                name: mode === 'edit' && trainingDay ? trainingDay.trainingDayName : ''
             }}
                     validationSchema={NewTrainingDaySchema}
                     onSubmit={({name}, {resetForm}) => {
-                        console.log(name)
-                        onCreateNewTrainingDay(name);
+                        console.log(name);
+                        if(mode === 'edit') {
+                            onEditTrainingDay(trainingDay!._id, name);
+                        } else {
+                            onCreateNewTrainingDay(name);
+                            emitNewMessage('Created training day');
+                        }
                         resetForm();
                         onCloseModal();
-                        emitNewMessage('Created training day');
                     }}>
                 {({errors, touched, isValid, dirty}) => (
                     <Form>
@@ -54,4 +68,4 @@ const CreateTrainingDayForm: React.FC = () => {
     )
 };
 
-export default CreateTrainingDayForm;
+export default TrainingDayForm;

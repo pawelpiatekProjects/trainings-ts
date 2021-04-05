@@ -24,6 +24,17 @@ const TrainingDayController: React.FC<Props> = ({trainingDay}) => {
         console.log('on delete')
         onOpenModal({
             contentType: ContentType.DeleteTrainingDay,
+            mode: 'add',
+            planConfig: {
+                dayId: trainingDay._id
+            }
+        })
+    }
+
+    const onEditTrainingDay = () => {
+        onOpenModal({
+            contentType: ContentType.EditTrainingDay,
+            mode: 'edit',
             planConfig: {
                 dayId: trainingDay._id
             }
@@ -35,6 +46,7 @@ const TrainingDayController: React.FC<Props> = ({trainingDay}) => {
             trainingDay={trainingDay}
             onAddExercise={onAddExercise}
             onDeleteTrainingDay={onDeleteTrainingDay}
+            onEditTrainingDay={onEditTrainingDay}
         />
     )
 };
