@@ -42,7 +42,7 @@ const CreatePlanForm: React.FC = () => {
                         await onCreateNewPlan(name, description, image);
                         onCloseModal();
                         resetForm();
-                        emitNewMessage('Created new training plan');
+                        emitNewMessage('Created training plan')
                     }}
             >
                 {({errors, touched, isValid, dirty}) => (

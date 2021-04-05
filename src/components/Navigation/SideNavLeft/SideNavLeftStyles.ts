@@ -6,6 +6,10 @@ interface INestedNavItems {
     isActive: boolean
 }
 
+interface IActiveStyles {
+    isActive: boolean
+}
+
 export const SideNavWrapper = styled.nav`
   width: 100%;
   height: 100%;
@@ -76,6 +80,13 @@ export const NavigationItemContent = styled.div`
   svg {
     font-size: 2.5rem;
   }
+`;
+
+export const NavigationItemParagraph = styled.p<IActiveStyles>`
+  font-size: ${variables.textSmall};
+  margin-left: .5rem;
+  font-weight: 500;
+  color: ${props => props.isActive ? variables.yellowPrimary : variables.textColorPrimary};
 `;
 
 

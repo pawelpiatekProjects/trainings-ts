@@ -5,20 +5,36 @@ export enum ContentType {
     AddTrainingPlan,
     AddTrainingDay,
     AddExercise,
-    ShowExerciseDescription
+    ShowExerciseDescription,
+    DeleteExercise
+}
+
+type DeleteType = 'plan' | 'day' | 'exercise';
+
+export interface TrainingPlanConfig {
+    planId?: string;
+    dayId?: string;
+    exerciseId?: string;
 }
 
 interface PopUpConfig {
     isPopUpOpen: boolean;
     content: ContentType;
-    dayId?: string;
+    planConfig?: TrainingPlanConfig;
     message?: string;
 
 }
 
+interface OpenModalData {
+    contentType: ContentType,
+    planConfig?: TrainingPlanConfig,
+    message?: string,
+    deleteType?: DeleteType
+}
+
 interface ContextType {
     popUpConfig: PopUpConfig;
-    onOpenModal: (contentType: ContentType,  dayId?: string, message?: string) => void;
+    onOpenModal: (openModalData: OpenModalData) => void;
     onCloseModal: () => void;
 }
 
@@ -28,19 +44,20 @@ const PopUpContextProvider: React.FC = ({children}) => {
 
     const [popUpConfig, setPopUpConfig] = useState({} as PopUpConfig);
 
-    const onOpenModal = (contentType: ContentType, dayId?: string, message?: string) => {
-        if(message) {
+    // const onOpenModal = (contentType: ContentType, planConfig?: TrainingPlanConfig, message?: string) => {
+    const onOpenModal = (openModalData: OpenModalData) => {
+        if(openModalData.message) {
             setPopUpConfig({
                 isPopUpOpen: true,
-                content: contentType,
-                dayId: dayId,
-                message: message
+                content: openModalData.contentType,
+                planConfig: openModalData.planConfig,
+                message: openModalData.message
             })
         } else {
             setPopUpConfig({
                 isPopUpOpen: true,
-                content: contentType,
-                dayId: dayId
+                content: openModalData.contentType,
+                planConfig: openModalData.planConfig
             })
         }
     }

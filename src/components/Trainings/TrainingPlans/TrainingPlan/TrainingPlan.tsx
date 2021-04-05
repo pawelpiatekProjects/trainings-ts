@@ -25,7 +25,9 @@ const TrainingPlan: React.FC = () => {
     const {openedPlan} = useContext(TrainingPlanContext)!;
 
     const handleModalOpen = () => {
-        onOpenModal(ContentType.AddTrainingDay)
+        onOpenModal({
+            contentType: ContentType.AddTrainingDay
+        })
     }
 
     let trainingDaysWrapperContent;

@@ -18,7 +18,6 @@ const CreateTrainingDayForm: React.FC = () => {
     const {onCloseModal} = useContext(PopUpContext);
     const {emitNewMessage} = useContext(ToastContext);
 
-
     const NewTrainingDaySchema = Yup.object().shape({
         name: Yup.string()
             .max(50, 'Too Long')
@@ -36,7 +35,7 @@ const CreateTrainingDayForm: React.FC = () => {
                         onCreateNewTrainingDay(name);
                         resetForm();
                         onCloseModal();
-                        emitNewMessage('Created new training day');
+                        emitNewMessage('Created training day');
                     }}>
                 {({errors, touched, isValid, dirty}) => (
                     <Form>

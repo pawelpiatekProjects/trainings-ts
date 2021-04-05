@@ -6,9 +6,7 @@ import PrivateRoute from "../../../utils/PrivateRoute";
 
 import {Switch} from "react-router-dom";
 import TrainingPlanController from "./TrainingPlan/TrainingPlanController";
-import {PopUpContext} from "../../../contexts/PopUpContext";
-import {ContentType} from "../../../contexts/PopUpContext";
-
+import {ContentType, PopUpContext} from "../../../contexts/PopUpContext";
 
 
 const TrainingPlansController: React.FC = () => {
@@ -25,7 +23,9 @@ const TrainingPlansController: React.FC = () => {
 
 
     const onAddNewPlan = () => {
-        onOpenModal(ContentType.AddTrainingPlan);
+        onOpenModal({
+            contentType: ContentType.AddTrainingPlan
+        })
     }
 
 

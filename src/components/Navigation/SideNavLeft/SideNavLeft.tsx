@@ -7,6 +7,7 @@ import {
     NavigationBottom,
     NavigationItem,
     NavigationItemContent,
+    NavigationItemParagraph,
     NestedNavItems,
     NestedNavItem,
     NestedNavLink

@@ -1,6 +1,6 @@
 import React, {useContext} from "react";
 import {ExerciseButton, ExerciseButtons, ExerciseItem, ExerciseItems, ExercisesWrapper} from './ExerciseStyles';
-import {TrainingPlanContext, TrainingPlanExercise} from "../../../../../../contexts/TrainingPlansContext";
+import {TrainingPlanExercise} from "../../../../../../contexts/TrainingPlansContext";
 import {Info, YouTube} from '@material-ui/icons';
 import {ContentType, PopUpContext} from "../../../../../../contexts/PopUpContext";
 
@@ -11,9 +11,22 @@ interface Props {
 }
 
 const Exercise: React.FC<Props> = ({exercise, trainingDayId}) => {
-    console.log('exercise: ', exercise)
     const {onOpenModal} = useContext(PopUpContext);
-    const {onDeleteExercise} = useContext(TrainingPlanContext)!;
+
+    const onDescriptionShow = () => {
+        onOpenModal({
+            contentType: ContentType.ShowExerciseDescription,
+            message: exercise.exerciseDescription
+        })
+    }
+
+    const onDeleteExercise = () => {
+        onOpenModal({
+            contentType: ContentType.DeleteExercise,
+            deleteType: 'exercise'
+        })
+    }
+
     return (
         <ExercisesWrapper>
             <ExerciseItems>
@@ -38,10 +51,10 @@ const Exercise: React.FC<Props> = ({exercise, trainingDayId}) => {
 
                 </ExerciseItem>
                 <ExerciseItem width={10}>
-                    <p>{exercise.rate ? exercise.rate: '-'}</p>
+                    <p>{exercise.rate ? exercise.rate : '-'}</p>
                 </ExerciseItem>
                 <ExerciseItem width={10}>
-                    <p>{exercise.pause ? exercise.pause: '-'}</p>
+                    <p>{exercise.pause ? exercise.pause : '-'}</p>
                 </ExerciseItem>
                 <ExerciseItem width={10}>{exercise.ytLink ? (
                     <a href={exercise.ytLink}>
@@ -51,15 +64,15 @@ const Exercise: React.FC<Props> = ({exercise, trainingDayId}) => {
                 <ExerciseItem width={10}>
                     {exercise.exerciseDescription ? (
                         <button
-                            onClick={() => onOpenModal(ContentType.ShowExerciseDescription, '', exercise.exerciseDescription)}>
+                            onClick={() => onDescriptionShow()}>
                             <Info/>
                         </button>
-                    ): '-'}
+                    ) : '-'}
                 </ExerciseItem>
             </ExerciseItems>
             <ExerciseButtons>
                 <ExerciseButton>Edit</ExerciseButton>
-                <ExerciseButton onClick={() => onDeleteExercise(trainingDayId, exercise._id)}>Delete</ExerciseButton>
+                <ExerciseButton onClick={() => onDeleteExercise()}>Delete</ExerciseButton>
             </ExerciseButtons>
         </ExercisesWrapper>
 

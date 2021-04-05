@@ -55,9 +55,8 @@ const AddTrainingDayExerciseForm: React.FC = () => {
             }}
                     validationSchema={NewExerciseSchema}
                     onSubmit={({name, series, weight, pause, rate, ytLink, description}, {resetForm}) => {
-                        console.log('dayId: ', popUpConfig.dayId);
                         onAddTrainingDayExercise(
-                            popUpConfig.dayId!,
+                            popUpConfig.planConfig!.dayId!,
                             name,
                             series,
                             weight,

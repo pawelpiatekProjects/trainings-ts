@@ -3,14 +3,14 @@ import {
     Button,
     EmptyExercisesHeader,
     EmptyExercisesWrapper,
+    ExerciseIntro,
+    ExerciseIntroItem,
     ExercisesWrapper,
     TopButton,
     TopButtons,
     TrainingDayHeader,
     TrainingDayHeading,
-    TrainingDayWrapper,
-    ExerciseIntro,
-    ExerciseIntroItem
+    TrainingDayWrapper
 } from './TrainingDayStyles';
 import {TrainingDay as TrainingDayType} from "../../../../../contexts/TrainingPlansContext";
 import Exercise from "./Exercise/Exercise";
@@ -26,7 +26,12 @@ const TrainingDay: React.FC<Props> = ({trainingDay}) => {
     const {onOpenModal} = useContext(PopUpContext);
 
     const handleOpenModal = () => {
-        onOpenModal(ContentType.AddExercise, trainingDay._id);
+        onOpenModal({
+            contentType: ContentType.AddExercise,
+            planConfig: {
+                dayId: trainingDay._id
+            }
+        })
     }
 
     let result;
