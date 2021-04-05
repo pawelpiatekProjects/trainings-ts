@@ -47,6 +47,7 @@ interface ContextType {
     openedPlan: TrainingPlanAll;
     setOpenedPlan: (plan: TrainingPlanAll) => void;
     onCreateNewPlan: (name: string, description: string, image: string) => void;
+    onDeleteTrainingPlan: () => void;
     onCreateNewTrainingDay: (trainingDayName: string) => void;
     onDeleteTrainingDay: (dayId: string) => void;
     onAddTrainingDayExercise: (
@@ -81,6 +82,22 @@ const TrainingPlanContextProvider: React.FC = ({children}) => {
                 image: image
             });
 
+        } catch (e) {
+            console.log('Error: ', e)
+        } finally {
+            const newTrainingPlans = await get<any>('plans/all');
+            setTrainingPlans(newTrainingPlans.data.plans);
+        }
+    }
+
+    const onDeleteTrainingPlan = async () => {
+        const userId = getUserIdFromStorage()!;
+
+        try {
+            const {data} = await deleteRequest<any>('plans/deleteTrainingPlan', {
+                userId: userId,
+                planId: openedPlan._id
+            });
         } catch (e) {
             console.log('Error: ', e)
         } finally {
@@ -186,6 +203,7 @@ const TrainingPlanContextProvider: React.FC = ({children}) => {
                 openedPlan,
                 setOpenedPlan,
                 onCreateNewPlan,
+                onDeleteTrainingPlan,
                 onCreateNewTrainingDay,
                 onDeleteTrainingDay,
                 onAddTrainingDayExercise,

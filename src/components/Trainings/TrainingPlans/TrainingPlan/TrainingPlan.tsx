@@ -17,18 +17,16 @@ import {ReactComponent as ThemeImg} from '../../../../assets/images/svg/dummbell
 import {TrainingPlanContext} from "../../../../contexts/TrainingPlansContext";
 import * as variables from '../../../../assets/styles/variables';
 import TrainingDayController from "./TrainingDay/TrainingDayController";
-import {ContentType, PopUpContext} from "../../../../contexts/PopUpContext";
+
+interface Props {
+    onAddTrainingDay: () => void;
+    onDeleteTrainingPlan: () => void;
+}
 
 
-const TrainingPlan: React.FC = () => {
-    const {onOpenModal} = useContext(PopUpContext)
+const TrainingPlan: React.FC<Props> = ({onAddTrainingDay, onDeleteTrainingPlan}) => {
+
     const {openedPlan} = useContext(TrainingPlanContext)!;
-
-    const handleModalOpen = () => {
-        onOpenModal({
-            contentType: ContentType.AddTrainingDay
-        })
-    }
 
     let trainingDaysWrapperContent;
     if(openedPlan.trainingDays) {
@@ -42,7 +40,7 @@ const TrainingPlan: React.FC = () => {
                     <TrainingDaysEmptyHeader>
                         Your training plan is empty. Add training days
                     </TrainingDaysEmptyHeader>
-                    <Button onClick={() => handleModalOpen()} color={variables.yellowPrimary}>Add</Button>
+                    <Button onClick={() => onAddTrainingDay()} color={variables.yellowPrimary}>Add</Button>
                 </TrainingDaysEmpty>
             )
         }
@@ -57,9 +55,9 @@ const TrainingPlan: React.FC = () => {
                     <TrainingPlanHeading>
                         <TrainingPlanHeader> {openedPlan.trainingPlanName && openedPlan.trainingPlanName}</TrainingPlanHeader>
                         <HeadingButtons>
-                            <Button onClick={() => handleModalOpen()} color={variables.yellowPrimary}>Add</Button>
+                            <Button onClick={() => onAddTrainingDay()} color={variables.yellowPrimary}>Add day</Button>
                             <Button color={variables.yellowPrimary}>Edit</Button>
-                            <Button color={variables.yellowPrimary}>Delete</Button>
+                            <Button onClick={() => onDeleteTrainingPlan()} color={variables.yellowPrimary}>Delete</Button>
                         </HeadingButtons>
                     </TrainingPlanHeading>
                     <TrainingPlanIntroData>

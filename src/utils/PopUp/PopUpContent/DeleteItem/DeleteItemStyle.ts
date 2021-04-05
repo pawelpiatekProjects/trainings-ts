@@ -8,7 +8,7 @@ export const DeleteItemWrapper = styled.div`
 
 export const DeleteItemHeader = styled.h1`
   //font-weight: 400;
-  width: 30%;
+  width: 40%;
   border-bottom: 3px solid ${variables.yellowPrimary};
   padding-bottom: .5rem;
   margin-bottom: 4rem;

@@ -7,7 +7,8 @@ export enum ContentType {
     AddExercise,
     ShowExerciseDescription,
     DeleteExercise,
-    DeleteTrainingDay
+    DeleteTrainingDay,
+    DeleteTrainingPlan
 }
 
 type DeleteType = 'plan' | 'day' | 'exercise';
