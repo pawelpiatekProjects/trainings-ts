@@ -8,10 +8,11 @@ export enum ContentType {
     ShowExerciseDescription,
     DeleteExercise,
     DeleteTrainingDay,
-    DeleteTrainingPlan
+    DeleteTrainingPlan,
+    EditExercise
 }
 
-type DeleteType = 'plan' | 'day' | 'exercise';
+type Mode = 'add' | 'edit';
 
 export interface TrainingPlanConfig {
     planId?: string;
@@ -32,7 +33,7 @@ interface OpenModalData {
     contentType: ContentType,
     planConfig?: TrainingPlanConfig,
     message?: string,
-    deleteType?: DeleteType
+    mode?: Mode
 }
 
 interface ContextType {

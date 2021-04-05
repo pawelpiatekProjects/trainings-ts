@@ -15,7 +15,8 @@ const TrainingDayController: React.FC<Props> = ({trainingDay}) => {
             contentType: ContentType.AddExercise,
             planConfig: {
                 dayId: trainingDay._id
-            }
+            },
+            mode: 'add'
         })
     }
 

@@ -24,7 +24,8 @@ const TrainingPlansController: React.FC = () => {
 
     const onAddNewPlan = () => {
         onOpenModal({
-            contentType: ContentType.AddTrainingPlan
+            contentType: ContentType.AddTrainingPlan,
+            mode: 'add'
         })
     }
 

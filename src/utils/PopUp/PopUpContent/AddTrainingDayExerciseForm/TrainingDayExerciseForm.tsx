@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {FormWrapper} from './AddTrainingDayExerciseFormStyles';
+import {FormWrapper} from './TrainingDayExerciseFormStyles';
 import {Formik, Form, Field} from 'formik';
 import {
     FormHeader,
@@ -11,12 +11,14 @@ import {
 } from '../../../../assets/styles/customStylesComponents/formComponents';
 import {SecondaryButton} from '../../../../assets/styles/customStylesComponents/buttons';
 import * as Yup from "yup";
-import {TrainingPlanContext} from "../../../../contexts/TrainingPlansContext";
+import {TrainingPlanContext, TrainingPlanExercise} from "../../../../contexts/TrainingPlansContext";
 import {PopUpContext} from "../../../../contexts/PopUpContext";
 import {ToastContext} from "../../../../contexts/ToastContext";
 
-const AddTrainingDayExerciseForm: React.FC = () => {
-    const {onAddTrainingDayExercise} = useContext(TrainingPlanContext);
+// TODO: add controller here
+
+const TrainingDayExerciseForm: React.FC = () => {
+    const {onAddTrainingDayExercise, openedPlan, onEditExercise} = useContext(TrainingPlanContext);
     const {popUpConfig, onCloseModal} = useContext(PopUpContext);
     const {emitNewMessage} = useContext(ToastContext);
 
@@ -41,30 +43,56 @@ const AddTrainingDayExerciseForm: React.FC = () => {
             .max(250, 'Too Long'),
 
     });
+    const mode = popUpConfig.openModalData!.mode!;
+    let exercise: TrainingPlanExercise | null;
+
+    // return trainingDay._id === popUpConfig.openModalData!.planConfig!.dayId)[0];
+
+    if(mode === 'edit') {
+        const trainingDay = openedPlan.trainingDays.filter(trainingDay => trainingDay._id === popUpConfig.openModalData!.planConfig!.dayId!)[0];
+        exercise = trainingDay.exercises.filter(exercise => exercise._id === popUpConfig.openModalData!.planConfig!.exerciseId!)[0];
+    } else {
+        exercise = null
+    }
+
     return (
         <FormWrapper>
-            <FormHeader>Add Exercise</FormHeader>
+            <FormHeader>{mode === 'add' ? 'Add' : 'Edit'} exercise</FormHeader>
             <Formik initialValues={{
-                name: '',
-                series: '',
-                weight: '',
-                pause: '',
-                rate: '',
-                ytLink: '',
-                description: ''
+                name: mode === 'edit' && exercise ? exercise.exerciseName : '',
+                series: mode === 'edit' && exercise ? exercise.repsInSeries : '',
+                weight: mode === 'edit' && exercise ? exercise.weight : '',
+                pause: mode === 'edit' && exercise ? exercise.pause : '',
+                rate: mode === 'edit' && exercise ? exercise.rate : '',
+                ytLink: mode === 'edit' && exercise ? exercise.ytLink : '',
+                description: mode === 'edit' && exercise ? exercise.exerciseDescription : ''
             }}
                     validationSchema={NewExerciseSchema}
                     onSubmit={({name, series, weight, pause, rate, ytLink, description}, {resetForm}) => {
-                        onAddTrainingDayExercise(
-                            popUpConfig.openModalData.planConfig!.dayId!,
-                            name,
-                            series,
-                            weight,
-                            pause,
-                            rate,
-                            ytLink,
-                            description
-                        );
+                        if(mode === 'add') {
+                            onAddTrainingDayExercise(
+                                popUpConfig.openModalData.planConfig!.dayId!,
+                                name,
+                                series,
+                                weight,
+                                pause,
+                                rate,
+                                ytLink,
+                                description
+                            );
+                        } else {
+                            onEditExercise(
+                                popUpConfig.openModalData.planConfig!.dayId!,
+                                popUpConfig.openModalData.planConfig!.exerciseId!,
+                                name,
+                                series,
+                                weight,
+                                pause,
+                                rate,
+                                ytLink,
+                                description
+                            )
+                        }
                         onCloseModal();
                         resetForm();
                         emitNewMessage('Added new exercise');
@@ -76,7 +104,11 @@ const AddTrainingDayExerciseForm: React.FC = () => {
                             <FieldGroupItem>
                                 <FieldLabel>exercise name</FieldLabel>
                                 <FieldWrapper isError={errors.name} touched={touched.name}>
-                                    <Field name='name' placeholder='exercise name'/>
+                                    <Field
+                                        name='name'
+                                        placeholder='exercise name'
+
+                                    />
                                 </FieldWrapper>
                                 {errors.name && touched.name ? (
                                     <Error>{errors.name}</Error>
@@ -85,7 +117,11 @@ const AddTrainingDayExerciseForm: React.FC = () => {
                             <FieldGroupItem>
                                 <FieldLabel>series</FieldLabel>
                                 <FieldWrapper isError={errors.series} touched={touched.series}>
-                                    <Field name='series' type='number' placeholder='series'/>
+                                    <Field
+                                        name='series'
+                                        type='number'
+                                        placeholder='series'
+                                    />
                                 </FieldWrapper>
                                 {errors.series && touched.series ? (
                                     <Error>{errors.series}</Error>
@@ -97,7 +133,10 @@ const AddTrainingDayExerciseForm: React.FC = () => {
                             <FieldGroupItem>
                                 <FieldLabel>weight</FieldLabel>
                                 <FieldWrapper isError={errors.weight} touched={touched.weight}>
-                                    <Field name='weight' type='number' placeholder='weight (kg)'/>
+                                    <Field
+                                        name='weight'
+                                        type='number'
+                                    />
                                 </FieldWrapper>
                                 {errors.weight && touched.weight ? (
                                     <Error>{errors.weight}</Error>
@@ -106,7 +145,11 @@ const AddTrainingDayExerciseForm: React.FC = () => {
                             <FieldGroupItem>
                                 <FieldLabel>break</FieldLabel>
                                 <FieldWrapper isError={errors.pause} touched={touched.pause}>
-                                    <Field name='pause' type='number' placeholder='break (s)'/>
+                                    <Field
+                                        name='pause'
+                                        type='number'
+                                        placeholder='break (s)'
+                                    />
                                 </FieldWrapper>
                                 {errors.pause && touched.pause ? (
                                     <Error>{errors.pause}</Error>
@@ -118,7 +161,11 @@ const AddTrainingDayExerciseForm: React.FC = () => {
                             <FieldGroupItem>
                                 <FieldLabel>rate</FieldLabel>
                                 <FieldWrapper isError={errors.rate} touched={touched.rate}>
-                                    <Field name='rate' type='number' placeholder='rate'/>
+                                    <Field
+                                        name='rate'
+                                        type='number'
+                                        placeholder='rate'
+                                    />
                                 </FieldWrapper>
                                 {errors.rate && touched.rate ? (
                                     <Error>{errors.rate}</Error>
@@ -127,7 +174,10 @@ const AddTrainingDayExerciseForm: React.FC = () => {
                             <FieldGroupItem>
                                 <FieldLabel>you tube link</FieldLabel>
                                 <FieldWrapper isError={errors.ytLink} touched={touched.ytLink}>
-                                    <Field name='ytLink' placeholder='you tube link'/>
+                                    <Field
+                                        name='ytLink'
+                                        placeholder='you tube link'
+                                    />
                                 </FieldWrapper>
                                 {errors.ytLink && touched.ytLink ? (
                                     <Error>{errors.ytLink}</Error>
@@ -137,13 +187,18 @@ const AddTrainingDayExerciseForm: React.FC = () => {
 
                         <FieldLabel>description</FieldLabel>
                         <FieldWrapper isError={errors.description} touched={touched.description}>
-                            <Field name='description' placeholder='description'/>
+                            <Field
+                                name='description'
+                                placeholder='description'
+                            />
                         </FieldWrapper>
                         {errors.description && touched.description ? (
                             <Error>{errors.description}</Error>
                         ) : <Error></Error>}
 
-                        <SecondaryButton disabled={!(isValid && dirty)} type='submit'>Add</SecondaryButton>
+                        <SecondaryButton disabled={!(isValid && dirty)} type='submit'>
+                            {mode === 'add' ? 'Add' : 'Edit'}
+                        </SecondaryButton>
                     </Form>
                 )}
             </Formik>
@@ -151,4 +206,4 @@ const AddTrainingDayExerciseForm: React.FC = () => {
     )
 };
 
-export default AddTrainingDayExerciseForm;
+export default TrainingDayExerciseForm;

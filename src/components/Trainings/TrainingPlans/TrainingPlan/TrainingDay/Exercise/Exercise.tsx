@@ -9,7 +9,7 @@ interface Props {
     exercise: TrainingPlanExercise;
     trainingDayId: string
 }
-
+// TODO: add controller here
 const Exercise: React.FC<Props> = ({exercise, trainingDayId}) => {
     const {onOpenModal} = useContext(PopUpContext);
 
@@ -27,8 +27,18 @@ const Exercise: React.FC<Props> = ({exercise, trainingDayId}) => {
                 dayId: trainingDayId,
                 exerciseId: exercise._id
             },
-            deleteType: 'exercise'
         })
+    }
+
+    const onEditExercise = () => {
+        onOpenModal({
+            contentType: ContentType.EditExercise,
+            planConfig: {
+                dayId: trainingDayId,
+                exerciseId: exercise._id
+            },
+            mode: 'edit'
+        });
     }
 
     return (
@@ -45,13 +55,14 @@ const Exercise: React.FC<Props> = ({exercise, trainingDayId}) => {
                     <p>{exercise.weight ? exercise.weight : '-'}</p>
                 </ExerciseItem>
                 <ExerciseItem width={15}>
-                    <p>[{exercise.repsInSeries.map((num, index) => {
-                        return index === exercise.repsInSeries.length - 1 ? (
-                            <span key={num}>{num}</span>
-                        ) : (
-                            <span key={num}>{num}, </span>
-                        )
-                    })}]</p>
+                    {/*<p>[{exercise.repsInSeries.map((num, index) => {*/}
+                    {/*    return index === exercise.repsInSeries.length - 1 ? (*/}
+                    {/*        <span key={num}>{num}</span>*/}
+                    {/*    ) : (*/}
+                    {/*        <span key={num}>{num}, </span>*/}
+                    {/*    )*/}
+                    {/*})}]</p>*/}
+                    <p>{exercise.repsInSeries}</p>
 
                 </ExerciseItem>
                 <ExerciseItem width={10}>
@@ -75,7 +86,7 @@ const Exercise: React.FC<Props> = ({exercise, trainingDayId}) => {
                 </ExerciseItem>
             </ExerciseItems>
             <ExerciseButtons>
-                <ExerciseButton>Edit</ExerciseButton>
+                <ExerciseButton onClick={() => onEditExercise()}>Edit</ExerciseButton>
                 <ExerciseButton onClick={() => onDeleteExercise()}>Delete</ExerciseButton>
             </ExerciseButtons>
         </ExercisesWrapper>

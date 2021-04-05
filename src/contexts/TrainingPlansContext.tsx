@@ -1,5 +1,5 @@
 import React, {createContext, useState} from 'react';
-import {get, post, deleteRequest} from '../services/restService';
+import {get, post, deleteRequest, put} from '../services/restService';
 import {getUserIdFromStorage, getTokenFromStorage} from '../services/authenticationService';
 
 
@@ -33,10 +33,10 @@ export interface TrainingDay {
 export interface TrainingPlanExercise {
     _id: string;
     exerciseName: string;
-    repsInSeries: number[];
-    weight?: number;
-    pause?: number;
-    rate?: number;
+    repsInSeries: string;
+    weight?: string;
+    pause?: string;
+    rate?: string;
     ytLink?: string;
     exerciseDescription?: string;
 }
@@ -61,6 +61,17 @@ interface ContextType {
         description?: string
     ) => void;
     onDeleteExercise: (dayId: string, exerciseId: string) => void;
+    onEditExercise: (
+        dayId: string,
+        exerciseId: string,
+        name: string,
+        series?: string,
+        weight?: string,
+        pauseTime?: string,
+        rate?: string,
+        ytLink?: string,
+        description?: string
+    ) => void;
 }
 
 export const TrainingPlanContext = createContext({} as ContextType);
@@ -195,6 +206,41 @@ const TrainingPlanContextProvider: React.FC = ({children}) => {
         }
     }
 
+    const onEditExercise = async (
+        dayId: string,
+        exerciseId: string,
+        name: string,
+        series?: string,
+        weight?: string,
+        pauseTime?: string,
+        rate?: string,
+        ytLink?: string,
+        description?: string
+    ) => {
+        const userId = getUserIdFromStorage()!;
+        try {
+            const {data} = await put<any>('plans/editExercise', {
+                userId: userId,
+                planId: openedPlan._id,
+                dayId: dayId,
+                exerciseId: exerciseId,
+                name: name,
+                series: series ? series : '',
+                weight: weight ? weight : '',
+                pauseTime: pauseTime ? pauseTime : '',
+                rate: rate ? rate : '',
+                ytLink: ytLink ? ytLink : '',
+                description: description ? description : ''
+            });
+        } catch (e) {
+            console.log('Error: ', e);
+        } finally {
+            const {data} = await get<any>(`plans/all/${openedPlan._id}`);
+            setOpenedPlan(data.plan);
+        }
+    }
+
+
     return (
         <TrainingPlanContext.Provider
             value={{
@@ -207,7 +253,8 @@ const TrainingPlanContextProvider: React.FC = ({children}) => {
                 onCreateNewTrainingDay,
                 onDeleteTrainingDay,
                 onAddTrainingDayExercise,
-                onDeleteExercise
+                onDeleteExercise,
+                onEditExercise
             }}>
             {children}
         </TrainingPlanContext.Provider>

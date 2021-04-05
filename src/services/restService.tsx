@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {clearAuthenticatedUSerData, getTokenFromStorage} from './authenticationService';
 
-interface PostDataSchema {
+interface DataSchema {
     [key: string]: string
 }
 
@@ -19,7 +19,7 @@ export const onDeleteAuthorizationHeader = () => {
     delete instance.defaults.headers.common['Authorization'];
 }
 
-export function post<T>(endpoint: string, data?: PostDataSchema) {
+export function post<T>(endpoint: string, data?: DataSchema) {
     const token = getTokenFromStorage();
     if(token) {
         onAddAuthorizationHeader(token);
@@ -35,13 +35,23 @@ export function get<T>(endpoint: string) {
     return instance.get<T>(endpoint);
 }
 
-export function deleteRequest<T>(endpoint: string, params:PostDataSchema) {
+export function deleteRequest<T>(endpoint: string, params:DataSchema) {
     const token = getTokenFromStorage();
     if(token) {
         onAddAuthorizationHeader(token);
     }
     return instance.delete<T>(endpoint, {
         params: params
+    });
+}
+
+export function put<T>(endpoint: string, data: DataSchema) {
+    const token = getTokenFromStorage();
+    if(token) {
+        onAddAuthorizationHeader(token);
+    }
+    return instance.put<T>(endpoint, {
+        params: data
     });
 }
 
