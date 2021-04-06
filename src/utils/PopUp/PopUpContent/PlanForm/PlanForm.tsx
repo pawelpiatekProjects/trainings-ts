@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {FormWrapper} from './CreatePlanFormStyles';
+import {FormWrapper} from './PlanFormStyles';
 import {Formik, Form, Field} from 'formik';
 import {
     FormHeader,
@@ -13,10 +13,13 @@ import  {TrainingPlanContext} from "../../../../contexts/TrainingPlansContext";
 import  {PopUpContext} from "../../../../contexts/PopUpContext";
 import {ToastContext} from "../../../../contexts/ToastContext";
 
-const CreatePlanForm: React.FC = () => {
-    const {onCreateNewPlan} = useContext(TrainingPlanContext);
-    const {onCloseModal} = useContext(PopUpContext);
+const PlanForm: React.FC = () => {
+    const {onCreateNewPlan, openedPlan, onEditTrainingPlan} = useContext(TrainingPlanContext);
+    const {onCloseModal, popUpConfig} = useContext(PopUpContext);
     const {emitNewMessage} = useContext(ToastContext);
+
+    const mode = popUpConfig.openModalData!.mode!;
+
 
     const NewPlanSchema = Yup.object().shape({
         name: Yup.string()
@@ -31,18 +34,22 @@ const CreatePlanForm: React.FC = () => {
 
     return (
         <FormWrapper>
-            <FormHeader>Create Plan</FormHeader>
+            <FormHeader>{mode === 'edit' ? 'Edit' : 'Create'} Plan</FormHeader>
             <Formik initialValues={{
-                name: '',
-                description: '',
-                image: ''
+                name: mode === 'edit' ? openedPlan.trainingPlanName : '',
+                description: mode === 'edit' ? openedPlan.description : '',
+                image: mode === 'edit' ? openedPlan.image : ''
             }}
                 validationSchema={NewPlanSchema}
-                    onSubmit={async({name, description, image}, {resetForm}) => {
-                        await onCreateNewPlan(name, description, image);
+                    onSubmit={({name, description, image}, {resetForm}) => {
+                        if(mode === 'edit') {
+                            onEditTrainingPlan(name, image, description!);
+                        } else {
+                            onCreateNewPlan(name,  image, description!);
+                            emitNewMessage('Created training plan')
+                        }
                         onCloseModal();
                         resetForm();
-                        emitNewMessage('Created training plan')
                     }}
             >
                 {({errors, touched, isValid, dirty}) => (
@@ -77,4 +84,4 @@ const CreatePlanForm: React.FC = () => {
     )
 };
 
-export default CreatePlanForm
+export default PlanForm

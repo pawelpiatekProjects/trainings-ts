@@ -48,6 +48,7 @@ interface ContextType {
     setOpenedPlan: (plan: TrainingPlanAll) => void;
     onCreateNewPlan: (name: string, description: string, image: string) => void;
     onDeleteTrainingPlan: () => void;
+    onEditTrainingPlan: (name: string, description: string, image: string) => void;
     onCreateNewTrainingDay: (trainingDayName: string) => void;
     onDeleteTrainingDay: (dayId: string) => void;
     onEditTrainingDay: (dayId: string, name: string) => void;
@@ -82,14 +83,14 @@ const TrainingPlanContextProvider: React.FC = ({children}) => {
     const [trainingPlans, setTrainingPlans] = useState<TrainingPlanIntro[]>([]);
     const [openedPlan, setOpenedPlan] = useState<TrainingPlanAll>({} as TrainingPlanAll);
 
-    const onCreateNewPlan = async (name: string, description: string, image: string) => {
+    const onCreateNewPlan = async (name: string,  image: string, description?: string,) => {
         console.log('on add plan')
         const userId = getUserIdFromStorage()!;
 
         try {
             const {data} = await post<any>('plans/addPlan', {
                 trainingPlanName: name,
-                description: description,
+                description: description ? description : '',
                 userId: userId,
                 image: image
             });
@@ -115,6 +116,25 @@ const TrainingPlanContextProvider: React.FC = ({children}) => {
         } finally {
             const newTrainingPlans = await get<any>('plans/all');
             setTrainingPlans(newTrainingPlans.data.plans);
+        }
+    }
+
+    const onEditTrainingPlan = async (name: string, image: string, description?: string,) => {
+        const userId = getUserIdFromStorage()!;
+
+        try {
+            const {data} = await put<any>('plans/editTrainingPlan',{
+                userId: userId,
+                planId: openedPlan._id,
+                name: name,
+                description: description ? description : '',
+                image: image
+            });
+        } catch (e) {
+            console.log('Error: ', e)
+        } finally {
+            const {data} = await get<any>(`plans/all/${openedPlan._id}`);
+            setOpenedPlan(data.plan);
         }
     }
 
@@ -270,6 +290,7 @@ const TrainingPlanContextProvider: React.FC = ({children}) => {
                 setOpenedPlan,
                 onCreateNewPlan,
                 onDeleteTrainingPlan,
+                onEditTrainingPlan,
                 onEditTrainingDay,
                 onCreateNewTrainingDay,
                 onDeleteTrainingDay,

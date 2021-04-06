@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import PopUp from "./PopUp";
 import {ContentType, PopUpContext} from "../../contexts/PopUpContext";
-import CreatePlanForm from "./PopUpContent/CreatePlanForm/CreatePlanForm";
+import PlanForm from "./PopUpContent/PlanForm/PlanForm";
 import TrainingDayForm from "./PopUpContent/TrainingDayForm/TrainingDayForm";
 import TrainingDayExerciseForm from "./PopUpContent/AddTrainingDayExerciseForm/TrainingDayExerciseForm";
 import ExerciseDescription from "./PopUpContent/ExerciseDescription/ExerciseDescription";
@@ -15,7 +15,7 @@ const PopUpController: React.FC = () => {
 
     switch (popUpConfig.content) {
         case ContentType.AddTrainingPlan: {
-            contentElement = <CreatePlanForm/>
+            contentElement = <PlanForm/>
             break;
         } case ContentType.AddTrainingDay: {
             contentElement = <TrainingDayForm/>
@@ -40,6 +40,9 @@ const PopUpController: React.FC = () => {
             break;
         } case ContentType.EditTrainingDay: {
             contentElement = <TrainingDayForm/>
+            break;
+        } case ContentType.EditTrainingPlan: {
+            contentElement = <PlanForm/>;
             break;
         }
     }

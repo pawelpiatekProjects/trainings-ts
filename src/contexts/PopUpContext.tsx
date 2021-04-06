@@ -10,7 +10,8 @@ export enum ContentType {
     DeleteTrainingDay,
     DeleteTrainingPlan,
     EditExercise,
-    EditTrainingDay
+    EditTrainingDay,
+    EditTrainingPlan
 }
 
 type Mode = 'add' | 'edit';

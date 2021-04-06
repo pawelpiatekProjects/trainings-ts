@@ -21,10 +21,11 @@ import TrainingDayController from "./TrainingDay/TrainingDayController";
 interface Props {
     onAddTrainingDay: () => void;
     onDeleteTrainingPlan: () => void;
+    onEditTrainingPlan: () => void;
 }
 
 
-const TrainingPlan: React.FC<Props> = ({onAddTrainingDay, onDeleteTrainingPlan}) => {
+const TrainingPlan: React.FC<Props> = ({onAddTrainingDay, onDeleteTrainingPlan, onEditTrainingPlan}) => {
 
     const {openedPlan} = useContext(TrainingPlanContext)!;
 
@@ -56,7 +57,7 @@ const TrainingPlan: React.FC<Props> = ({onAddTrainingDay, onDeleteTrainingPlan})
                         <TrainingPlanHeader> {openedPlan.trainingPlanName && openedPlan.trainingPlanName}</TrainingPlanHeader>
                         <HeadingButtons>
                             <Button onClick={() => onAddTrainingDay()} color={variables.yellowPrimary}>Add day</Button>
-                            <Button color={variables.yellowPrimary}>Edit</Button>
+                            <Button onClick={() => onEditTrainingPlan()} color={variables.yellowPrimary}>Edit</Button>
                             <Button onClick={() => onDeleteTrainingPlan()} color={variables.yellowPrimary}>Delete</Button>
                         </HeadingButtons>
                     </TrainingPlanHeading>

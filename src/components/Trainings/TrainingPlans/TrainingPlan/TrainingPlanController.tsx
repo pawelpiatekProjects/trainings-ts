@@ -21,7 +21,8 @@ const TrainingPlanController: React.FC = () => {
 
     const onAddTrainingDay = () => {
         onOpenModal({
-            contentType: ContentType.AddTrainingDay
+            contentType: ContentType.AddTrainingDay,
+            mode: 'add'
         })
     }
 
@@ -31,13 +32,24 @@ const TrainingPlanController: React.FC = () => {
         })
     }
 
+    const onEditTrainingPlan = () => {
+        onOpenModal({
+            contentType: ContentType.EditTrainingPlan,
+            mode: 'edit'
+        })
+    }
+
     useEffect(() => {
         fetchTrainingPlan();
     }, [])
 
 
     return (
-        <TrainingPlan onAddTrainingDay={onAddTrainingDay} onDeleteTrainingPlan={onDeleteTrainingPlan}/>
+        <TrainingPlan
+            onAddTrainingDay={onAddTrainingDay}
+            onDeleteTrainingPlan={onDeleteTrainingPlan}
+            onEditTrainingPlan={onEditTrainingPlan}
+        />
     )
 };
 
