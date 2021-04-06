@@ -1,8 +1,11 @@
-import React, {createContext, useState} from 'react';
+import React, {createContext, useContext, useState} from 'react';
 import {get, post, deleteRequest, put} from '../services/restService';
-import {getUserIdFromStorage, getTokenFromStorage} from '../services/authenticationService';
+import {getUserIdFromStorage} from '../services/authenticationService';
+import {LoaderContext} from "./LoaderContext";
 
-
+/**
+ * Interface that includes training plan data, which are displayed in TrainingPlans.tsx component
+ * */
 export interface TrainingPlanIntro {
     _id: string;
     name: string;
@@ -13,6 +16,9 @@ export interface TrainingPlanIntro {
     createdAt: string
 }
 
+/**
+ * Interface that includes all training plan data, which are stored in database
+ * */
 export interface TrainingPlanAll {
     _id: string;
     trainingPlanName: string;
@@ -24,12 +30,18 @@ export interface TrainingPlanAll {
     updatedAt: string;
 }
 
+/**
+ * Interface that includes training day data, which are stored in database
+ * */
 export interface TrainingDay {
     _id: string;
     trainingDayName: string;
     exercises: TrainingPlanExercise[];
 }
 
+/**
+ * Interface that includes training day exercise data, which are stored in database
+ * */
 export interface TrainingPlanExercise {
     _id: string;
     exerciseName: string;
@@ -41,6 +53,9 @@ export interface TrainingPlanExercise {
     exerciseDescription?: string;
 }
 
+/*
+* Data from ContextProvider value
+* **/
 interface ContextType {
     trainingPlans: TrainingPlanIntro[];
     setTrainingPlans: (plans: TrainingPlanIntro[]) => void;
@@ -80,15 +95,20 @@ export const TrainingPlanContext = createContext({} as ContextType);
 
 const TrainingPlanContextProvider: React.FC = ({children}) => {
 
+    const {openLoader, closeLoader} = useContext(LoaderContext);
+
     const [trainingPlans, setTrainingPlans] = useState<TrainingPlanIntro[]>([]);
     const [openedPlan, setOpenedPlan] = useState<TrainingPlanAll>({} as TrainingPlanAll);
 
-    const onCreateNewPlan = async (name: string,  image: string, description?: string,) => {
-        console.log('on add plan')
+    /** Function  for creating new training plans*/
+    const onCreateNewPlan = async (name: string,  image: string, description?: string) => {
+
         const userId = getUserIdFromStorage()!;
 
+        openLoader();
+
         try {
-            const {data} = await post<any>('plans/addPlan', {
+             await post<any>('plans/addPlan', {
                 trainingPlanName: name,
                 description: description ? description : '',
                 userId: userId,
@@ -99,50 +119,73 @@ const TrainingPlanContextProvider: React.FC = ({children}) => {
             console.log('Error: ', e)
         } finally {
             const newTrainingPlans = await get<any>('plans/all');
+
             setTrainingPlans(newTrainingPlans.data.plans);
+
+            closeLoader();
         }
     }
 
+    /** Function  for deleting training plans*/
     const onDeleteTrainingPlan = async () => {
+
         const userId = getUserIdFromStorage()!;
 
+        openLoader();
+
         try {
-            const {data} = await deleteRequest<any>('plans/deleteTrainingPlan', {
+            await deleteRequest<any>('plans/deleteTrainingPlan', {
                 userId: userId,
                 planId: openedPlan._id
             });
+
         } catch (e) {
             console.log('Error: ', e)
         } finally {
             const newTrainingPlans = await get<any>('plans/all');
+
             setTrainingPlans(newTrainingPlans.data.plans);
+
+            closeLoader();
         }
     }
 
+    /** Function  for editing training plans*/
     const onEditTrainingPlan = async (name: string, image: string, description?: string,) => {
+
         const userId = getUserIdFromStorage()!;
 
+        openLoader();
+
         try {
-            const {data} = await put<any>('plans/editTrainingPlan',{
+             await put<any>('plans/editTrainingPlan',{
                 userId: userId,
                 planId: openedPlan._id,
                 name: name,
                 description: description ? description : '',
                 image: image
             });
+
         } catch (e) {
             console.log('Error: ', e)
         } finally {
             const {data} = await get<any>(`plans/all/${openedPlan._id}`);
+
             setOpenedPlan(data.plan);
+
+            closeLoader();
         }
     }
 
+    /** Function  for creating new training days*/
     const onCreateNewTrainingDay = async (trainingDayName: string) => {
+
         const userId = getUserIdFromStorage()!;
 
+        openLoader();
+
         try {
-            const response = await post<any>('plans/addTrainingDay', {
+             await post<any>('plans/addTrainingDay', {
                 name: trainingDayName,
                 userId: userId,
                 planId: openedPlan._id
@@ -154,14 +197,20 @@ const TrainingPlanContextProvider: React.FC = ({children}) => {
             const {data} = await get<any>(`plans/all/${openedPlan._id}`);
 
             setOpenedPlan(data.plan);
+
+            closeLoader();
         }
     }
 
+    /** Function  for deleting training days*/
     const onDeleteTrainingDay = async (dayId: string) => {
+
         const userId = getUserIdFromStorage()!;
 
+        openLoader();
+
         try {
-            const {data} = await deleteRequest<any>('plans/deleteTrainingDay', {
+            await deleteRequest<any>('plans/deleteTrainingDay', {
                 userId: userId,
                 planId: openedPlan._id,
                 dayId: dayId
@@ -171,15 +220,22 @@ const TrainingPlanContextProvider: React.FC = ({children}) => {
             console.log(e);
         } finally {
             const {data} = await get<any>(`plans/all/${openedPlan._id}`);
+
             setOpenedPlan(data.plan);
+
+            closeLoader();
         }
     }
 
+    /** Function  for editing training days*/
     const onEditTrainingDay = async (dayId: string, name: string) => {
+
         const userId = getUserIdFromStorage()!;
 
+        openLoader();
+
         try {
-            const {data} = await put<any>('plans/editTrainingDay', {
+            await put<any>('plans/editTrainingDay', {
                 userId: userId,
                 planId: openedPlan._id,
                 dayId: dayId,
@@ -189,11 +245,15 @@ const TrainingPlanContextProvider: React.FC = ({children}) => {
             console.log('error: ', e);
         } finally {
             const {data} = await get<any>(`plans/all/${openedPlan._id}`);
+
             setOpenedPlan(data.plan);
+
+            closeLoader();
         }
 
     }
 
+    /** Function  for creating new training day exercises*/
     const onAddTrainingDayExercise = async (
         dayId: string,
         name: string,
@@ -207,8 +267,9 @@ const TrainingPlanContextProvider: React.FC = ({children}) => {
 
         const userId = getUserIdFromStorage()!;
 
+        openLoader();
         try {
-            const response = await post<any>('plans/addTrainingExercise', {
+            await post<any>('plans/addTrainingExercise', {
                 userId: userId,
                 planId: openedPlan._id,
                 dayId: dayId,
@@ -224,15 +285,21 @@ const TrainingPlanContextProvider: React.FC = ({children}) => {
             console.log(e)
         } finally {
             const {data} = await get<any>(`plans/all/${openedPlan._id}`);
+
             setOpenedPlan(data.plan);
+
+            closeLoader();
         }
     }
 
+    /** Function  for deleting training day exercises*/
     const onDeleteExercise = async (dayId: string, exerciseId: string) => {
+
         const userId = getUserIdFromStorage()!;
 
+        openLoader();
         try {
-            const response = await deleteRequest<any>('plans/deleteExercise', {
+            await deleteRequest<any>('plans/deleteExercise', {
                 userId: userId,
                 planId: openedPlan._id,
                 dayId: dayId,
@@ -242,10 +309,14 @@ const TrainingPlanContextProvider: React.FC = ({children}) => {
             console.log(e)
         } finally {
             const {data} = await get<any>(`plans/all/${openedPlan._id}`);
+
             setOpenedPlan(data.plan);
+
+            closeLoader();
         }
     }
 
+    /** Function  for editing training day exercises*/
     const onEditExercise = async (
         dayId: string,
         exerciseId: string,
@@ -257,9 +328,12 @@ const TrainingPlanContextProvider: React.FC = ({children}) => {
         ytLink?: string,
         description?: string
     ) => {
+
         const userId = getUserIdFromStorage()!;
+
+        openLoader();
         try {
-            const {data} = await put<any>('plans/editExercise', {
+            await put<any>('plans/editExercise', {
                 userId: userId,
                 planId: openedPlan._id,
                 dayId: dayId,
@@ -276,10 +350,12 @@ const TrainingPlanContextProvider: React.FC = ({children}) => {
             console.log('Error: ', e);
         } finally {
             const {data} = await get<any>(`plans/all/${openedPlan._id}`);
+
             setOpenedPlan(data.plan);
+
+            closeLoader();
         }
     }
-
 
     return (
         <TrainingPlanContext.Provider

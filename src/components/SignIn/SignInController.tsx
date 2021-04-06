@@ -6,6 +6,7 @@ import { RouteComponentProps} from 'react-router-dom';
 import {storeAuthenticatedUser} from '../../services/authenticationService';
 import {onAddAuthorizationHeader} from '../../services/restService';
 import {PopUpContext} from "../../contexts/PopUpContext";
+import {LoaderContext} from "../../contexts/LoaderContext";
 
 
 interface Props extends RouteComponentProps{ }
@@ -13,6 +14,7 @@ interface Props extends RouteComponentProps{ }
 const SignInController: React.FC<Props> = ({history}) => {
 
     const {onOpenModal} = useContext(PopUpContext);
+    const {openLoader, closeLoader} = useContext(LoaderContext);
 
     const SignInSchema = Yup.object().shape({
         email: Yup.string()
@@ -27,7 +29,7 @@ const SignInController: React.FC<Props> = ({history}) => {
     });
 
     const onSignIn = async(email: string, password: string) => {
-        console.log(`email: ${email}, password: ${password}`)
+        openLoader();
 
         try {
             const {data: {token, userId}} = await post<any>('auth/login', {
@@ -47,6 +49,8 @@ const SignInController: React.FC<Props> = ({history}) => {
             console.log('Error: ', e)
             // TODO: add fetching http errors
             // onOpenModal('Could not to sign in. Please check your email and password');
+        } finally {
+            closeLoader();
         }
     }
     return (

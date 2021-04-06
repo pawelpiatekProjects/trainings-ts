@@ -19,6 +19,9 @@ import PopUpContextProvider from "../../contexts/PopUpContext";
 import PopUpController from "../../utils/PopUp/PopUpController";
 import TrainingPlanContextProvider from "../../contexts/TrainingPlansContext";
 import Toast from "../../utils/Toast/Toast";
+import Loader from "../../utils/Loader/Loader";
+import {Backdrop} from "@material-ui/core";
+import LoaderContextProvider from "../../contexts/LoaderContext";
 
 
 const App: React.FC = () => {
@@ -26,64 +29,67 @@ const App: React.FC = () => {
     return (
 
         <div className="App">
-            <TrainingPlanContextProvider>
-                <PopUpContextProvider>
-                    <ToastContextProvider>
-                        <PopUpController/>
-                        <Toast/>
-                        <GoogleFontLoader
-                            fonts={[
-                                {
-                                    font: 'Montserrat',
-                                    weights: [400, 500, 700],
-                                },
-                            ]}
-                            subsets={['cyrillic-ext', 'greek', 'latin']}
-                        />
-                        <GlobalStyle/>
-                        <Switch>
-                            <PrivateRoute
-                                path='/dashboard'
-                                exact
-                                component={DashboardController}
+            <LoaderContextProvider>
+                <TrainingPlanContextProvider>
+                    <PopUpContextProvider>
+                        <ToastContextProvider>
+                            <Loader/>
+                            <PopUpController/>
+                            <Toast/>
+                            <GoogleFontLoader
+                                fonts={[
+                                    {
+                                        font: 'Montserrat',
+                                        weights: [400, 500, 700],
+                                    },
+                                ]}
+                                subsets={['cyrillic-ext', 'greek', 'latin']}
                             />
-                            <PrivateRoute
-                                path='/trainings'
-                                component={TrainingsController}
-                            />
-                            <PrivateRoute
-                                path='/calendar'
-                                exact
-                                component={Calendar}
-                            />
-                            <PrivateRoute
-                                path='/statistics'
-                                exact
-                                component={Statistics}
-                            />
-                            <PrivateRoute
-                                path='/user-account'
-                                exact
-                                component={USerAccount}
-                            />
-                            <PrivateRoute
-                                path='/settings'
-                                exact
-                                component={Settings}
-                            />
-                            <PrivateRoute
-                                path='/exercises'
-                                exact
-                                component={Exercises}
-                            />
-                            <Route path="/sign-in" exact component={SignInController}/>
-                            <Route path="/sign-up" exact component={SignUpController}/>
-                            <Route path="/" exact component={Intro}/>
-                            <Route path="*" component={PageNotFound}/>
-                        </Switch>
-                    </ToastContextProvider>
-                </PopUpContextProvider>
-            </TrainingPlanContextProvider>
+                            <GlobalStyle/>
+                            <Switch>
+                                <PrivateRoute
+                                    path='/dashboard'
+                                    exact
+                                    component={DashboardController}
+                                />
+                                <PrivateRoute
+                                    path='/trainings'
+                                    component={TrainingsController}
+                                />
+                                <PrivateRoute
+                                    path='/calendar'
+                                    exact
+                                    component={Calendar}
+                                />
+                                <PrivateRoute
+                                    path='/statistics'
+                                    exact
+                                    component={Statistics}
+                                />
+                                <PrivateRoute
+                                    path='/user-account'
+                                    exact
+                                    component={USerAccount}
+                                />
+                                <PrivateRoute
+                                    path='/settings'
+                                    exact
+                                    component={Settings}
+                                />
+                                <PrivateRoute
+                                    path='/exercises'
+                                    exact
+                                    component={Exercises}
+                                />
+                                <Route path="/sign-in" exact component={SignInController}/>
+                                <Route path="/sign-up" exact component={SignUpController}/>
+                                <Route path="/" exact component={Intro}/>
+                                <Route path="*" component={PageNotFound}/>
+                            </Switch>
+                        </ToastContextProvider>
+                    </PopUpContextProvider>
+                </TrainingPlanContextProvider>
+            </LoaderContextProvider>
         </div>
     );
 }

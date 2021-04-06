@@ -1,12 +1,15 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import SignUp from "./SignUp";
 import * as Yup from 'yup';
 import {post} from '../../services/restService';
 import {RouteComponentProps} from "react-router-dom";
+import {LoaderContext} from "../../contexts/LoaderContext";
 
 interface Props extends RouteComponentProps{ }
 
 const SignUpController: React.FC<Props> = ({history}) => {
+
+    const {openLoader, closeLoader} = useContext(LoaderContext);
 
     const SignUpSchema = Yup.object().shape({
         name: Yup.string()
@@ -36,7 +39,7 @@ const SignUpController: React.FC<Props> = ({history}) => {
     });
 
      const onSignUp = async (name: string, lastName: string, userName: string, email: string, password: string) => {
-        console.log(`name: ${name}, lastNAme: ${lastName}, email: ${email}, password: ${password}`);
+        openLoader();
 
         try {
             const response = await post<any>('auth/signup', {
@@ -55,6 +58,8 @@ const SignUpController: React.FC<Props> = ({history}) => {
 
         } catch (e) {
             console.log('Error: ', e);
+        } finally {
+            closeLoader();
         }
     }
     return (

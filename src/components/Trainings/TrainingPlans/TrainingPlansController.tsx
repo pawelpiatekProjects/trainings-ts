@@ -7,18 +7,27 @@ import PrivateRoute from "../../../utils/PrivateRoute";
 import {Switch} from "react-router-dom";
 import TrainingPlanController from "./TrainingPlan/TrainingPlanController";
 import {ContentType, PopUpContext} from "../../../contexts/PopUpContext";
+import {LoaderContext} from "../../../contexts/LoaderContext";
 
 
 const TrainingPlansController: React.FC = () => {
 
     const {setTrainingPlans} = useContext(TrainingPlanContext);
-    const {onOpenModal} = useContext(PopUpContext)
+    const {onOpenModal} = useContext(PopUpContext);
+    const {openLoader, closeLoader} = useContext(LoaderContext);
 
 
     const fetchTrainingPlans = async () => {
-        const {data} = await get<any>('plans/all');
-        // console.log(data);
-        setTrainingPlans(data.plans);
+        openLoader();
+        try {
+            const {data} = await get<any>('plans/all');
+            setTrainingPlans(data.plans);
+        } catch (e) {
+            console.log('Error: ', e);
+        } finally {
+            closeLoader();
+        }
+
     }
 
 
