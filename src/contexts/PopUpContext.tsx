@@ -1,5 +1,8 @@
 import React, {useState, createContext} from 'react';
 
+/**
+ * Enum which have all available PopUpContent
+ * */
 export enum ContentType {
     Error,
     AddTrainingPlan,
@@ -14,30 +17,49 @@ export enum ContentType {
     EditTrainingPlan
 }
 
+/**
+ * Type which is used in PopUpContent forms to decide which type of form is now displayed: add | edit
+ */
 type Mode = 'add' | 'edit';
 
+/**
+ * Interface which provides information about currently opened item in training plan
+ */
 export interface TrainingPlanConfig {
     planId?: string;
     dayId?: string;
     exerciseId?: string;
 }
 
-interface PopUpConfig {
-    isPopUpOpen: boolean;
-    content: ContentType;
-    openModalData: OpenModalData;
-    // planConfig?: TrainingPlanConfig;
-    // message?: string;
-
-}
-
+/**
+ * Interface that provides external configuration data to PopUp.
+ */
 interface OpenModalData {
+    /** Which component should be rendered as PopUp child */
     contentType: ContentType,
+    /** Information about selected item from currently opened training plan */
     planConfig?: TrainingPlanConfig,
+    /** Optional message*/
     message?: string,
+    /** Mode used by PopUpContent forms to decide which type of form (add or edit) is now displayed */
     mode?: Mode
 }
 
+/**
+ * Interface that provides information about currently opened PopUp
+ */
+interface PopUpConfig {
+    /** Is PopUp currently open */
+    isPopUpOpen: boolean;
+    /** Which content should be rendered as PopUpComponent child */
+    content: ContentType;
+    /** Information provided by OpenModalData Interface*/
+    openModalData: OpenModalData;
+}
+
+/**
+ * Interfaces that provides data in ContextProvider value
+ */
 interface ContextType {
     popUpConfig: PopUpConfig;
     onOpenModal: (openModalData: OpenModalData) => void;

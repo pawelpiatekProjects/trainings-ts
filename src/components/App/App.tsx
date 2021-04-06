@@ -20,7 +20,6 @@ import PopUpController from "../../utils/PopUp/PopUpController";
 import TrainingPlanContextProvider from "../../contexts/TrainingPlansContext";
 import Toast from "../../utils/Toast/Toast";
 import Loader from "../../utils/Loader/Loader";
-import {Backdrop} from "@material-ui/core";
 import LoaderContextProvider from "../../contexts/LoaderContext";
 
 
