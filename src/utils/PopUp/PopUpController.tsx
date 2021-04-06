@@ -8,41 +8,64 @@ import ExerciseDescription from "./PopUpContent/ExerciseDescription/ExerciseDesc
 import DeleteExercise from "./PopUpContent/DeleteItem/DeleteExercise";
 import DeleteTrainingDay from "./PopUpContent/DeleteItem/DeleteTrainingDay";
 import DeleteTrainingPlan from "./PopUpContent/DeleteItem/DeleteTrainingPlan";
+import {getTokenExpiration, getTokenFromStorage} from '../../services/authenticationService';
+import Error from "./PopUpContent/Error/Error";
+
 
 const PopUpController: React.FC = () => {
-    const {popUpConfig} = useContext(PopUpContext);
+
+    const {popUpConfig, onOpenModal} = useContext(PopUpContext);
     let contentElement;
 
+    // if (!getTokenExpiration() || parseInt(getTokenExpiration()!) < new Date().getTime() || !getTokenFromStorage()) {
+    //     onOpenModal({
+    //         contentType: ContentType.Error,
+    //         message: 'Error occured'
+    //     })
+    // }
     switch (popUpConfig.content) {
         case ContentType.AddTrainingPlan: {
             contentElement = <PlanForm/>
             break;
-        } case ContentType.AddTrainingDay: {
+        }
+        case ContentType.AddTrainingDay: {
             contentElement = <TrainingDayForm/>
             break
-        } case ContentType.AddExercise: {
+        }
+        case ContentType.AddExercise: {
             contentElement = <TrainingDayExerciseForm/>
             break;
-        } case ContentType.ShowExerciseDescription: {
+        }
+        case ContentType.ShowExerciseDescription: {
             contentElement = <ExerciseDescription/>
             break;
-        } case ContentType.DeleteExercise: {
+        }
+        case ContentType.DeleteExercise: {
             contentElement = <DeleteExercise/>;
             break;
-        } case ContentType.DeleteTrainingDay: {
+        }
+        case ContentType.DeleteTrainingDay: {
             contentElement = <DeleteTrainingDay/>;
             break;
-        } case ContentType.DeleteTrainingPlan: {
+        }
+        case ContentType.DeleteTrainingPlan: {
             contentElement = <DeleteTrainingPlan/>
             break;
-        } case ContentType.EditExercise: {
+        }
+        case ContentType.EditExercise: {
             contentElement = <TrainingDayExerciseForm/>
             break;
-        } case ContentType.EditTrainingDay: {
+        }
+        case ContentType.EditTrainingDay: {
             contentElement = <TrainingDayForm/>
             break;
-        } case ContentType.EditTrainingPlan: {
+        }
+        case ContentType.EditTrainingPlan: {
             contentElement = <PlanForm/>;
+            break;
+        }
+        case ContentType.Error: {
+            contentElement = <Error/>
             break;
         }
     }

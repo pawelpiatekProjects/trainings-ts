@@ -55,18 +55,40 @@ const TrainingDayExerciseForm: React.FC = () => {
         exercise = null
     }
 
+    // const initialValuesAdd = {
+    //     name: '',
+    //     series: '',
+    //     weight: '',
+    //     pause: '',
+    //     rate: '',
+    //     ytLink: '',
+    //     description: ''
+    // }
+    // const initialValuesEdit = {
+    //     name: exercise!.exerciseName!,
+    //     series: exercise!.repsInSeries!,
+    //     weight: exercise!.weight!,
+    //     pause: exercise!.pause!,
+    //     rate: exercise!.rate!,
+    //     ytLink: exercise!.ytLink!,
+    //     description: exercise!.exerciseDescription!,
+    // }
+
+
+
     return (
         <FormWrapper>
             <FormHeader>{mode === 'add' ? 'Add' : 'Edit'} exercise</FormHeader>
             <Formik initialValues={{
-                name: mode === 'edit' && exercise ? exercise.exerciseName : '',
-                series: mode === 'edit' && exercise ? exercise.repsInSeries : '',
-                weight: mode === 'edit' && exercise ? exercise.weight : '',
-                pause: mode === 'edit' && exercise ? exercise.pause : '',
-                rate: mode === 'edit' && exercise ? exercise.rate : '',
-                ytLink: mode === 'edit' && exercise ? exercise.ytLink : '',
-                description: mode === 'edit' && exercise ? exercise.exerciseDescription : ''
+                    name: mode === 'edit' ? exercise!.exerciseName! : '',
+                    series: mode === 'edit' ? exercise!.repsInSeries! : '',
+                    weight: mode === 'edit' ? exercise!.weight! : '',
+                    pause: mode === 'edit' ? exercise!.pause! : '',
+                    rate: mode === 'edit' ? exercise!.rate! : '',
+                    ytLink: mode === 'edit' ? exercise!.ytLink! : '',
+                    description: mode === 'edit' ? exercise!.exerciseDescription! : '',
             }}
+                    enableReinitialize={true}
                     validationSchema={NewExerciseSchema}
                     onSubmit={({name, series, weight, pause, rate, ytLink, description}, {resetForm}) => {
                         if(mode === 'add') {
@@ -138,6 +160,7 @@ const TrainingDayExerciseForm: React.FC = () => {
                                     <Field
                                         name='weight'
                                         type='number'
+                                        placeholder='weight (kg)'
                                     />
                                 </FieldWrapper>
                                 {errors.weight && touched.weight ? (

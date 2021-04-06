@@ -40,6 +40,7 @@ const TrainingDayForm: React.FC = () => {
                 name: mode === 'edit' && trainingDay ? trainingDay.trainingDayName : ''
             }}
                     validationSchema={NewTrainingDaySchema}
+                    enableReinitialize={true}
                     onSubmit={({name}, {resetForm}) => {
                         console.log(name);
                         if(mode === 'edit') {

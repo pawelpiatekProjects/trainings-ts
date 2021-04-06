@@ -9,8 +9,8 @@ import {
 } from '../../../../assets/styles/customStylesComponents/formComponents';
 import {SecondaryButton} from '../../../../assets/styles/customStylesComponents/buttons';
 import * as Yup from "yup";
-import  {TrainingPlanContext} from "../../../../contexts/TrainingPlansContext";
-import  {PopUpContext} from "../../../../contexts/PopUpContext";
+import {TrainingPlanContext} from "../../../../contexts/TrainingPlansContext";
+import {PopUpContext} from "../../../../contexts/PopUpContext";
 import {ToastContext} from "../../../../contexts/ToastContext";
 
 const PlanForm: React.FC = () => {
@@ -19,6 +19,7 @@ const PlanForm: React.FC = () => {
     const {emitNewMessage} = useContext(ToastContext);
 
     const mode = popUpConfig.openModalData!.mode!;
+    console.log('mode: ', mode);
 
 
     const NewPlanSchema = Yup.object().shape({
@@ -40,12 +41,13 @@ const PlanForm: React.FC = () => {
                 description: mode === 'edit' ? openedPlan.description : '',
                 image: mode === 'edit' ? openedPlan.image : ''
             }}
-                validationSchema={NewPlanSchema}
+                    enableReinitialize={true}
+                    validationSchema={NewPlanSchema}
                     onSubmit={({name, description, image}, {resetForm}) => {
-                        if(mode === 'edit') {
+                        if (mode === 'edit') {
                             onEditTrainingPlan(name, image, description!);
                         } else {
-                            onCreateNewPlan(name,  image, description!);
+                            onCreateNewPlan(name, image, description!);
                             emitNewMessage('Created training plan')
                         }
                         onCloseModal();
