@@ -50,7 +50,7 @@ const GlobalStyle = createGlobalStyle`
 
   }
   
-  input{
+  input, textarea{
     font-family: 'Montserrat';
   }
 

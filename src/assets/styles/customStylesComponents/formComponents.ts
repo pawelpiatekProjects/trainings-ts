@@ -126,8 +126,6 @@ export const FieldWrapper = styled.div<IError>`
     cursor: pointer;
   }
   
-  
-  
   input {
     border: none;
     font-size: ${variables.textMedium};
@@ -139,6 +137,16 @@ export const FieldWrapper = styled.div<IError>`
     outline: none;
     }
     
+  }
+  
+  textarea {
+    width: 100%;
+    font-size: ${variables.textMedium};
+    border: none;
+
+    &:focus {
+      outline: none;
+    }
   }
   
   svg {

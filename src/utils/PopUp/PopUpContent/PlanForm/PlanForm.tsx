@@ -65,7 +65,12 @@ const PlanForm: React.FC = () => {
                         ) : <Error></Error>}
                         <FieldLabel>description</FieldLabel>
                         <FieldWrapper isError={errors.description} touched={touched.description}>
-                            <Field name='description' placeholder='plan description'/>
+                            <Field
+                                as='textarea'
+                                name='description'
+                                placeholder='plan description'
+                                rows={6}
+                            />
                         </FieldWrapper>
                         {errors.description && touched.description ? (
                             <Error>{errors.description}</Error>

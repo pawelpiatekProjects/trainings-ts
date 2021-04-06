@@ -215,6 +215,8 @@ const TrainingDayExerciseForm: React.FC = () => {
                             <Field
                                 name='description'
                                 placeholder='description'
+                                as='textarea'
+                                rows={6}
                             />
                         </FieldWrapper>
                         {errors.description && touched.description ? (

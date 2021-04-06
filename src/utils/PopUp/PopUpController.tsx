@@ -3,7 +3,7 @@ import PopUp from "./PopUp";
 import {ContentType, PopUpContext} from "../../contexts/PopUpContext";
 import PlanForm from "./PopUpContent/PlanForm/PlanForm";
 import TrainingDayForm from "./PopUpContent/TrainingDayForm/TrainingDayForm";
-import TrainingDayExerciseForm from "./PopUpContent/AddTrainingDayExerciseForm/TrainingDayExerciseForm";
+import TrainingDayExerciseForm from "./PopUpContent/TrainingDayExerciseForm/TrainingDayExerciseForm";
 import ExerciseDescription from "./PopUpContent/ExerciseDescription/ExerciseDescription";
 import DeleteExercise from "./PopUpContent/DeleteItem/DeleteExercise";
 import DeleteTrainingDay from "./PopUpContent/DeleteItem/DeleteTrainingDay";
