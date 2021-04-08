@@ -1,13 +1,15 @@
-import React, {useContext} from "react";
+import React from "react";
 import {
     NewTrainingWrapper,
     NewTrainingHeader,
+    ContentWrapper,
+    BackButton
 } from './NewTrainingStyles';
 import TrainingPlans from "./TrainingPlans/TrainingPlans";
 import TrainingDays from './TrainingDays/TrainingDays';
 import {TrainingDay, TrainingPlanContext, TrainingPlanIntro} from "../../../../contexts/TrainingPlansContext";
 import {tabs} from "./NewTrainingController";
-
+import {ArrowBackIos} from '@material-ui/icons';
 
 interface Props {
     onChangeActiveTab: (tabName: tabs) => void;
@@ -18,31 +20,47 @@ interface Props {
 
 const NewTraining: React.FC<Props> = ({onChangeActiveTab, activeTab , onStartNewTraining}) => {
 
-
-    let content;
-    switch (activeTab) {
-        case "plan": {
-            content = (
-                <TrainingPlans
-                    onChangeActiveTab={onChangeActiveTab}
-                />
-            );
-            break;
-        }
-        case "day": {
-            content = (
-                <TrainingDays
-                    onChangeActiveTab={onChangeActiveTab}
-                    onStartTraining={onStartNewTraining}
-                />
-            )
-        }
-    }
+    // let content;
+    // switch (activeTab) {
+    //     case "plan": {
+    //         content = (
+    //             <TrainingPlans
+    //                 onChangeActiveTab={onChangeActiveTab}
+    //             />
+    //         );
+    //         break;
+    //     }
+    //     case "day": {
+    //         content = (
+    //             <TrainingDays
+    //                 onChangeActiveTab={onChangeActiveTab}
+    //                 onStartTraining={onStartNewTraining}
+    //             />
+    //         )
+    //     }
+    // }
 
     return (
         <NewTrainingWrapper>
+            {activeTab === 'day' ? (
+                <BackButton onClick={() => onChangeActiveTab('plan')}>
+                    <ArrowBackIos/>
+                    Back
+                </BackButton>
+            ): null}
             <NewTrainingHeader>Choose {activeTab}</NewTrainingHeader>
-            {content}
+            <ContentWrapper>
+                {/*{content}*/}
+                <TrainingPlans
+                    activeTab={activeTab}
+                    onChangeActiveTab={onChangeActiveTab}
+                />
+                <TrainingDays
+                    activeTab={activeTab}
+                    onChangeActiveTab={onChangeActiveTab}
+                    onStartTraining={onStartNewTraining}
+                />
+            </ContentWrapper>
         </NewTrainingWrapper>
     )
 };

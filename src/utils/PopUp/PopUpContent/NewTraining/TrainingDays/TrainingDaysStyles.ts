@@ -1,8 +1,16 @@
 import styled from "styled-components";
 import * as variables from '../../../../../assets/styles/variables';
 
-export const TrainingDaysWrapper = styled.div`
+interface IWrapper {
+    isActive: boolean
+}
 
+export const TrainingDaysWrapper = styled.div<IWrapper>`
+  transform: ${props => props.isActive ? 'translateX(0) scaleY(1)' : 'translateX(-100rem) scaleY(0)'} ;
+  max-height: ${props => props.isActive ? '100%' : '0'};
+  width: 80%;
+  margin: 0 auto;
+  transition: transform .4s;
 `;
 
 export const TrainingDaysList = styled.ul`

@@ -9,9 +9,10 @@ import {tabs} from "../NewTrainingController";
 
 interface Props {
     onChangeActiveTab: (tabName: tabs) => void;
+    activeTab: tabs;
 }
 
-const TrainingPlans: React.FC<Props> = ({onChangeActiveTab}) => {
+const TrainingPlans: React.FC<Props> = ({onChangeActiveTab, activeTab}) => {
     const {trainingPlans, fetchTrainingPlan} = useContext(TrainingPlanContext);
     console.log('plans: ', trainingPlans);
 
@@ -20,7 +21,7 @@ const TrainingPlans: React.FC<Props> = ({onChangeActiveTab}) => {
         fetchTrainingPlan(plan._id);
     }
     return(
-        <TrainingPlansWrapper>
+        <TrainingPlansWrapper isActive={activeTab === 'plan'}>
             <TrainingPlansList>
                 {trainingPlans.map(trainingPlan => (
                     <TrainingPlan onClick={() => handlePlanClick(trainingPlan)}>

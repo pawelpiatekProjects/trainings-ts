@@ -7,14 +7,15 @@ import {
 } from './TrainingDaysStyles';
 import {tabs} from "../NewTrainingController";
 import {TrainingDay, TrainingPlanContext} from "../../../../../contexts/TrainingPlansContext";
-import {PrimaryButton} from '../../../../../assets/styles/customStylesComponents/buttons';
+
 
 interface Props {
     onChangeActiveTab: (tabName: tabs) => void;
     onStartTraining: (trainingDay: TrainingDay) => void;
+    activeTab: tabs;
 }
 
-const TrainingDays: React.FC<Props> = ({onChangeActiveTab, onStartTraining}) => {
+const TrainingDays: React.FC<Props> = ({onChangeActiveTab, onStartTraining, activeTab}) => {
     const {openedPlan} = useContext(TrainingPlanContext);
     console.log('opened plan', openedPlan);
 
@@ -42,7 +43,7 @@ const TrainingDays: React.FC<Props> = ({onChangeActiveTab, onStartTraining}) => 
         content = <EmptyTrainingDays>No training days in this plan</EmptyTrainingDays>
     }
     return (
-        <TrainingDaysWrapper>
+        <TrainingDaysWrapper isActive={activeTab === 'day'}>
                 {content}
         </TrainingDaysWrapper>
     )
