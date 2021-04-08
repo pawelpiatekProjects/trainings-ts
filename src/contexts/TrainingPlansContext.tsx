@@ -59,6 +59,8 @@ export interface TrainingPlanExercise {
 interface ContextType {
     trainingPlans: TrainingPlanIntro[];
     setTrainingPlans: (plans: TrainingPlanIntro[]) => void;
+    fetchTrainingPlans: () => void;
+    fetchTrainingPlan: (id: string) => void;
     openedPlan: TrainingPlanAll;
     setOpenedPlan: (plan: TrainingPlanAll) => void;
     onCreateNewPlan: (name: string, description: string, image: string) => void;
@@ -99,6 +101,43 @@ const TrainingPlanContextProvider: React.FC = ({children}) => {
 
     const [trainingPlans, setTrainingPlans] = useState<TrainingPlanIntro[]>([]);
     const [openedPlan, setOpenedPlan] = useState<TrainingPlanAll>({} as TrainingPlanAll);
+
+    /** Function for fetching all training plans */
+    const fetchTrainingPlans = async () => {
+
+        openLoader();
+
+        try {
+            const {data} = await get<any>('plans/all');
+
+            setTrainingPlans(data.plans);
+
+        } catch (e) {
+            console.log('Error: ', e);
+
+        } finally {
+            closeLoader();
+        }
+
+    }
+
+    /** Function for fetching single training plan with plan id */
+    const fetchTrainingPlan = async (id: string) => {
+
+        openLoader();
+
+        try {
+            const {data} = await get<any>(`plans/all/${id}`);
+
+            setOpenedPlan(data.plan);
+
+        } catch (e) {
+            console.log('Error: ', e);
+        } finally {
+            closeLoader();
+        }
+
+    }
 
     /** Function  for creating new training plans*/
     const onCreateNewPlan = async (name: string,  image: string, description?: string) => {
@@ -364,6 +403,8 @@ const TrainingPlanContextProvider: React.FC = ({children}) => {
                 setTrainingPlans,
                 openedPlan,
                 setOpenedPlan,
+                fetchTrainingPlans,
+                fetchTrainingPlan,
                 onCreateNewPlan,
                 onDeleteTrainingPlan,
                 onEditTrainingPlan,

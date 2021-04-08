@@ -1,5 +1,13 @@
-import React, {useContext} from 'react';
-import {FormWrapper} from './PlanFormStyles';
+import React, {useContext, useState} from 'react';
+import {
+    FormWrapper,
+    CustomImagePickerWrapper,
+    CustomImagePicker,
+    SelectedImage,
+    Button,
+    ImageSelect,
+    ImageOption
+} from './PlanFormStyles';
 import {Formik, Form, Field} from 'formik';
 import {
     FormHeader,
@@ -12,15 +20,42 @@ import * as Yup from "yup";
 import {TrainingPlanContext} from "../../../../contexts/TrainingPlansContext";
 import {PopUpContext} from "../../../../contexts/PopUpContext";
 import {ToastContext} from "../../../../contexts/ToastContext";
+import {ArrowDropDown} from '@material-ui/icons';
+import  BarChartImg from '../../../../assets/images/svg/bar-chart.svg';
+import  DumbbellImg from '../../../../assets/images/svg/dummbell.svg';
+import  HeartImg from '../../../../assets/images/svg/heart.svg';
+import  LineChartImg from '../../../../assets/images/svg/line-chart.svg';
+
 
 const PlanForm: React.FC = () => {
     const {onCreateNewPlan, openedPlan, onEditTrainingPlan} = useContext(TrainingPlanContext);
     const {onCloseModal, popUpConfig} = useContext(PopUpContext);
     const {emitNewMessage} = useContext(ToastContext);
 
-    const mode = popUpConfig.openModalData!.mode!;
-    console.log('mode: ', mode);
+    const [isPickerOpen, setPickerOpen] = useState(false);
+    const [selectedImg, setSelectedImg] = useState('BarChartImg');
 
+    const togglePicker = () => {
+        setPickerOpen(prevState => !prevState);
+    }
+
+    const selectImg = (name: string) => {
+        togglePicker();
+        setSelectedImg(name);
+    }
+
+    const getDisplayedImageSrc = () => {
+        let result;
+        switch (selectedImg) {
+            case 'BarChart': {
+                result = BarChartImg;
+                break
+            }
+        }
+        return result
+    }
+
+    const mode = popUpConfig.openModalData!.mode!;
 
     const NewPlanSchema = Yup.object().shape({
         name: Yup.string()
@@ -30,7 +65,7 @@ const PlanForm: React.FC = () => {
         description: Yup.string()
             .max(250, 'Too Long'),
         image: Yup.string()
-            .required('Password is required'),
+            .required('Image is required'),
     });
 
     return (
@@ -63,6 +98,50 @@ const PlanForm: React.FC = () => {
                         {errors.name && touched.name ? (
                             <Error>{errors.name}</Error>
                         ) : <Error></Error>}
+
+                        <FieldLabel>plan image</FieldLabel>
+                        <CustomImagePickerWrapper>
+                            <Field name='image' value={selectedImg}/>
+                            <CustomImagePicker>
+                                <SelectedImage>
+                                    {selectedImg}
+                                </SelectedImage>
+                                <Button onClick={() => togglePicker()}>
+                                    <ArrowDropDown/>
+                                </Button>
+                            </CustomImagePicker>
+                            <ImageSelect isOpen={isPickerOpen}>
+                                <ImageOption>
+                                    <img
+                                        onClick={() => selectImg('BarChartImg')}
+                                        src={BarChartImg} alt="BarChart"
+                                    />
+                                </ImageOption>
+                                <ImageOption>
+                                    <img
+                                        onClick={() => selectImg('Dumbbell')}
+                                        src={DumbbellImg} alt="Dumbbell"
+                                    />
+                                </ImageOption>
+                                <ImageOption>
+                                    <img
+                                        onClick={() => selectImg('Heart')}
+                                        src={HeartImg} alt="Heart"
+                                    />
+                                </ImageOption>
+                                <ImageOption>
+                                    <img
+                                        onClick={() => selectImg('LineChart')}
+                                        src={LineChartImg} alt="LineChart"
+                                    />
+                                </ImageOption>
+                            </ImageSelect>
+                        </CustomImagePickerWrapper>
+
+                        {/*{errors.image && touched.image ? (*/}
+                        {/*    <Error>{errors.image}</Error>*/}
+                        {/*) : <Error></Error>}*/}
+
                         <FieldLabel>description</FieldLabel>
                         <FieldWrapper isError={errors.description} touched={touched.description}>
                             <Field
@@ -74,13 +153,6 @@ const PlanForm: React.FC = () => {
                         </FieldWrapper>
                         {errors.description && touched.description ? (
                             <Error>{errors.description}</Error>
-                        ) : <Error></Error>}
-                        <FieldLabel>plan image</FieldLabel>
-                        <FieldWrapper isError={errors.image} touched={touched.image}>
-                            <Field name='image' placeholder='plan image'/>
-                        </FieldWrapper>
-                        {errors.image && touched.image ? (
-                            <Error>{errors.image}</Error>
                         ) : <Error></Error>}
                         <SecondaryButton disabled={!(isValid && dirty)} type='submit'>Create</SecondaryButton>
                     </Form>

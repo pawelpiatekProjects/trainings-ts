@@ -4,20 +4,20 @@ import TrainingPlan from "./TrainingPlan";
 import {useLocation} from 'react-router-dom';
 import {TrainingPlanContext} from "../../../../contexts/TrainingPlansContext";
 import {ContentType, PopUpContext} from "../../../../contexts/PopUpContext";
+import {LoaderContext} from "../../../../contexts/LoaderContext";
 
 
 const TrainingPlanController: React.FC = () => {
 
     const {onOpenModal} = useContext(PopUpContext);
-
     const {state} = useLocation();
-    const {setOpenedPlan} = useContext(TrainingPlanContext);
+    const {fetchTrainingPlan} = useContext(TrainingPlanContext);
 
 
-    const fetchTrainingPlan = async () => {
-        const {data} = await get<any>(`plans/all/${state}`);
-        setOpenedPlan(data.plan);
-    }
+    // const fetchTrainingPlan = async () => {
+    //     const {data} = await get<any>(`plans/all/${state}`);
+    //     setOpenedPlan(data.plan);
+    // }
 
     const onAddTrainingDay = () => {
         onOpenModal({
@@ -40,7 +40,7 @@ const TrainingPlanController: React.FC = () => {
     }
 
     useEffect(() => {
-        fetchTrainingPlan();
+        fetchTrainingPlan(state as string);
     }, [])
 
 
