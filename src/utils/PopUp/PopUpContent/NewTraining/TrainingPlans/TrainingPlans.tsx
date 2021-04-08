@@ -4,16 +4,26 @@ import {
     TrainingPlansList,
     TrainingPlan
 } from './TrainingPlansStyles';
-import {TrainingPlanContext} from "../../../../../contexts/TrainingPlansContext";
+import {TrainingPlanContext, TrainingPlanIntro} from "../../../../../contexts/TrainingPlansContext";
+import {tabs} from "../NewTrainingController";
 
-const TrainingPlans: React.FC = () => {
-    const {trainingPlans} = useContext(TrainingPlanContext);
-    console.log('plans: ', trainingPlans)
+interface Props {
+    onChangeActiveTab: (tabName: tabs) => void;
+}
+
+const TrainingPlans: React.FC<Props> = ({onChangeActiveTab}) => {
+    const {trainingPlans, fetchTrainingPlan} = useContext(TrainingPlanContext);
+    console.log('plans: ', trainingPlans);
+
+    const handlePlanClick = (plan: TrainingPlanIntro) => {
+        onChangeActiveTab('day');
+        fetchTrainingPlan(plan._id);
+    }
     return(
         <TrainingPlansWrapper>
             <TrainingPlansList>
                 {trainingPlans.map(trainingPlan => (
-                    <TrainingPlan>
+                    <TrainingPlan onClick={() => handlePlanClick(trainingPlan)}>
                         <p>{trainingPlan.name}</p>
                     </TrainingPlan>
                 ))}

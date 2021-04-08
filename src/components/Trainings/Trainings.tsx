@@ -12,6 +12,7 @@ import {
     SideNavWrapper,
     SwitchWrapper
 } from './TrainingsStyles';
+import NewTrainingController from "./NewTraining/NewTrainingController";
 
 const Trainings: React.FC = () => {
 
@@ -24,6 +25,7 @@ const Trainings: React.FC = () => {
                 <SwitchWrapper>
                     <Switch>
                         <PrivateRoute exact component={TrainingListController} path='/trainings/trainings-list'/>
+                        <PrivateRoute exact component={NewTrainingController} path='/trainings/new'/>
                         <PrivateRoute component={TrainingPlansController} path='/trainings/training-plans'/>
                         <PrivateRedirect path='/trainings' redirectPath='/trainings/trainings-list'/>
                     </Switch>
