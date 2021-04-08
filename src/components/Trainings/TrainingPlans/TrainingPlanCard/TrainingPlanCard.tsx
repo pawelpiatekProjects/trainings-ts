@@ -7,17 +7,49 @@ import {
     More
 } from './TrainingPlanCardStyles';
 import {TrainingPlanIntro} from "../../../../contexts/TrainingPlansContext";
-import {ReactComponent as ThemeImg} from '../../../../assets/images/svg/dummbell.svg'
+import {ThemeImage} from '../../../../utils/PopUp/PopUpContent/PlanForm/PlanForm';
+import  Dumbbell from '../../../../assets/images/svg/dummbell.svg';
+import  LineChart from '../../../../assets/images/svg/line-chart.svg';
+import  Heart from '../../../../assets/images/svg/heart.svg';
+import  BarChart from '../../../../assets/images/svg/bar-chart.svg';
+
 
 interface Props {
     plan: TrainingPlanIntro
 }
 
+
 const TrainingPlanCard: React.FC<Props> = ({plan}) => {
-    console.log('Plan: ', plan)
+    console.log('Plan: ', plan.image);
+    let themeImageSrc;
+
+    switch (plan.image) {
+        case 'BarChartImg': {
+            themeImageSrc = BarChart;
+            break;
+        }
+        case 'Dumbbell': {
+            themeImageSrc = Dumbbell;
+            break;
+        }
+        case 'Heart': {
+            themeImageSrc = Heart;
+            break;
+        }
+        case 'LineChart': {
+            themeImageSrc = LineChart;
+            break;
+        }
+        default : {
+            themeImageSrc = Dumbbell;
+            break;
+        }
+    }
+
+
     return (
         <TrainingPlanCardWrapper>
-            <ThemeImg/>
+            <img src={themeImageSrc} alt='theme image'/>
             <TrainingPlanCardInfoWrapper>
                 <TrainingPlanHeader>{plan.name}</TrainingPlanHeader>
                 <Created>Created at: <span>{plan.createdAt.slice(0,10)}</span></Created>

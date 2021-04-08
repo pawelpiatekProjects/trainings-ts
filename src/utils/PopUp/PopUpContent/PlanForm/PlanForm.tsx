@@ -26,6 +26,8 @@ import  DumbbellImg from '../../../../assets/images/svg/dummbell.svg';
 import  HeartImg from '../../../../assets/images/svg/heart.svg';
 import  LineChartImg from '../../../../assets/images/svg/line-chart.svg';
 
+export type ThemeImage = 'BarChartImg' | 'Dumbbell' | 'Heart' | 'LineChart';
+
 
 const PlanForm: React.FC = () => {
     const {onCreateNewPlan, openedPlan, onEditTrainingPlan} = useContext(TrainingPlanContext);
@@ -39,21 +41,11 @@ const PlanForm: React.FC = () => {
         setPickerOpen(prevState => !prevState);
     }
 
-    const selectImg = (name: string) => {
+    const selectImg = (name: ThemeImage) => {
         togglePicker();
         setSelectedImg(name);
     }
 
-    const getDisplayedImageSrc = () => {
-        let result;
-        switch (selectedImg) {
-            case 'BarChart': {
-                result = BarChartImg;
-                break
-            }
-        }
-        return result
-    }
 
     const mode = popUpConfig.openModalData!.mode!;
 
@@ -74,7 +66,7 @@ const PlanForm: React.FC = () => {
             <Formik initialValues={{
                 name: mode === 'edit' ? openedPlan.trainingPlanName : '',
                 description: mode === 'edit' ? openedPlan.description : '',
-                image: mode === 'edit' ? openedPlan.image : ''
+                image: mode === 'edit' ? openedPlan.image : selectedImg
             }}
                     enableReinitialize={true}
                     validationSchema={NewPlanSchema}
@@ -106,7 +98,7 @@ const PlanForm: React.FC = () => {
                                 <SelectedImage>
                                     {selectedImg}
                                 </SelectedImage>
-                                <Button onClick={() => togglePicker()}>
+                                <Button onClick={() => togglePicker()} type='button'>
                                     <ArrowDropDown/>
                                 </Button>
                             </CustomImagePicker>
