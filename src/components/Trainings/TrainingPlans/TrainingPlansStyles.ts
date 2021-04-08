@@ -27,3 +27,14 @@ export const TrainingPlansList = styled.div`
   grid-gap: 3rem;
 `;
 
+export const TrainingPlansEmpty = styled.div`
+  width: 80%;
+  margin: 5rem auto 0 auto;
+  height: 50%;
+  border: 1px dashed ${variables.textColorTertiary};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`;
+

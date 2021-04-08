@@ -1,8 +1,9 @@
 import React from 'react';
 import {
     TrainingsListWrapper,
-    TrainingPlansHeading,
-    TrainingPlansHeader
+    TrainingsListHeading,
+    TrainingsListHeader,
+    TrainingsListEmpty
 } from './TrainingsListStyles'
 import {PrimaryButton} from '../../../assets/styles/customStylesComponents/buttons';
 import * as variables from '../../../assets/styles/variables';
@@ -14,14 +15,20 @@ interface Props {
 const TrainingsList: React.FC<Props> = ({startNewTraining}) => {
     return (
         <TrainingsListWrapper>
-            <TrainingPlansHeading>
-                <TrainingPlansHeader>Trainings List</TrainingPlansHeader>
+            <TrainingsListHeading>
+                <TrainingsListHeader>Trainings List</TrainingsListHeader>
                 <PrimaryButton
                     onClick={() => startNewTraining()}
                     color={variables.yellowPrimary}
                 >Start new training
                 </PrimaryButton>
-            </TrainingPlansHeading>
+            </TrainingsListHeading>
+
+            {/*Todo: change this to dynamic*/}
+            <TrainingsListEmpty>
+                <h1>Your trainings list is empty. Start new training</h1>
+                <PrimaryButton color={variables.yellowPrimary}>Start</PrimaryButton>
+            </TrainingsListEmpty>
         </TrainingsListWrapper>
     )
 };

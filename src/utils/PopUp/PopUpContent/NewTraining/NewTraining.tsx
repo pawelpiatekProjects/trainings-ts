@@ -20,25 +20,6 @@ interface Props {
 
 const NewTraining: React.FC<Props> = ({onChangeActiveTab, activeTab , onStartNewTraining}) => {
 
-    // let content;
-    // switch (activeTab) {
-    //     case "plan": {
-    //         content = (
-    //             <TrainingPlans
-    //                 onChangeActiveTab={onChangeActiveTab}
-    //             />
-    //         );
-    //         break;
-    //     }
-    //     case "day": {
-    //         content = (
-    //             <TrainingDays
-    //                 onChangeActiveTab={onChangeActiveTab}
-    //                 onStartTraining={onStartNewTraining}
-    //             />
-    //         )
-    //     }
-    // }
 
     return (
         <NewTrainingWrapper>

@@ -3,7 +3,8 @@ import {
     TrainingPlansWrapper,
     TrainingPlansHeading,
     TrainingPlansHeader,
-    TrainingPlansList
+    TrainingPlansList,
+    TrainingPlansEmpty
 } from './TrainingPlansStyles';
 import * as variables from '../../../assets/styles/variables';
 import {PrimaryButton} from '../../../assets/styles/customStylesComponents/buttons';
@@ -22,13 +23,18 @@ const TrainingPlans: React.FC<Props> = ({onAddNewPlan}) => {
                 <TrainingPlansHeader>TrainingPlans</TrainingPlansHeader>
                 <PrimaryButton onClick={() => onAddNewPlan()} color={variables.yellowPrimary}>New</PrimaryButton>
             </TrainingPlansHeading>
-
-            <TrainingPlansList>
-                {trainingPlans.map(plan => (
-                    <TrainingPlanCard plan={plan} key={plan._id}/>
-                ))}
-            </TrainingPlansList>
-
+            {trainingPlans.length > 0 ? (
+                <TrainingPlansList>
+                    {trainingPlans.map(plan => (
+                        <TrainingPlanCard plan={plan} key={plan._id}/>
+                    ))}
+                </TrainingPlansList>
+            ) : (
+                <TrainingPlansEmpty>
+                    <h1>Your training plans list is empty. Create new plan</h1>
+                    <PrimaryButton color={variables.yellowPrimary}>Create</PrimaryButton>
+                </TrainingPlansEmpty>
+            )};
         </TrainingPlansWrapper>
 
     )
