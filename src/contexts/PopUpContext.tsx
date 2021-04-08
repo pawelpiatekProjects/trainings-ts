@@ -1,4 +1,5 @@
 import React, {useState, createContext} from 'react';
+import {getTokenExpiration, getTokenFromStorage} from '../services/authenticationService';
 
 /**
  * Enum which have all available PopUpContent
@@ -73,12 +74,23 @@ const PopUpContextProvider: React.FC = ({children}) => {
     const [popUpConfig, setPopUpConfig] = useState({} as PopUpConfig);
 
     const onOpenModal = (openModalData: OpenModalData) => {
-        setPopUpConfig({
-            isPopUpOpen: true,
-            content: openModalData.contentType,
-            openModalData: openModalData
-        });
 
+        if(getTokenFromStorage() && parseInt(getTokenExpiration()!) > new Date().getTime()) {
+            setPopUpConfig({
+                isPopUpOpen: true,
+                content: openModalData.contentType,
+                openModalData: openModalData
+            });
+        } else {
+            setPopUpConfig({
+                isPopUpOpen: true,
+                content: ContentType.Error,
+                openModalData: {
+                    contentType: ContentType.Error,
+                    message: 'Authentication failed'
+                }
+            });
+        }
     }
 
     const onCloseModal = () => {

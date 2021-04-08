@@ -8,21 +8,14 @@ import ExerciseDescription from "./PopUpContent/ExerciseDescription/ExerciseDesc
 import DeleteExercise from "./PopUpContent/DeleteItem/DeleteExercise";
 import DeleteTrainingDay from "./PopUpContent/DeleteItem/DeleteTrainingDay";
 import DeleteTrainingPlan from "./PopUpContent/DeleteItem/DeleteTrainingPlan";
-import {getTokenExpiration, getTokenFromStorage} from '../../services/authenticationService';
 import Error from "./PopUpContent/Error/Error";
 
 
 const PopUpController: React.FC = () => {
 
-    const {popUpConfig, onOpenModal} = useContext(PopUpContext);
+    const {popUpConfig} = useContext(PopUpContext);
     let contentElement;
 
-    // if (!getTokenExpiration() || parseInt(getTokenExpiration()!) < new Date().getTime() || !getTokenFromStorage()) {
-    //     onOpenModal({
-    //         contentType: ContentType.Error,
-    //         message: 'Error occured'
-    //     })
-    // }
     switch (popUpConfig.content) {
         case ContentType.AddTrainingPlan: {
             contentElement = <PlanForm/>
