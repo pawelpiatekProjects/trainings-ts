@@ -1,9 +1,18 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import TrainingsList from "./TrainingsList";
+import {ContentType, PopUpContext} from "../../../contexts/PopUpContext";
 
-const TrainingListController: React.FC =() => {
+const TrainingListController: React.FC = () => {
+    const {onOpenModal} = useContext(PopUpContext);
+
+    const onStartNewTraining = () => {
+        onOpenModal({
+            contentType: ContentType.StartNewTraining
+        })
+    }
+
     return(
-        <TrainingsList/>
+        <TrainingsList startNewTraining={onStartNewTraining}/>
     )
 };
 

@@ -9,6 +9,7 @@ import DeleteExercise from "./PopUpContent/DeleteItem/DeleteExercise";
 import DeleteTrainingDay from "./PopUpContent/DeleteItem/DeleteTrainingDay";
 import DeleteTrainingPlan from "./PopUpContent/DeleteItem/DeleteTrainingPlan";
 import Error from "./PopUpContent/Error/Error";
+import NewTrainingController from "./PopUpContent/NewTraining/NewTrainingController";
 
 
 const PopUpController: React.FC = () => {
@@ -59,6 +60,10 @@ const PopUpController: React.FC = () => {
         }
         case ContentType.Error: {
             contentElement = <Error/>
+            break;
+        }
+        case ContentType.StartNewTraining: {
+            contentElement = <NewTrainingController/>
             break;
         }
     }
