@@ -1,35 +1,43 @@
-import React from 'react';
-import {useLocation} from 'react-router-dom';
+import React, {useContext} from 'react';
+import {NavLink, useLocation} from 'react-router-dom';
 import {
-    SideNavWrapper,
     Navigation,
-    NavigationTop,
     NavigationBottom,
     NavigationItem,
     NavigationItemContent,
-    NavigationItemParagraph,
-    NestedNavItems,
+    NavigationTop,
     NestedNavItem,
-    NestedNavLink
+    NestedNavItems,
+    NestedNavLink,
+    SideNavWrapper
 } from './SideNavLeftStyles';
-import {NavLink} from "react-router-dom";
 import {
-    Dashboard,
-    FitnessCenter,
     CalendarToday,
-    TrendingUp,
-    Folder,
-    Settings,
+    Dashboard,
     Face,
-    KeyboardArrowRight
+    FitnessCenter,
+    Folder,
+    KeyboardArrowRight,
+    Settings,
+    TrendingUp
 } from '@material-ui/icons';
 import {LogoutOutlined} from '@ant-design/icons'
 import * as variables from "../../../assets/styles/variables";
+import {ContentType, PopUpContext} from "../../../contexts/PopUpContext";
 
 
 const SideNavLeft: React.FC = () => {
     const location = useLocation().pathname.split('/')[1];
-    console.log('location: ', location === 'trainings')
+    const {onOpenModal} = useContext(PopUpContext);
+
+    console.log('location: ', location === 'trainings');
+
+    const handleLogOut = () => {
+        console.log('log out');
+        onOpenModal({
+            contentType: ContentType.LogOut
+        })
+    }
 
     const activeStyle = {
         color: variables.textColorPrimary,
@@ -38,7 +46,6 @@ const SideNavLeft: React.FC = () => {
 
     const activeStyleNested = {
         color: variables.textColorPrimary,
-
     }
     return (
         <SideNavWrapper>
@@ -47,8 +54,8 @@ const SideNavLeft: React.FC = () => {
                     <NavigationItem>
                         <NavLink activeStyle={activeStyle} to='/dashboard'>
                             <NavigationItemContent>
-                                    <Dashboard/>
-                                    <p>Dashboard</p>
+                                <Dashboard/>
+                                <p>Dashboard</p>
                             </NavigationItemContent>
                         </NavLink>
                     </NavigationItem>
@@ -56,8 +63,8 @@ const SideNavLeft: React.FC = () => {
                     <NavigationItem>
                         <NavLink activeStyle={activeStyle} to='/trainings'>
                             <NavigationItemContent>
-                                    <FitnessCenter/>
-                                    <p>Trainings</p>
+                                <FitnessCenter/>
+                                <p>Trainings</p>
                             </NavigationItemContent>
                         </NavLink>
                     </NavigationItem>
@@ -80,54 +87,52 @@ const SideNavLeft: React.FC = () => {
                     <NavigationItem>
                         <NavLink activeStyle={activeStyle} to='/calendar'>
                             <NavigationItemContent>
-                                    <CalendarToday/>
-                                    <p>Calendar</p>
+                                <CalendarToday/>
+                                <p>Calendar</p>
                             </NavigationItemContent>
                         </NavLink>
                     </NavigationItem>
                     <NavigationItem>
                         <NavLink activeStyle={activeStyle} to='/statistics'>
                             <NavigationItemContent>
-                                    <TrendingUp/>
-                                    <p>Statistics</p>
+                                <TrendingUp/>
+                                <p>Statistics</p>
                             </NavigationItemContent>
                         </NavLink>
                     </NavigationItem>
                     <NavigationItem>
                         <NavLink activeStyle={activeStyle} to='/exercises'>
                             <NavigationItemContent>
-                                    <Folder/>
-                                    <p>Exercises</p>
+                                <Folder/>
+                                <p>Exercises</p>
                             </NavigationItemContent>
                         </NavLink>
                     </NavigationItem>
                 </NavigationTop>
-               <NavigationBottom>
-                   <NavigationItem>
-                       <NavLink activeStyle={activeStyle} to='/settings'>
-                           <NavigationItemContent>
-                                   <Settings/>
-                                   <p>Settings</p>
-                           </NavigationItemContent>
-                       </NavLink>
-                   </NavigationItem>
-                   <NavigationItem>
-                       <NavLink activeStyle={activeStyle} to='/account'>
-                           <NavigationItemContent>
-                                   <Face/>
-                                   <p>Account</p>
-                           </NavigationItemContent>
-                       </NavLink>
-                   </NavigationItem>
-                   <NavigationItem>
-                       <NavLink activeStyle={activeStyle} to='/log-out'>
-                           <NavigationItemContent>
-                                   <LogoutOutlined/>
-                                   <p>Log out</p>
-                           </NavigationItemContent>
-                       </NavLink>
-                   </NavigationItem>
-               </NavigationBottom>
+                <NavigationBottom>
+                    <NavigationItem>
+                        <NavLink activeStyle={activeStyle} to='/settings'>
+                            <NavigationItemContent>
+                                <Settings/>
+                                <p>Settings</p>
+                            </NavigationItemContent>
+                        </NavLink>
+                    </NavigationItem>
+                    <NavigationItem>
+                        <NavLink activeStyle={activeStyle} to='/account'>
+                            <NavigationItemContent>
+                                <Face/>
+                                <p>Account</p>
+                            </NavigationItemContent>
+                        </NavLink>
+                    </NavigationItem>
+                    <NavigationItem>
+                        <button onClick={() => handleLogOut()}>
+                            <LogoutOutlined/>
+                            <p>Log out</p>
+                        </button>
+                    </NavigationItem>
+                </NavigationBottom>
             </Navigation>
         </SideNavWrapper>
     )

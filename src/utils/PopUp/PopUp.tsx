@@ -15,11 +15,11 @@ interface Props {
 const PopUp: React.FC<Props> = ({isOpen, children}) => {
     const {onCloseModal} = useContext(PopUpContext);
     return (
-        <PopUpWrapper isOpen={isOpen}>
-            <PopUpContent>
+        <PopUpWrapper>
+            <PopUpContent isOpen={isOpen}>
                 {children}
             </PopUpContent>
-            <Backdrop onClick={() => onCloseModal()}/>
+            <Backdrop isOpen={isOpen} onClick={() => onCloseModal()}/>
         </PopUpWrapper>
     )
 };

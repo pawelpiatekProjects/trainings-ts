@@ -43,7 +43,7 @@ export const NavigationItem = styled.li`
   margin-top: 1rem;
   transition: all .3s;
   
-  a {
+  a, button {
     width: 100%;
     text-align: center;
     color: ${variables.light};
@@ -63,6 +63,28 @@ export const NavigationItem = styled.li`
 
     }
 
+  }
+  
+  button {
+    background: transparent;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    border: none;
+    
+    &:focus {
+      outline: none;
+    }
+
+    p {
+      font-size: ${variables.textSmall};
+      margin-left: .5rem;
+      font-weight: 500;
+    }
+
+    svg {
+      font-size: 2.5rem;
+    }
   }
 `;
 

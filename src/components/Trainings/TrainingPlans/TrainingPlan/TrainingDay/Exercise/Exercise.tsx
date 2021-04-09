@@ -55,14 +55,14 @@ const Exercise: React.FC<Props> = ({exercise, trainingDayId}) => {
                     <p>{exercise.weight ? exercise.weight : '-'}</p>
                 </ExerciseItem>
                 <ExerciseItem width={15}>
-                    {/*<p>[{exercise.repsInSeries.map((num, index) => {*/}
-                    {/*    return index === exercise.repsInSeries.length - 1 ? (*/}
-                    {/*        <span key={num}>{num}</span>*/}
-                    {/*    ) : (*/}
-                    {/*        <span key={num}>{num}, </span>*/}
-                    {/*    )*/}
-                    {/*})}]</p>*/}
-                    <p>{exercise.repsInSeries}</p>
+                    <p>[{exercise.repsInSeries.map((num, index) => {
+                        return index === exercise.repsInSeries.length - 1 ? (
+                            <span key={index}>{num}</span>
+                        ) : (
+                            <span key={index}>{num}, </span>
+                        )
+                    })}]</p>
+                    {/*<p>{exercise.repsInSeries}</p>*/}
 
                 </ExerciseItem>
                 <ExerciseItem width={10}>

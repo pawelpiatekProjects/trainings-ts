@@ -1,5 +1,5 @@
-import React, {useContext} from 'react';
-import {FormWrapper} from './TrainingDayExerciseFormStyles';
+import React, {useContext, useState} from 'react';
+import {FormWrapper, MoreInfoButton, InfoPrompt} from './TrainingDayExerciseFormStyles';
 import {Formik, Form, Field} from 'formik';
 import {
     FormHeader,
@@ -14,6 +14,7 @@ import * as Yup from "yup";
 import {TrainingPlanContext, TrainingPlanExercise} from "../../../../contexts/TrainingPlansContext";
 import {PopUpContext} from "../../../../contexts/PopUpContext";
 import {ToastContext} from "../../../../contexts/ToastContext";
+import {Info} from '@material-ui/icons';
 
 // TODO: add controller here
 
@@ -21,6 +22,12 @@ const TrainingDayExerciseForm: React.FC = () => {
     const {onAddTrainingDayExercise, openedPlan, onEditExercise} = useContext(TrainingPlanContext);
     const {popUpConfig, onCloseModal} = useContext(PopUpContext);
     const {emitNewMessage} = useContext(ToastContext);
+
+    const [isSeriesInfoOpen, setIsSeriesInfoOpen] = useState(false);
+
+    const toggleInfoOpen = () => {
+        setIsSeriesInfoOpen(prevState => !prevState);
+    }
 
     const NewExerciseSchema = Yup.object().shape({
         name: Yup.string()
@@ -30,7 +37,7 @@ const TrainingDayExerciseForm: React.FC = () => {
         series: Yup.string() // Todo: change
             .min(2, 'Too Short')
             .max(50, 'Too Long')
-            .required('Name is required'),
+            .required('Reps are required'),
         weight: Yup.string()
             .max(3, 'Are you sure??'),
         pause: Yup.string()
@@ -46,8 +53,6 @@ const TrainingDayExerciseForm: React.FC = () => {
     const mode = popUpConfig.openModalData!.mode!;
     let exercise: TrainingPlanExercise | null;
 
-    // return trainingDay._id === popUpConfig.openModalData!.planConfig!.dayId)[0];
-
     if(mode === 'edit') {
         const trainingDay = openedPlan.trainingDays.filter(trainingDay => trainingDay._id === popUpConfig.openModalData!.planConfig!.dayId!)[0];
         exercise = trainingDay.exercises.filter(exercise => exercise._id === popUpConfig.openModalData!.planConfig!.exerciseId!)[0];
@@ -55,33 +60,13 @@ const TrainingDayExerciseForm: React.FC = () => {
         exercise = null
     }
 
-    // const initialValuesAdd = {
-    //     name: '',
-    //     series: '',
-    //     weight: '',
-    //     pause: '',
-    //     rate: '',
-    //     ytLink: '',
-    //     description: ''
-    // }
-    // const initialValuesEdit = {
-    //     name: exercise!.exerciseName!,
-    //     series: exercise!.repsInSeries!,
-    //     weight: exercise!.weight!,
-    //     pause: exercise!.pause!,
-    //     rate: exercise!.rate!,
-    //     ytLink: exercise!.ytLink!,
-    //     description: exercise!.exerciseDescription!,
-    // }
-
-
 
     return (
         <FormWrapper>
             <FormHeader>{mode === 'add' ? 'Add' : 'Edit'} exercise</FormHeader>
             <Formik initialValues={{
                     name: mode === 'edit' ? exercise!.exerciseName! : '',
-                    series: mode === 'edit' ? exercise!.repsInSeries! : '',
+                    series: mode === 'edit' ? exercise!.repsInSeries!.join(',') : '',
                     weight: mode === 'edit' ? exercise!.weight! : '',
                     pause: mode === 'edit' ? exercise!.pause! : '',
                     rate: mode === 'edit' ? exercise!.rate! : '',
@@ -143,9 +128,15 @@ const TrainingDayExerciseForm: React.FC = () => {
                                 <FieldWrapper isError={errors.series} touched={touched.series}>
                                     <Field
                                         name='series'
-                                        type='number'
-                                        placeholder='series'
+                                        placeholder='reps in series'
                                     />
+                                    <MoreInfoButton
+                                        type='button'
+                                        isOpen={isSeriesInfoOpen}
+                                        onClick={() => toggleInfoOpen()}
+                                    >
+                                        <Info/>
+                                    </MoreInfoButton>
                                 </FieldWrapper>
                                 {errors.series && touched.series ? (
                                     <Error>{errors.series}</Error>

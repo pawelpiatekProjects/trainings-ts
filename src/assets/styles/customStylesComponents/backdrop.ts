@@ -1,8 +1,13 @@
 import styled from 'styled-components';
 import * as variables from '../../styles/variables';
 
+interface IBackdrop {
+    isOpen?: boolean
+}
 
-export const Backdrop = styled.div`
+
+export const Backdrop = styled.div<IBackdrop>`
+  display: ${props => props.isOpen ? 'block' : 'none'};
   width: 100%;
   height: 100vh;
   background: ${variables.backdropRGBA};

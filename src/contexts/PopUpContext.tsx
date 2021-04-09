@@ -16,7 +16,8 @@ export enum ContentType {
     EditExercise,
     EditTrainingDay,
     EditTrainingPlan,
-    StartNewTraining
+    StartNewTraining,
+    LogOut
 }
 
 /**

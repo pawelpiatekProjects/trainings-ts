@@ -12,7 +12,7 @@ const Loader: React.FC = () => {
             <LoaderContent>
                 <Spinner background={variables.yellowPrimary}/>
             </LoaderContent>
-            <Backdrop/>
+            <Backdrop isOpen={isOpen}/>
         </LoaderWrapper>
     )
 };

@@ -7,18 +7,20 @@ interface IWrapper {
     isOpen: boolean;
 }
 
-export const PopUpWrapper = styled.div<IWrapper>`
-  display: ${props => props.isOpen ?  'block' : 'none'};
-  
+export const PopUpWrapper = styled.div`
+
+  transition: all .4s;
 `;
 
 
-export const PopUpContent = styled.div`
+export const PopUpContent = styled.div<IWrapper>`
+  transform: ${props => props.isOpen ? 'translate(-50%, -50%);' : 'translate(-50%, -500rem)'};
+  transition: all .4s;
   max-height: 90vh;
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  //transform: translate(-50%, -50%);
   background: ${variables.light};
   width: 40%;
   padding: 3rem;

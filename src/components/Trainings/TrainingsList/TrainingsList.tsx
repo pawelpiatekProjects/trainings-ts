@@ -27,7 +27,10 @@ const TrainingsList: React.FC<Props> = ({startNewTraining}) => {
             {/*Todo: change this to dynamic*/}
             <TrainingsListEmpty>
                 <h1>Your trainings list is empty. Start new training</h1>
-                <PrimaryButton color={variables.yellowPrimary}>Start</PrimaryButton>
+                <PrimaryButton
+                    onClick={() => startNewTraining()}
+                    color={variables.yellowPrimary}
+                >Start</PrimaryButton>
             </TrainingsListEmpty>
         </TrainingsListWrapper>
     )
