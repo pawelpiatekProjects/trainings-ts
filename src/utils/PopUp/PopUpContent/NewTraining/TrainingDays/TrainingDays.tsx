@@ -30,7 +30,7 @@ const TrainingDays: React.FC<Props> = ({onChangeActiveTab, onStartTraining, acti
             content = (
                     <TrainingDaysList>
                         {openedPlan.trainingDays.map(trainingDay => (
-                            <TrainingDayItem onClick={() => newTrainingClick(trainingDay)}>
+                            <TrainingDayItem key={trainingDay._id} onClick={() => newTrainingClick(trainingDay)}>
                                 <p>{trainingDay.trainingDayName}</p>
                             </TrainingDayItem>
                         ))}

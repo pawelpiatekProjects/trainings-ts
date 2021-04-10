@@ -24,7 +24,7 @@ const TrainingPlans: React.FC<Props> = ({onChangeActiveTab, activeTab}) => {
         <TrainingPlansWrapper isActive={activeTab === 'plan'}>
             <TrainingPlansList>
                 {trainingPlans.map(trainingPlan => (
-                    <TrainingPlan onClick={() => handlePlanClick(trainingPlan)}>
+                    <TrainingPlan key={trainingPlan._id} onClick={() => handlePlanClick(trainingPlan)}>
                         <p>{trainingPlan.name}</p>
                     </TrainingPlan>
                 ))}
