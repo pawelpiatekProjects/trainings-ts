@@ -58,7 +58,7 @@ export const TrainingPlanIntroElement = styled.p`
 `;
 
 export const TrainingDaysWrapper = styled.div`
-  width: 80%;
+  width: 100%;
   margin: 2rem auto;
 `;
 

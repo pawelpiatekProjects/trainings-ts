@@ -11,7 +11,7 @@ export const SignInWrapper = styled.div`
 export const SignInLeft = styled.div`
   height: 100%;
   width: 45%;
-  background: ${variables.yellowPrimary};
+  background:  ${variables.yellowPrimary};
   display: flex;
   justify-content: center;
   align-items: center;
