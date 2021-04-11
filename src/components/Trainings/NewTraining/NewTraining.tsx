@@ -15,7 +15,11 @@ import NewTrainingExercise from "./NewTrainingExercise/NewTrainingExercise";
 import {TrainingsContext} from "../../../contexts/TrainingsContext";
 import Timer from "./Timer/Timer";
 
-const NewTraining: React.FC = () => {
+interface Props {
+    onCompleteTraining: () => void;
+}
+
+const NewTraining: React.FC<Props> = ({onCompleteTraining}) => {
     const {activeTraining} = useContext(TrainingsContext);
     return (
         <NewTrainingWrapper>
@@ -40,7 +44,12 @@ const NewTraining: React.FC = () => {
                         <Timer/>
                     </HeadingItem>
                 </HeadingContent>
-                <PrimaryButton color={variables.yellowPrimary}>Finish</PrimaryButton>
+                <PrimaryButton
+                    color={variables.yellowPrimary}
+                    onClick={() => onCompleteTraining()}
+                >
+                    Finish
+                </PrimaryButton>
             </Heading>
             <Exercises>
                 {activeTraining.exercises.map(exercise => (

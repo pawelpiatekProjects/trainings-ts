@@ -2,8 +2,8 @@ import React, {useContext, useState} from "react";
 import {Formik, Form, Field} from 'formik';
 import * as Yup from "yup";
 import {
-    TrainingWrapper,
-    TrainingHeading,
+    ExerciseWrapper,
+    ExerciseHeading,
     DropDownButton,
     SeriesWrapper,
     Series,
@@ -42,13 +42,13 @@ const NewTrainingExercise: React.FC<Props> = ({exercise}) => {
             .max(5, 'Too Long'),
     })
     return (
-        <TrainingWrapper>
-            <TrainingHeading>
+        <ExerciseWrapper isFinished={exercise.isFinished}>
+            <ExerciseHeading>
                 <h2>{exercise.exerciseName}</h2>
                 <DropDownButton onClick={() => toggleSeriesOpen()} isOpen={isSeriesOpen}>
                     <ArrowDropDown/>
                 </DropDownButton>
-            </TrainingHeading>
+            </ExerciseHeading>
             {exercise.series.map((series, index) => (
                 <SeriesWrapper isOpen={isSeriesOpen} key={series._id}>
                     <Formik
@@ -114,7 +114,7 @@ const NewTrainingExercise: React.FC<Props> = ({exercise}) => {
                     </Formik>
                 </SeriesWrapper>
             ))}
-        </TrainingWrapper>
+        </ExerciseWrapper>
     )
 };
 

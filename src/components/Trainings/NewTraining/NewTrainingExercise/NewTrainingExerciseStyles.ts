@@ -1,6 +1,10 @@
 import styled from "styled-components";
 import * as variables from '../../../../assets/styles/variables';
 
+interface IExerciseWrapper {
+    isFinished: boolean;
+}
+
 interface ISeriesItem {
     width: number
 }
@@ -17,14 +21,19 @@ interface ISeriesContent {
     isFinished: boolean;
 }
 
-export const TrainingWrapper = styled.div`
+export const ExerciseWrapper = styled.div<IExerciseWrapper>`
   width: 90%;
   margin: 0 auto;
   background: ${variables.grayPrimary};
   padding: 1rem;
+
+  opacity: ${props => props.isFinished ? .6 : 1};
+  &:hover {
+    cursor: ${props => props.isFinished ? 'not-allowed' : 'default'};
+  }
 `;
 
-export const TrainingHeading = styled.div`
+export const ExerciseHeading = styled.div`
   padding: 0 2rem;
   display: flex;
   justify-content: space-between;

@@ -1,12 +1,16 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, {useContext, useEffect} from "react";
 import NewTraining from "./NewTraining";
 import {TrainingsContext} from "../../../contexts/TrainingsContext";
 import {useHistory} from "react-router-dom";
+import {ContentType, PopUpContext} from "../../../contexts/PopUpContext";
 
 
 const NewTrainingController: React.FC = () => {
-    const {activeTraining, startTimer} = useContext(TrainingsContext);
+    const {activeTraining, completeTraining} = useContext(TrainingsContext);
+    const {onOpenModal} = useContext(PopUpContext);
     const history = useHistory();
+
+
 
 
     useEffect(() => {
@@ -17,10 +21,17 @@ const NewTrainingController: React.FC = () => {
         // startTimer();
     },[]);
 
+    const handleCompleteTraining = () => {
+        console.log('finish training');
+        onOpenModal({
+            contentType: ContentType.FinishTraining
+        })
+    }
+
 
 
     return (
-        <NewTraining/>
+        <NewTraining onCompleteTraining={handleCompleteTraining}/>
     )
 };
 

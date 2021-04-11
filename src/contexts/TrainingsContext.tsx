@@ -45,6 +45,7 @@ interface ContextType {
         pause: string,
         rate: string
     ) => void;
+    completeTraining: () => void;
     trainingTimer: number;
     startTimer: () => void;
 }
@@ -100,11 +101,32 @@ const TrainingsContextProvider: React.FC = ({children}) => {
                 rate: rate
             });
             setActiveTraining(training);
+
         } catch (e) {
             console.log('Error: ', e);
         } finally {
             closeLoader();
         }
+    }
+
+    const completeTraining = async() => {
+        const userId = getUserIdFromStorage()!;
+
+        openLoader();
+
+        try {
+            const {data} = await post<any>('trainings/completeTraining', {
+                trainingId: activeTraining._id
+            });
+
+            setActiveTraining({} as Training);
+        } catch (e) {
+            console.log('Error: ', e);
+        } finally {
+            closeLoader();
+        }
+
+
     }
 
     const startTimer = () => {
@@ -118,6 +140,7 @@ const TrainingsContextProvider: React.FC = ({children}) => {
             activeTraining,
             initializeNewTraining,
             completeSeries,
+            completeTraining,
             trainingTimer,
             startTimer
         }}>
