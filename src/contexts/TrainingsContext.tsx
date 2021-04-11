@@ -6,13 +6,16 @@ import {LoaderContext} from "./LoaderContext";
 export interface Series {
     _id: string;
     reps: number;
+    weight: number;
     pause: number;
     rate: number;
+    isFinished: boolean;
 }
 
 export interface TrainingExercise {
     _id: string;
     exerciseName: string;
+    isFinished: boolean;
     series: Series[];
 }
 
@@ -24,7 +27,7 @@ export interface Training {
     isFinished: boolean;
     planName: string;
     dayName: string;
-    exercisesToDo: TrainingExercise[];
+    exercises: TrainingExercise[];
     finishedExercises: TrainingExercise[];
     createdAt: string;
     updatedAt: string;
@@ -33,6 +36,8 @@ export interface Training {
 interface ContextType {
     activeTraining: Training;
     initializeNewTraining: (planId: string, dayId: string) => void;
+    trainingTimer: number;
+    startTimer: () => void;
 }
 
 export const TrainingsContext = createContext({} as ContextType);
@@ -42,6 +47,7 @@ const TrainingsContextProvider: React.FC = ({children}) => {
     const {openLoader, closeLoader} = useContext(LoaderContext);
 
     const [activeTraining, setActiveTraining] = useState<Training>({} as Training);
+    const [trainingTimer, setTrainingTimer] = useState(0);
 
     const initializeNewTraining = async(planId: string, dayId: string) => {
         const userId = getUserIdFromStorage()!;
@@ -63,10 +69,18 @@ const TrainingsContextProvider: React.FC = ({children}) => {
         }
     }
 
+    const startTimer = () => {
+        // setInterval(() => {
+        //     setTrainingTimer(prevState => prevState + 1);
+        // },1000)
+    }
+
     return (
         <TrainingsContext.Provider value={{
             activeTraining,
-            initializeNewTraining
+            initializeNewTraining,
+            trainingTimer,
+            startTimer
         }}>
             {children}
         </TrainingsContext.Provider>

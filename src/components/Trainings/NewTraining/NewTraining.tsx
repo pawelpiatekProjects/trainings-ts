@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext} from "react";
 import {
     NewTrainingWrapper,
     Heading,
@@ -7,37 +7,49 @@ import {
     PlanName,
     DayName,
     ExercisesParagraph,
-    Timer,
     Exercises
 } from './NewTrainingStyles';
 import {PrimaryButton} from '../../../assets/styles/customStylesComponents/buttons';
 import * as variables from '../../../assets/styles/variables';
 import NewTrainingExercise from "./NewTrainingExercise/NewTrainingExercise";
+import {TrainingsContext} from "../../../contexts/TrainingsContext";
+import Timer from "./Timer/Timer";
 
 const NewTraining: React.FC = () => {
+    const {activeTraining} = useContext(TrainingsContext);
     return (
         <NewTrainingWrapper>
             <Heading>
                 <HeadingContent>
                     <HeadingItem>
-                        <PlanName>Plan name: <span>FBW1</span></PlanName>
-                        <DayName>Day name: <span>Day A</span></DayName>
+                        <PlanName>Plan name: <span>{activeTraining.planName && activeTraining.planName}</span></PlanName>
+                        <DayName>Day name: <span>{activeTraining.dayName && activeTraining.dayName}</span></DayName>
 
                     </HeadingItem>
                     <HeadingItem>
-                        <ExercisesParagraph>Finished exercises: <span>2</span></ExercisesParagraph>
-                        <ExercisesParagraph>Exercises to do: <span>2</span></ExercisesParagraph>
+                        <ExercisesParagraph>
+                            Finished exercises:
+                            <span> {activeTraining.finishedExercises ? activeTraining.finishedExercises.length : null}</span>
+                        </ExercisesParagraph>
+                        <ExercisesParagraph>
+                            Exercises:
+                            <span> {activeTraining.exercises ? activeTraining.exercises.length : null}</span>
+                        </ExercisesParagraph>
                     </HeadingItem>
                     <HeadingItem>
-                        <Timer>
-                            <p>0:25:33</p>
-                        </Timer>
+                        <Timer/>
                     </HeadingItem>
                 </HeadingContent>
                 <PrimaryButton color={variables.yellowPrimary}>Finish</PrimaryButton>
             </Heading>
             <Exercises>
-                <NewTrainingExercise/>
+                {activeTraining.exercises.map(exercise => (
+                    <NewTrainingExercise
+                        exercise={exercise}
+                        key={exercise._id}
+                    />
+                ))}
+
             </Exercises>
         </NewTrainingWrapper>
     )

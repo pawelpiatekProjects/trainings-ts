@@ -53,11 +53,15 @@ export const SeriesWrapper = styled.ul<ISeriesWrapper>`
   display: ${props => props.isOpen ? 'block' : 'none'};
   transition: transform .3s;
   transform-origin: top;
+  
+  
 `;
 
 export const Series = styled.li`
   display: flex;
   align-items: start;
+  
+  
 `;
 
 export const SeriesContent = styled.div`
@@ -66,6 +70,11 @@ export const SeriesContent = styled.div`
   justify-content: space-between;
   align-items: start;
   padding: 1rem;
+  
+  //opacity: .4;
+  //&:hover {
+  //  cursor: not-allowed;
+  //}
 `;
 
 export const SeriesItem = styled.div<ISeriesItem>`
