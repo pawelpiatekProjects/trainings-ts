@@ -36,6 +36,15 @@ export interface Training {
 interface ContextType {
     activeTraining: Training;
     initializeNewTraining: (planId: string, dayId: string) => void;
+    completeSeries: (
+        trainingId: string,
+        exerciseId: string,
+        seriesId: string,
+        reps: string,
+        weight: string,
+        pause: string,
+        rate: string
+    ) => void;
     trainingTimer: number;
     startTimer: () => void;
 }
@@ -69,6 +78,35 @@ const TrainingsContextProvider: React.FC = ({children}) => {
         }
     }
 
+    const completeSeries = async(
+        trainingId: string,
+        exerciseId: string,
+        seriesId: string,
+        reps: string,
+        weight: string,
+        pause: string,
+        rate: string
+    ) => {
+        openLoader();
+
+        try {
+            const {data: {training}} = await post<any>('trainings/completeSeries',{
+                trainingId: trainingId,
+                exerciseId: exerciseId,
+                seriesId: seriesId,
+                reps: reps,
+                weight: weight,
+                pause: pause,
+                rate: rate
+            });
+            setActiveTraining(training);
+        } catch (e) {
+            console.log('Error: ', e);
+        } finally {
+            closeLoader();
+        }
+    }
+
     const startTimer = () => {
         // setInterval(() => {
         //     setTrainingTimer(prevState => prevState + 1);
@@ -79,6 +117,7 @@ const TrainingsContextProvider: React.FC = ({children}) => {
         <TrainingsContext.Provider value={{
             activeTraining,
             initializeNewTraining,
+            completeSeries,
             trainingTimer,
             startTimer
         }}>

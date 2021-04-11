@@ -21,7 +21,7 @@ interface Props {
 
 
 const NewTrainingExercise: React.FC<Props> = ({exercise}) => {
-    const {activeTraining} = useContext(TrainingsContext);
+    const {activeTraining, completeSeries} = useContext(TrainingsContext);
     const [isSeriesOpen, setIsSeriesOpen] = useState(false);
 
     console.log('exercises toDo: ', activeTraining.exercises);
@@ -59,44 +59,54 @@ const NewTrainingExercise: React.FC<Props> = ({exercise}) => {
                             rate: series.rate.toString()
                         }}
                         onSubmit={({reps, weight, pause, rate}) => {
-                            console.log('on submit');
+                            completeSeries(
+                                activeTraining._id,
+                                exercise._id,
+                                series._id,
+                                reps,
+                                weight,
+                                pause,
+                                rate
+                            );
                         }}
                         validationSchema={ExerciseFormSchema}
                     >
                         {({errors, touched, isValid, dirty}) => (
                             <Form>
                                 <Series>
-                                    <SeriesContent>
+                                    <SeriesContent isFinished={series.isFinished}>
                                         <SeriesItem width={20}>
                                             <p>{index + 1}.</p>
                                         </SeriesItem>
                                         <SeriesItem width={20}>
-                                            <Field name='reps'/>
+                                            <Field name='reps' disabled={series.isFinished}/>
                                             {errors.reps && touched.reps ? (
                                                 <Error>{errors.reps}</Error>
                                             ) : <Error></Error>}
                                         </SeriesItem>
                                         <SeriesItem width={20}>
-                                            <Field name='weight'/>
+                                            <Field name='weight' disabled={series.isFinished}/>
                                             {errors.weight && touched.weight ? (
                                                 <Error>{errors.weight}</Error>
                                             ) : <Error></Error>}
                                         </SeriesItem>
                                         <SeriesItem width={20}>
-                                            <Field name='pause'/>
+                                            <Field name='pause' disabled={series.isFinished}/>
                                             {errors.pause && touched.pause ? (
                                                 <Error>{errors.pause}</Error>
                                             ) : <Error></Error>}
                                         </SeriesItem>
                                         <SeriesItem width={20}>
-                                            <Field name='rate'/>
+                                            <Field name='rate' disabled={series.isFinished}/>
                                             {errors.rate && touched.rate ? (
                                                 <Error>{errors.rate}</Error>
                                             ) : <Error></Error>}
                                         </SeriesItem>
                                     </SeriesContent>
                                     <ButtonWrapper>
-                                        <button type='submit'>Add</button>
+                                        {series.isFinished ? null : (
+                                            <button type='submit'>Add</button>
+                                        )}
                                     </ButtonWrapper>
                                 </Series>
                             </Form>

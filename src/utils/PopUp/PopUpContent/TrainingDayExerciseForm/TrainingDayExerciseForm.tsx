@@ -77,13 +77,14 @@ const TrainingDayExerciseForm: React.FC = () => {
                     validationSchema={NewExerciseSchema}
                     onSubmit={({name, series, weight, pause, rate, ytLink, description}, {resetForm}) => {
                         if(mode === 'add') {
+                            console.log('weight',  weight.length)
                             onAddTrainingDayExercise(
                                 popUpConfig.openModalData.planConfig!.dayId!,
                                 name,
                                 series,
-                                weight,
-                                pause,
-                                rate,
+                                weight.length === 0 ? '0' : weight,
+                                pause.length === 0 ? '0' : pause,
+                                rate.length === 0 ? '0' : rate,
                                 ytLink,
                                 description
                             );

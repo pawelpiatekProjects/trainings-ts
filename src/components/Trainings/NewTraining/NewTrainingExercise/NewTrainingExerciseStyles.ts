@@ -13,6 +13,10 @@ interface IDropdownButton {
     isOpen: boolean
 }
 
+interface ISeriesContent {
+    isFinished: boolean;
+}
+
 export const TrainingWrapper = styled.div`
   width: 90%;
   margin: 0 auto;
@@ -64,17 +68,17 @@ export const Series = styled.li`
   
 `;
 
-export const SeriesContent = styled.div`
+export const SeriesContent = styled.div<ISeriesContent>`
     width: 90%;
   display: flex;
   justify-content: space-between;
   align-items: start;
   padding: 1rem;
   
-  //opacity: .4;
-  //&:hover {
-  //  cursor: not-allowed;
-  //}
+  opacity: ${props => props.isFinished ? .4 : 1};
+  &:hover {
+    cursor: ${props => props.isFinished ? 'not-allowed' : 'default'};
+  }
 `;
 
 export const SeriesItem = styled.div<ISeriesItem>`
@@ -88,6 +92,10 @@ export const SeriesItem = styled.div<ISeriesItem>`
   input {
     padding: .5rem;
     border: 2px solid ${variables.grayPrimary};
+    
+    &:disabled {
+      cursor: not-allowed;
+    }
   }
 `;
 
@@ -125,6 +133,8 @@ export const ButtonWrapper = styled.div`
     &:hover:after {
       transform: scaleX(1);
     }
+    
+   
   }
 `;
 
