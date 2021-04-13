@@ -1,5 +1,5 @@
 import React, {createContext, useContext, useState} from 'react';
-import {post} from '../services/restService';
+import {post, get} from '../services/restService';
 import {getUserIdFromStorage} from '../services/authenticationService';
 import {LoaderContext} from "./LoaderContext";
 
@@ -33,8 +33,19 @@ export interface Training {
     updatedAt: string;
 }
 
+export interface TrainingIntro {
+    _id: string;
+    creator: string;
+    date: string
+    length: number;
+    planName: string
+    dayName: string
+}
+
 interface ContextType {
     activeTraining: Training;
+    trainings: TrainingIntro[];
+    fetchTrainings: () => void;
     initializeNewTraining: (planId: string, dayId: string) => void;
     completeSeries: (
         trainingId: string,
@@ -57,7 +68,27 @@ const TrainingsContextProvider: React.FC = ({children}) => {
     const {openLoader, closeLoader} = useContext(LoaderContext);
 
     const [activeTraining, setActiveTraining] = useState<Training>({} as Training);
+    const [trainings, setTrainings] = useState<Training[]>([]);
+
     const [trainingTimer, setTrainingTimer] = useState(0);
+
+    const fetchTrainings = async() => {
+        const userId = getUserIdFromStorage()!;
+
+        openLoader();
+
+        try {
+            const {data: {trainings}} = await get<any>('trainings/all');
+            console.log('trainings from context: ', trainings);
+            setTrainings(trainings);
+
+        } catch (e) {
+            console.log('Error: ', e);
+        } finally {
+            closeLoader();
+        }
+    }
+
 
     const initializeNewTraining = async(planId: string, dayId: string) => {
         const userId = getUserIdFromStorage()!;
@@ -138,6 +169,8 @@ const TrainingsContextProvider: React.FC = ({children}) => {
     return (
         <TrainingsContext.Provider value={{
             activeTraining,
+            trainings,
+            fetchTrainings,
             initializeNewTraining,
             completeSeries,
             completeTraining,

@@ -10,6 +10,7 @@ export const TrainingsListHeading = styled.div`
   display: flex;
   justify-content: start;
   align-items: center;
+  height: 20%;
 `;
 
 export const TrainingsListHeader = styled.h1`
@@ -28,3 +29,48 @@ export const TrainingsListEmpty = styled.div`
   align-items: center;
   flex-direction: column;
 `;
+
+export const TrainingsContent = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  height: 80%;
+`;
+
+
+
+export const ListOfTrainings = styled.ul`
+  width: 40%;
+  height: 100%;
+  overflow-y: auto;
+  padding: 0 3rem;
+`;
+
+export const ListHeader = styled.li`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem;
+  background: ${variables.light};
+  border: 3px solid ${variables.yellowPrimary};
+`;
+
+export const ListHeaderItem = styled.div`
+  display: flex;
+  align-items: center;
+  
+  svg {
+    margin-right: .5rem;
+    font-size: 2rem;
+    color: ${variables.textColorPrimary};
+  }
+  
+  p{
+    margin: 0;
+    color: ${variables.textColorPrimary};
+  }
+  
+`;
+

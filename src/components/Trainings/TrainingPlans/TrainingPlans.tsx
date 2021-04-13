@@ -17,6 +17,7 @@ interface Props {
 
 const TrainingPlans: React.FC<Props> = ({onAddNewPlan}) => {
     const {trainingPlans} = useContext(TrainingPlanContext);
+    console.log('training plans: ', trainingPlans);
     return (
         <TrainingPlansWrapper>
             <TrainingPlansHeading>
