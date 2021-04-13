@@ -1,24 +1,34 @@
 import styled from "styled-components";
 import * as variables from '../../../../assets/styles/variables';
 
+interface IIsOpen {
+    isOpen: boolean;
+}
 
-export const TrainingWrapper = styled.li`
+
+export const TrainingWrapper = styled.li<IIsOpen>`
   list-style: none;
   width: 100%;
-  background: ${variables.light};
+  background: ${props => props.isOpen ? variables.yellowPrimary : variables.light};
   padding: 2rem;
   margin: 1rem 0;
   position: relative;
   z-index: 1;
   
+  p {
+    margin: 0;
+    color: ${props=> props.isOpen ? variables.light : variables.textColorPrimary};
+
+    transition: all .5s;
+  }
   
-  //border-left: 4px solid ${variables.yellowPrimary};
+  
 
   &:hover {
     cursor: pointer;
     
     p {
-      color: ${variables.light};
+      color: ${props => props.isOpen ? variables.textColorPrimary :variables.light};
     }
   }
   
@@ -29,7 +39,7 @@ export const TrainingWrapper = styled.li`
     left: 0;
     height: 100%;
     width: 100%;
-    background: ${variables.yellowPrimary};
+    background: ${props => props.isOpen ? variables.light : variables.yellowPrimary};
     display: inline-block;
     z-index: -1;
     transform: scaleX(.01);
@@ -50,9 +60,3 @@ export const TrainingWrapperContent = styled.div`
   
 `;
 
-export const TrainingItem = styled.p`
-  margin: 0;
-  color: ${variables.textColorPrimary};
-
-  transition: all .5s;
-`;

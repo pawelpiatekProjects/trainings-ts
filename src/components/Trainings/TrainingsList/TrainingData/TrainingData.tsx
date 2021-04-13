@@ -4,11 +4,15 @@ import {
     TrainingNotSelected,
     NotSelectedContent,
     DetailsWrapper,
+    DetailsHeading,
+    DetailsHeadingLeft,
+    DetailsHeadingRight,
     DetailsDate,
     DetailsHeader,
     ExercisesHeader,
     Exercises
 } from './TrainingDataStyles';
+import {TimerWrapper} from '../../../../assets/styles/customStylesComponents/Timer';
 import {TrainingsContext} from "../../../../contexts/TrainingsContext";
 import {EventBusy} from '@material-ui/icons';
 import Exercise from "./Exercise/Exercise";
@@ -31,9 +35,18 @@ const TrainingData: React.FC = () => {
                 </TrainingNotSelected>
             ): (
                 <DetailsWrapper>
-                    <DetailsDate>{openedTraining.date.slice(0,10)}</DetailsDate>
-                    <DetailsHeader>Plan name: <span>{openedTraining.planName}</span></DetailsHeader>
-                    <DetailsHeader>Training day: <span>{openedTraining.dayName}</span></DetailsHeader>
+                    <DetailsHeading>
+                        <DetailsHeadingLeft>
+                            <DetailsDate>{openedTraining.date.slice(0,10)}</DetailsDate>
+                            <DetailsHeader>Plan name: <span>{openedTraining.planName}</span></DetailsHeader>
+                            <DetailsHeader>Training day: <span>{openedTraining.dayName}</span></DetailsHeader>
+                        </DetailsHeadingLeft>
+                        <DetailsHeadingRight>
+                            <TimerWrapper>
+                                <p>{openedTraining.length}</p>
+                            </TimerWrapper>
+                        </DetailsHeadingRight>
+                    </DetailsHeading>
                     <ExercisesHeader>Exercises</ExercisesHeader>
                     <Exercises >
                         {openedTraining.exercises.map((exercise, index) => (

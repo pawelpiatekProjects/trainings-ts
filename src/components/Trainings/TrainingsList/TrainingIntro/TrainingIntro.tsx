@@ -1,6 +1,6 @@
-import React from "react";
-import {TrainingWrapper, TrainingWrapperContent, TrainingItem} from './TrainingIntroStyles';
-import {TrainingIntro as TrainingIntroType} from "../../../../contexts/TrainingsContext";
+import React, {useContext} from "react";
+import {TrainingWrapper, TrainingWrapperContent} from './TrainingIntroStyles';
+import {TrainingIntro as TrainingIntroType, TrainingsContext} from "../../../../contexts/TrainingsContext";
 
 interface Props {
     training: TrainingIntroType;
@@ -8,12 +8,14 @@ interface Props {
 }
 
 const TrainingIntro: React.FC<Props> = ({training, onOpenTrainingData}) => {
+    const {openedTraining} = useContext(TrainingsContext);
+    const isOpen = training._id === openedTraining._id;
     return (
-        <TrainingWrapper onClick={() => onOpenTrainingData(training._id)}>
+        <TrainingWrapper isOpen={isOpen} onClick={() => onOpenTrainingData(training._id)}>
             <TrainingWrapperContent>
-                <TrainingItem>{training.date.slice(0,10)}</TrainingItem>
-                <TrainingItem>{training.planName}</TrainingItem>
-                <TrainingItem>{training.dayName}</TrainingItem>
+                <p>{training.date.slice(0,10)}</p>
+                <p>{training.planName}</p>
+                <p>{training.dayName}</p>
             </TrainingWrapperContent>
         </TrainingWrapper>
     )

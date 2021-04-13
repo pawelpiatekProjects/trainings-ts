@@ -41,6 +41,20 @@ export const DetailsWrapper = styled.div`
   overflow-y: auto;
 `;
 
+export const DetailsHeading = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const DetailsHeadingLeft = styled.div`
+
+`;
+
+export const DetailsHeadingRight = styled.div`
+
+`;
+
 export const DetailsDate = styled.h1`
   color: ${variables.textColorTertiary};
   font-size: 2.5rem;
