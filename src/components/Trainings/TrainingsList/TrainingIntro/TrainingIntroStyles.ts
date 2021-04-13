@@ -35,7 +35,7 @@ export const TrainingWrapper = styled.li`
     transform: scaleX(.01);
     transform-origin: left;
     
-    transition: all .3s;
+    transition: all .5s;
   }
   
   &:hover:before {
@@ -54,5 +54,5 @@ export const TrainingItem = styled.p`
   margin: 0;
   color: ${variables.textColorPrimary};
 
-  transition: all .3s;
+  transition: all .5s;
 `;

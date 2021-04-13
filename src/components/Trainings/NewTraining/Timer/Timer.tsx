@@ -1,5 +1,5 @@
 import React, {useContext} from "react";
-import {TimerWrapper} from './TimerStyles';
+import {TimerWrapper} from '../../../../assets/styles/customStylesComponents/Timer';
 import {TrainingsContext} from "../../../../contexts/TrainingsContext";
 
 const Timer: React.FC = () => {

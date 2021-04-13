@@ -74,3 +74,8 @@ export const ListHeaderItem = styled.div`
   
 `;
 
+export const TrainingDataWrapper = styled.div`
+  width: 60%;
+  height: 100%;
+`;
+

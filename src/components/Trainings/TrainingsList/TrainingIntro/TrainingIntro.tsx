@@ -4,11 +4,12 @@ import {TrainingIntro as TrainingIntroType} from "../../../../contexts/Trainings
 
 interface Props {
     training: TrainingIntroType;
+    onOpenTrainingData: (id: string) => void;
 }
 
-const TrainingIntro: React.FC<Props> = ({training}) => {
+const TrainingIntro: React.FC<Props> = ({training, onOpenTrainingData}) => {
     return (
-        <TrainingWrapper>
+        <TrainingWrapper onClick={() => onOpenTrainingData(training._id)}>
             <TrainingWrapperContent>
                 <TrainingItem>{training.date.slice(0,10)}</TrainingItem>
                 <TrainingItem>{training.planName}</TrainingItem>

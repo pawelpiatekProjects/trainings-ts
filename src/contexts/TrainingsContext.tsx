@@ -28,7 +28,6 @@ export interface Training {
     planName: string;
     dayName: string;
     exercises: TrainingExercise[];
-    finishedExercises: TrainingExercise[];
     createdAt: string;
     updatedAt: string;
 }
@@ -45,7 +44,9 @@ export interface TrainingIntro {
 interface ContextType {
     activeTraining: Training;
     trainings: TrainingIntro[];
+    openedTraining: Training;
     fetchTrainings: () => void;
+    fetchTraining: (is: string) => void;
     initializeNewTraining: (planId: string, dayId: string) => void;
     completeSeries: (
         trainingId: string,
@@ -69,11 +70,10 @@ const TrainingsContextProvider: React.FC = ({children}) => {
 
     const [activeTraining, setActiveTraining] = useState<Training>({} as Training);
     const [trainings, setTrainings] = useState<Training[]>([]);
-
+    const [openedTraining, setOpenedTraining] = useState<Training>({} as Training);
     const [trainingTimer, setTrainingTimer] = useState(0);
 
     const fetchTrainings = async() => {
-        const userId = getUserIdFromStorage()!;
 
         openLoader();
 
@@ -84,6 +84,20 @@ const TrainingsContextProvider: React.FC = ({children}) => {
 
         } catch (e) {
             console.log('Error: ', e);
+        } finally {
+            closeLoader();
+        }
+    }
+
+    const fetchTraining = async(id: string) => {
+        openLoader();
+
+        try {
+            const {data: {training}} = await get<any>(`trainings/all/${id}`);
+            setOpenedTraining(training);
+
+        } catch (e) {
+            console.log('Error:', e)
         } finally {
             closeLoader();
         }
@@ -170,7 +184,9 @@ const TrainingsContextProvider: React.FC = ({children}) => {
         <TrainingsContext.Provider value={{
             activeTraining,
             trainings,
+            openedTraining,
             fetchTrainings,
+            fetchTraining,
             initializeNewTraining,
             completeSeries,
             completeTraining,

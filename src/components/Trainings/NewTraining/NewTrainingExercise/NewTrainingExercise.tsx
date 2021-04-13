@@ -25,7 +25,6 @@ const NewTrainingExercise: React.FC<Props> = ({exercise}) => {
     const [isSeriesOpen, setIsSeriesOpen] = useState(false);
 
     console.log('exercises toDo: ', activeTraining.exercises);
-    console.log('finished exercises: ', activeTraining.finishedExercises);
 
     const toggleSeriesOpen = () => {
         setIsSeriesOpen(prevState => !prevState);

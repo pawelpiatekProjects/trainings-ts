@@ -8,18 +8,21 @@ import {
     ListHeader,
     ListHeaderItem,
     ListOfTrainings,
+    TrainingDataWrapper
 } from './TrainingsListStyles';
 import {PrimaryButton} from '../../../assets/styles/customStylesComponents/buttons';
 import * as variables from '../../../assets/styles/variables';
 import {TrainingsContext} from "../../../contexts/TrainingsContext";
 import TrainingIntro from "./TrainingIntro/TrainingIntro";
 import {CalendarToday, ListAlt, FitnessCenter} from '@material-ui/icons';
+import TrainingData from "./TrainingData/TrainingData";
 
 interface Props {
     startNewTraining: () => void;
+    onOpenTrainingData: (id: string) => void;
 }
 
-const TrainingsList: React.FC<Props> = ({startNewTraining}) => {
+const TrainingsList: React.FC<Props> = ({startNewTraining, onOpenTrainingData}) => {
     const {trainings} = useContext(TrainingsContext);
 
     if (trainings.length < 0) {
@@ -41,7 +44,6 @@ const TrainingsList: React.FC<Props> = ({startNewTraining}) => {
                     </PrimaryButton>
                 </TrainingsListHeading>
                 <TrainingsContent>
-
                     <ListOfTrainings>
                         <ListHeader>
                             <ListHeaderItem>
@@ -58,9 +60,16 @@ const TrainingsList: React.FC<Props> = ({startNewTraining}) => {
                             </ListHeaderItem>
                         </ListHeader>
                         {trainings.map(training => (
-                            <TrainingIntro training={training}/>
+                            <TrainingIntro
+                                onOpenTrainingData={onOpenTrainingData}
+                                key={training._id}
+                                training={training}
+                            />
                         ))}
                     </ListOfTrainings>
+                    <TrainingDataWrapper>
+                        <TrainingData/>
+                    </TrainingDataWrapper>
                 </TrainingsContent>
             </TrainingsListWrapper>
         )

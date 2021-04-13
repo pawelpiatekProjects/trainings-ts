@@ -31,9 +31,10 @@ const NewTraining: React.FC<Props> = ({onCompleteTraining}) => {
 
                     </HeadingItem>
                     <HeadingItem>
+                        {/*todo: add dynamic content*/}
                         <ExercisesParagraph>
                             Finished exercises:
-                            <span> {activeTraining.finishedExercises ? activeTraining.finishedExercises.length : null}</span>
+                            <span> 0</span>
                         </ExercisesParagraph>
                         <ExercisesParagraph>
                             Exercises:

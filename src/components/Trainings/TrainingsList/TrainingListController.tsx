@@ -5,7 +5,7 @@ import {TrainingsContext} from "../../../contexts/TrainingsContext";
 
 const TrainingListController: React.FC = () => {
     const {onOpenModal} = useContext(PopUpContext);
-    const {fetchTrainings} = useContext(TrainingsContext);
+    const {fetchTrainings, fetchTraining} = useContext(TrainingsContext);
 
     useEffect(() => {
         fetchTrainings();
@@ -15,10 +15,17 @@ const TrainingListController: React.FC = () => {
         onOpenModal({
             contentType: ContentType.StartNewTraining
         })
+    };
+
+    const onOpenTrainingData = (id: string) => {
+        fetchTraining(id)
     }
 
     return(
-        <TrainingsList startNewTraining={onStartNewTraining}/>
+        <TrainingsList
+            startNewTraining={onStartNewTraining}
+            onOpenTrainingData={onOpenTrainingData}
+        />
     )
 };
 
