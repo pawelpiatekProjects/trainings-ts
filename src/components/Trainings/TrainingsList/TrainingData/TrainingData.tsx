@@ -7,21 +7,19 @@ import {
     DetailsDate,
     DetailsHeader,
     ExercisesHeader,
-    Exercises,
-    Exercise,
-    ExerciseWrapper,
-    SeriesWrapper,
-    SeriesItem,
-    SeriesItemContent
+    Exercises
 } from './TrainingDataStyles';
 import {TrainingsContext} from "../../../../contexts/TrainingsContext";
 import {EventBusy} from '@material-ui/icons';
+import Exercise from "./Exercise/Exercise";
 
 const TrainingData: React.FC = () => {
-
     const {openedTraining} = useContext(TrainingsContext);
     const isEmpty = Object.keys(openedTraining).length === 0;
-    console.log('isEmpty: ', isEmpty);
+
+
+
+
     return (
         <TrainingDataWrapper>
             {isEmpty ? (
@@ -37,24 +35,9 @@ const TrainingData: React.FC = () => {
                     <DetailsHeader>Plan name: <span>{openedTraining.planName}</span></DetailsHeader>
                     <DetailsHeader>Training day: <span>{openedTraining.dayName}</span></DetailsHeader>
                     <ExercisesHeader>Exercises</ExercisesHeader>
-                    <Exercises>
+                    <Exercises >
                         {openedTraining.exercises.map((exercise, index) => (
-                            <ExerciseWrapper>
-                                <Exercise key={exercise._id}>
-                                    <p>{index + 1}.</p>
-                                    <p> {exercise.exerciseName}</p>
-                                </Exercise>
-                                <SeriesWrapper>
-                                    {exercise.series.map(seriesItem => (
-                                        <SeriesItem>
-                                            <SeriesItemContent>{seriesItem.reps}</SeriesItemContent>
-                                            <SeriesItemContent>{seriesItem.weight}</SeriesItemContent>
-                                            <SeriesItemContent>{seriesItem.pause}</SeriesItemContent>
-                                            <SeriesItemContent>{seriesItem.rate}</SeriesItemContent>
-                                        </SeriesItem>
-                                    ))}
-                                </SeriesWrapper>
-                            </ExerciseWrapper>
+                            <Exercise exercise={exercise} index={index + 1}/>
                         ))}
                     </Exercises>
                 </DetailsWrapper>

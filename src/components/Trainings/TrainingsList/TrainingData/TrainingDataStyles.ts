@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import * as variables from '.././../../../assets/styles/variables';
 
+
 export const TrainingDataWrapper = styled.div`
   width: 80%;
   margin: 0 auto;
@@ -36,6 +37,8 @@ export const DetailsWrapper = styled.div`
   background: ${variables.light};
   padding: 3rem;
   max-height: 90%;
+  
+  overflow-y: auto;
 `;
 
 export const DetailsDate = styled.h1`
@@ -113,32 +116,7 @@ export const Exercise = styled.li`
   }
 `;
 
-export const ExerciseWrapper = styled.div`
 
-`;
-
-export const SeriesWrapper = styled.ul`
-  width: 95%;
-  margin: 0 auto;
-  border-left: 4px solid ${variables.yellowPrimary};
-  border-right: 4px solid ${variables.yellowPrimary};
-  border-bottom: 4px solid ${variables.yellowPrimary};
-`;
-
-export const SeriesItem = styled.li`
-  width: 100%;
-  border-bottom: 1px dashed ${variables.thirdGray};
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: ${variables.grayPrimary};
-  padding: 1rem 2rem;
-
-`;
-
-export const SeriesItemContent = styled.p`
-  margin: 0;
-`;
 
 
 
