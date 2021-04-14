@@ -14,12 +14,16 @@ const NewTrainingController: React.FC = () => {
 
 
     useEffect(() => {
-        // TODO: move this logic to Storage
-        if(Object.keys(activeTraining).length === 0) {
-            history.push('/trainings/trainings-list');
-        }
-        // startTimer();
-    },[]);
+        const unListen = history.listen(() => {
+           onOpenModal({
+               contentType: ContentType.ExitTraining
+           })
+        });
+        return () => unListen();
+    }, []);
+
+
+
 
     const handleCompleteTraining = () => {
         console.log('finish training');

@@ -9,7 +9,6 @@ interface Props extends RouteProps{
 
 const PrivateRedirect: React.FC<Props> = ({ path, redirectPath}) => {
     const isAuth = isUserAuthenticated();
-    // return isAuth ? <Route component={component}/> : <Redirect to='/sign-in'/>
     if (isAuth) {
         return (
             <Route path={path}>

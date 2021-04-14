@@ -1,5 +1,10 @@
 import axios from 'axios';
-import {clearAuthenticatedUSerData, getTokenFromStorage} from './authenticationService';
+import {
+    clearAuthenticatedUSerData,
+    getTokenFromStorage,
+    getRefreshTokenFromStorage,
+    getUserIdFromStorage, storeAuthenticatedUser
+} from './authenticationService';
 
 interface DataSchema {
     [key: string]: string
@@ -21,7 +26,7 @@ export const onDeleteAuthorizationHeader = () => {
 
 export function post<T>(endpoint: string, data?: DataSchema) {
     const token = getTokenFromStorage();
-    if(token) {
+    if (token) {
         onAddAuthorizationHeader(token);
     }
     return instance.post<T>(endpoint, data);
@@ -29,15 +34,15 @@ export function post<T>(endpoint: string, data?: DataSchema) {
 
 export function get<T>(endpoint: string) {
     const token = getTokenFromStorage();
-    if(token) {
+    if (token) {
         onAddAuthorizationHeader(token);
     }
     return instance.get<T>(endpoint);
 }
 
-export function deleteRequest<T>(endpoint: string, params:DataSchema) {
+export function deleteRequest<T>(endpoint: string, params: DataSchema) {
     const token = getTokenFromStorage();
-    if(token) {
+    if (token) {
         onAddAuthorizationHeader(token);
     }
     return instance.delete<T>(endpoint, {
@@ -47,7 +52,7 @@ export function deleteRequest<T>(endpoint: string, params:DataSchema) {
 
 export function put<T>(endpoint: string, data: DataSchema) {
     const token = getTokenFromStorage();
-    if(token) {
+    if (token) {
         onAddAuthorizationHeader(token);
     }
     return instance.put<T>(endpoint, {
@@ -55,9 +60,19 @@ export function put<T>(endpoint: string, data: DataSchema) {
     });
 }
 
-instance.interceptors.response.use(response=> response, error => {
-    if(error.response.status === 401) {
-        clearAuthenticatedUSerData();
+instance.interceptors.response.use(response => response, error => {
+    if (error.response.status === 401) {
+        const refreshToken = getRefreshTokenFromStorage()!;
+        const userId = getUserIdFromStorage()!;
+        post<any>('auth/refreshToken', {
+            refrshToken: refreshToken,
+            userId: userId
+        }).then(({data: {token, refreshToken, userId}}) => {
+            clearAuthenticatedUSerData();
+            storeAuthenticatedUser(token, userId, refreshToken);
+            onAddAuthorizationHeader(token);
+        })
+
     }
 })
 

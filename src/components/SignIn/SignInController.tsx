@@ -32,13 +32,13 @@ const SignInController: React.FC<Props> = ({history}) => {
         openLoader();
 
         try {
-            const {data: {token, userId}} = await post<any>('auth/login', {
+            const {data: {token, userId, refreshToken}} = await post<any>('auth/login', {
                 email: email,
                 password: password
             });
 
             // Emitting new authenticated user
-            storeAuthenticatedUser(token, userId);
+            storeAuthenticatedUser(token, userId, refreshToken);
 
             // Redirecting to DashboardController component
             history.push('/dashboard');

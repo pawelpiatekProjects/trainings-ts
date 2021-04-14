@@ -8,6 +8,7 @@ interface Props extends RouteProps{
 
 const PrivateRoute: React.FC<Props> = ({ component}) => {
     const isAuth = isUserAuthenticated();
+    console.log('isAuth: ', isAuth);
     return isAuth ? <Route component={component}/> : <Redirect to='/sign-in'/>
 };
 
