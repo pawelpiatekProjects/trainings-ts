@@ -72,7 +72,7 @@ const Exercise: React.FC<Props> = ({exercise, trainingDayId}) => {
                     <p>{exercise.pause ? exercise.pause : '-'}</p>
                 </ExerciseItem>
                 <ExerciseItem width={10}>{exercise.ytLink ? (
-                    <a href={exercise.ytLink}>
+                    <a href={exercise.ytLink} target="_blank">
                         <YouTube/>
                     </a>
                 ) : '-'}</ExerciseItem>

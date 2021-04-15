@@ -37,8 +37,9 @@ export interface TrainingIntro {
     creator: string;
     date: string
     length: number;
-    planName: string
-    dayName: string
+    planName: string;
+    dayName: string;
+    isFinished: boolean
 }
 
 interface ContextType {
@@ -47,6 +48,9 @@ interface ContextType {
     openedTraining: Training;
     fetchTrainings: () => void;
     fetchTraining: (is: string) => void;
+    checkTrainings: () => Promise<boolean>;
+    fetchNotFinishedTraining: () => void;
+    finishPreviousTraining: () => void;
     initializeNewTraining: (planId: string, dayId: string) => void;
     completeSeries: (
         trainingId: string,
@@ -100,6 +104,48 @@ const TrainingsContextProvider: React.FC = ({children}) => {
             console.log('Error:', e)
         } finally {
             closeLoader();
+        }
+    }
+
+    const checkTrainings = async () => {
+        const userId = getUserIdFromStorage()!;
+        try {
+            const {data: {isPreviousTrainingFinished}} = await post<any>('trainings/checkTrainings', {
+                userId: userId
+            });
+            return isPreviousTrainingFinished;
+        } catch (e) {
+            console.log('Error: ', e);
+            return false;
+        }
+    }
+
+    const finishPreviousTraining = async() => {
+        const userId = getUserIdFromStorage()!;
+
+        try {
+            await post<any>('/trainings/finishPreviousTraining', {
+                userId: userId
+            })
+        } catch (e) {
+            console.log('Error: ', e)
+        }
+
+    }
+
+    const fetchNotFinishedTraining = async() => {
+        const userId = getUserIdFromStorage()!;
+
+        try {
+            const {data: {training}} = await post<any>('/trainings/fetchNotFinished', {
+                userId: userId
+            });
+
+            console.log('not finished training: ', training);
+
+            setActiveTraining(training);
+        } catch (e) {
+            console.log('Error: ', e)
         }
     }
 
@@ -187,6 +233,9 @@ const TrainingsContextProvider: React.FC = ({children}) => {
             openedTraining,
             fetchTrainings,
             fetchTraining,
+            checkTrainings,
+            fetchNotFinishedTraining,
+            finishPreviousTraining,
             initializeNewTraining,
             completeSeries,
             completeTraining,

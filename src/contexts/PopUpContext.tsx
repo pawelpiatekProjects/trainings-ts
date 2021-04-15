@@ -1,5 +1,5 @@
 import React, {useState, createContext} from 'react';
-import {getTokenExpiration, getTokenFromStorage} from '../services/authenticationService';
+import { isUserAuthenticated} from '../services/authenticationService';
 
 /**
  * Enum which have all available PopUpContent
@@ -19,7 +19,8 @@ export enum ContentType {
     StartNewTraining,
     LogOut,
     FinishTraining,
-    ExitTraining
+    ExitTraining,
+    TrainingNotFinished
 }
 
 /**
@@ -79,7 +80,7 @@ const PopUpContextProvider: React.FC = ({children}) => {
 
     const onOpenModal = (openModalData: OpenModalData) => {
 
-        if(getTokenFromStorage() && parseInt(getTokenExpiration()!) > new Date().getTime()) {
+        if(isUserAuthenticated()) {
             setPopUpConfig({
                 isPopUpOpen: true,
                 content: openModalData.contentType,

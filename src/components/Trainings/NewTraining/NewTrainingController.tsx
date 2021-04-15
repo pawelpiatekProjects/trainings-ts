@@ -22,9 +22,6 @@ const NewTrainingController: React.FC = () => {
         return () => unListen();
     }, []);
 
-
-
-
     const handleCompleteTraining = () => {
         console.log('finish training');
         onOpenModal({

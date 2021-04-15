@@ -61,6 +61,7 @@ export function put<T>(endpoint: string, data: DataSchema) {
 }
 
 instance.interceptors.response.use(response => response, error => {
+    console.log('interceptor error`: ', error);
     if (error.response.status === 401) {
         const refreshToken = getRefreshTokenFromStorage()!;
         const userId = getUserIdFromStorage()!;

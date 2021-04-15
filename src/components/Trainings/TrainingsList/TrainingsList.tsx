@@ -59,7 +59,7 @@ const TrainingsList: React.FC<Props> = ({startNewTraining, onOpenTrainingData}) 
                                 <p>Training day</p>
                             </ListHeaderItem>
                         </ListHeader>
-                        {trainings.map(training => (
+                        {trainings.filter(training => training.isFinished).map(training => (
                             <TrainingIntro
                                 onOpenTrainingData={onOpenTrainingData}
                                 key={training._id}
