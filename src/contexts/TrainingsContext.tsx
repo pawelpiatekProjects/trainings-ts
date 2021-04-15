@@ -202,15 +202,17 @@ const TrainingsContextProvider: React.FC = ({children}) => {
 
     const completeTraining = async() => {
         const userId = getUserIdFromStorage()!;
-
         openLoader();
 
         try {
-            const {data} = await post<any>('trainings/completeTraining', {
+            const {data: {trainings}} = await post<any>('trainings/completeTraining', {
+                userId: userId,
                 trainingId: activeTraining._id
             });
 
-            setActiveTraining({} as Training);
+            setTrainings(trainings);
+
+
         } catch (e) {
             console.log('Error: ', e);
         } finally {
