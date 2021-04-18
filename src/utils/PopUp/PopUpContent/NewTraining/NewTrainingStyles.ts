@@ -17,7 +17,7 @@ export const NewTrainingHeader = styled.h1`
 
 export const ContentWrapper = styled.div`
   max-height: 90%;
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
 `;
 

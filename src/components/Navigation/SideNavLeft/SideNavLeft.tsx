@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import {NavLink, useLocation} from 'react-router-dom';
 import {
     Navigation,
@@ -24,11 +24,13 @@ import {
 import {LogoutOutlined} from '@ant-design/icons'
 import * as variables from "../../../assets/styles/variables";
 import {ContentType, PopUpContext} from "../../../contexts/PopUpContext";
+import {TrainingsContext} from "../../../contexts/TrainingsContext";
 
 
 const SideNavLeft: React.FC = () => {
     const location = useLocation().pathname.split('/')[1];
     const {onOpenModal} = useContext(PopUpContext);
+    const {activeTraining} = useContext(TrainingsContext);
 
     console.log('location: ', location === 'trainings');
 
@@ -82,6 +84,13 @@ const SideNavLeft: React.FC = () => {
                                 <p>Training Plans</p>
                             </NestedNavLink>
                         </NestedNavItem>
+                        {/*// ToDO: fixed this*/}
+                        {Object.keys(activeTraining).length > 0 ? (<NestedNavItem>
+                            <NestedNavLink activeStyle={activeStyleNested} to='/trainings/new'>
+                                <KeyboardArrowRight/>
+                                <p>Active training</p>
+                            </NestedNavLink>
+                        </NestedNavItem>) : null}
                     </NestedNavItems>
 
                     <NavigationItem>

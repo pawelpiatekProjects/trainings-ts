@@ -48,7 +48,7 @@ interface ContextType {
     openedTraining: Training;
     fetchTrainings: () => void;
     fetchTraining: (is: string) => void;
-    checkTrainings: () => Promise<boolean>;
+    checkTrainings: () => void;
     fetchNotFinishedTraining: () => void;
     finishPreviousTraining: () => void;
     initializeNewTraining: (planId: string, dayId: string) => void;
@@ -110,13 +110,15 @@ const TrainingsContextProvider: React.FC = ({children}) => {
     const checkTrainings = async () => {
         const userId = getUserIdFromStorage()!;
         try {
-            const {data: {isPreviousTrainingFinished}} = await post<any>('trainings/checkTrainings', {
+            const {data: {previousTraining}} = await post<any>('trainings/checkTrainings', {
                 userId: userId
             });
-            return isPreviousTrainingFinished;
+
+            if(Object.keys(previousTraining).length > 0) {
+                setActiveTraining(previousTraining);
+            }
         } catch (e) {
             console.log('Error: ', e);
-            return false;
         }
     }
 
@@ -211,6 +213,7 @@ const TrainingsContextProvider: React.FC = ({children}) => {
             });
 
             setTrainings(trainings);
+            setActiveTraining({} as Training);
 
 
         } catch (e) {
@@ -218,10 +221,7 @@ const TrainingsContextProvider: React.FC = ({children}) => {
         } finally {
             closeLoader();
         }
-
-
     }
-
     const startTimer = () => {
         // setInterval(() => {
         //     setTrainingTimer(prevState => prevState + 1);

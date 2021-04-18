@@ -21,9 +21,10 @@ const FinishTraining: React.FC = () => {
     console.log('active training finish: ',notFinishedExercises)
 
     const onFinishTraining = () => {
+        onCloseModal();
         completeTraining();
         history.push('/trainings/trainings-list');
-        onCloseModal();
+
     }
 
     return (

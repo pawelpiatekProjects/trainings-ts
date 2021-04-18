@@ -5,7 +5,9 @@ import {TrainingsContext} from "../../../contexts/TrainingsContext";
 
 const TrainingListController: React.FC = () => {
     const {onOpenModal} = useContext(PopUpContext);
-    const {fetchTrainings, fetchTraining, checkTrainings} = useContext(TrainingsContext);
+    const {fetchTrainings, fetchTraining, activeTraining} = useContext(TrainingsContext);
+
+    console.log('opened training: ', activeTraining);
 
     useEffect(() => {
         fetchTrainings();
@@ -13,8 +15,8 @@ const TrainingListController: React.FC = () => {
 
     const onStartNewTraining = async () => {
 
-        const isPreviousTrainingsFinished = await checkTrainings();
-        if (isPreviousTrainingsFinished) {
+        if (Object.keys(activeTraining).length <= 0) {
+            console.log('opened training length: ', Object.keys(activeTraining).length);
             onOpenModal({
                 contentType: ContentType.StartNewTraining
             })
@@ -23,7 +25,6 @@ const TrainingListController: React.FC = () => {
                 contentType: ContentType.TrainingNotFinished
             })
         }
-
     };
 
     const onOpenTrainingData = (id: string) => {
