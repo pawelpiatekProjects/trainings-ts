@@ -1,4 +1,4 @@
-<h1 align="center" style="color:#ff0000">
+<h1 align="center" style="color:#F9C409">
   ⚙ Application during development ⚙
 
 </h1>
@@ -15,7 +15,7 @@
   Project description
 </h1>
 
-This project is a React-Typescript application. This app is a gym planer. It has two main features:
+This app is a gym planer created with React.js and Typescript. This application is made for people who practice at the gym (especially powerlifting). It has two main features:
 Managing user's training plans, Creating user's trainings history
 
 
@@ -33,7 +33,7 @@ Managing user's training plans, Creating user's trainings history
         <li>User has to enter all data by himself</li>
         <li>Created plans are only available for users who created them</li>
         <ul>
-            <li style="color:#ff0000">⚙ In the future, I am going to add functionality which provides plans sharing ⚙</li>
+            <li style="color:#F9C409">⚙ In the future, I am going to add functionality which provides plans sharing ⚙</li>
         </ul>
         <li>Training plans data base is used as a template. User can start new training by picking selected training plan from 
         the list (more information in Trainings section)</li>
@@ -46,13 +46,13 @@ Managing user's training plans, Creating user's trainings history
         <li>User enter data about single series in each exercises. After confirming them, information are send to the backend and training is updating,
         </li>
     </ul>
-    <li style="color:#ff0000">Exercises data base ⚙ During development ⚙</li>
+    <li style="color:#F9C409">Exercises data base ⚙ During development ⚙</li>
     <ul>
         <li>
         In the future I want to provide feature which allows to create shared data base of exercises from which user can choose exercises during training plan creation process.
         </li>
     </ul>
-    <li style="color:#ff0000">Trainings statistics ⚙ During development ⚙</li>
+    <li style="color:#F9C409">Trainings statistics ⚙ During development ⚙</li>
     <ul>
         <li>App will collects data from completed trainings and presents them in a user-friendly way (charts etc.)</li>
         <li>User can also enter his personal records in powerlifting (squat, bench press, dead lift)</li>

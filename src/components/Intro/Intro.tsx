@@ -25,7 +25,7 @@ const Intro: React.FC<Props> = ({history}) => {
         <IntroWrapper>
             <IntroLeft>
                 <IntroLeftContent>
-                    <IntroLeftHeader>Lorem ipsum</IntroLeftHeader>
+                    <IntroLeftHeader>Welcome to Gym Planner</IntroLeftHeader>
                     <IntroLeftText>
                         Hello new user, you have come to the right place. We are glad you want to join our active
                         community. Just click the ‘Join Us’ button to start an incredible journey with us. In case you
