@@ -30,6 +30,9 @@ Managing user's training plans, Creating user's trainings history
 
 <ul>
     <li>Training plans management</li>
+    <p align="center">
+      <img  src="https://github.com/pawelpiatekProjects/trainings-ts/blob/master/training-plan.gif" width=60%/>
+    </p>
     <ul>
         <li>Each user can create their own training plans base. Each training plan consists of: Training days (template for single training unit)
         and each Training day consists of Exercises.
