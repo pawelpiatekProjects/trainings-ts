@@ -30,7 +30,7 @@ Managing user's training plans, Creating user's trainings history
 
 <ul>
     <li>Training plans management</li>
-    <p align="center">
+    <p>
       <img  src="https://github.com/pawelpiatekProjects/trainings-ts/blob/master/training-plan.gif" width=60%/>
     </p>
     <ul>
