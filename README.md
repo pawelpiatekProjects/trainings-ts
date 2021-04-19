@@ -11,6 +11,10 @@
 1. 🎨 Styled Components
 1. 🔧 Express.js - Backend in another repository [Backend](https://github.com/pawelpiatekProjects/trainingsBackend)
 
+<p align="center">
+  <img  src="https://github.com/pawelpiatekProjects/trainings-ts/blob/master/intro.gif" width=60%/>
+ </p>
+
 <h1 align="center">
   Project description
 </h1>
