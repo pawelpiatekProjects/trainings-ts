@@ -1,5 +1,6 @@
 import React, {useState, createContext} from 'react';
 import { isUserAuthenticated} from '../services/authenticationService';
+import {useHistory} from "react-router-dom";
 
 /**
  * Enum which have all available PopUpContent
@@ -20,7 +21,8 @@ export enum ContentType {
     LogOut,
     FinishTraining,
     ExitTraining,
-    TrainingNotFinished
+    TrainingNotFinished,
+    CreatedAccount
 }
 
 /**
@@ -75,12 +77,12 @@ interface ContextType {
 export const PopUpContext = createContext({} as ContextType);
 
 const PopUpContextProvider: React.FC = ({children}) => {
-
+    const history = useHistory();
     const [popUpConfig, setPopUpConfig] = useState({} as PopUpConfig);
 
     const onOpenModal = (openModalData: OpenModalData) => {
-
-        if(isUserAuthenticated()) {
+        console.log(history);
+        if(isUserAuthenticated() || history.location.pathname === '/sign-up' || history.location.pathname === '/sign-in') {
             setPopUpConfig({
                 isPopUpOpen: true,
                 content: openModalData.contentType,

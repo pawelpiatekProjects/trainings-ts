@@ -3,6 +3,8 @@ import {get, post, deleteRequest, put} from '../services/restService';
 import {getUserIdFromStorage} from '../services/authenticationService';
 import {LoaderContext} from "./LoaderContext";
 
+// todo: move emiting new toast here
+
 /**
  * Interface that includes training plan data, which are displayed in TrainingPlans.tsx component
  * */

@@ -14,6 +14,7 @@ import LogOut from "./PopUpContent/LogOut/LogOut";
 import FinishTraining from "./PopUpContent/FinishTraining/FinishTraining";
 import ExitTraining from "./PopUpContent/ExitTraining/ExitTraining";
 import OpenedTrainingAlert from "./PopUpContent/NewTraining/OpenedTrainingAlert/OpenedTrainingAlert";
+import CreatedAccount from "./PopUpContent/CreatedAccount/CreatedAccount";
 
 
 const PopUpController: React.FC = () => {
@@ -84,6 +85,10 @@ const PopUpController: React.FC = () => {
         }
         case ContentType.TrainingNotFinished: {
             contentElement = <OpenedTrainingAlert/>
+            break;
+        }
+        case ContentType.CreatedAccount: {
+            contentElement = <CreatedAccount/>
             break;
         }
     }

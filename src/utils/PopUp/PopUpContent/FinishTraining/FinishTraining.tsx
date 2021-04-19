@@ -12,30 +12,20 @@ import {PopUpContext} from "../../../../contexts/PopUpContext";
 import {useHistory} from "react-router-dom";
 
 const FinishTraining: React.FC = () => {
-    const {completeTraining, activeTraining} = useContext(TrainingsContext);
+    const {completeTraining} = useContext(TrainingsContext);
     const {onCloseModal} = useContext(PopUpContext);
     const history = useHistory();
-
-    const notFinishedExercises = activeTraining.exercises.filter(exercise => !exercise.isFinished).length;
-
-    console.log('active training finish: ',notFinishedExercises)
 
     const onFinishTraining = () => {
         onCloseModal();
         completeTraining();
         history.push('/trainings/trainings-list');
-
     }
 
     return (
         <FinishTrainingWrapper>
             <FinishTrainingHeader>Finish training</FinishTrainingHeader>
-            <FinishedTrainingParagraph>
-                {notFinishedExercises === 0 ?
-                    'Do you want to finish training?':
-                    'Are you sure, you want to finish training without finishing all exercises?'
-                }
-            </FinishedTrainingParagraph>
+            <FinishedTrainingParagraph>Do you want to finish training?</FinishedTrainingParagraph>
             <ButtonsGroup>
                 <PrimaryButton
                     onClick={() => onFinishTraining()}

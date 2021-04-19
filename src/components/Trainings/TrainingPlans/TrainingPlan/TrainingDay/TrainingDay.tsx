@@ -39,8 +39,8 @@ const TrainingDay: React.FC<Props> = ({trainingDay, onAddExercise, onDeleteTrain
             </EmptyExercisesWrapper>
         )
     } else {
-        result = trainingDay.exercises.map(exercise => (
-            <Exercise trainingDayId={trainingDay._id} exercise={exercise} key={exercise._id}/>
+        result = trainingDay.exercises.map((exercise, index) => (
+            <Exercise index={index} trainingDayId={trainingDay._id} exercise={exercise} key={exercise._id}/>
         ))
     }
 

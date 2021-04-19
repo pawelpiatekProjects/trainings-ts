@@ -2,6 +2,7 @@ import React, {createContext, useContext, useState} from 'react';
 import {post, get} from '../services/restService';
 import {getUserIdFromStorage} from '../services/authenticationService';
 import {LoaderContext} from "./LoaderContext";
+import {ToastContext} from "./ToastContext";
 
 export interface Series {
     _id: string;
@@ -71,6 +72,7 @@ export const TrainingsContext = createContext({} as ContextType);
 const TrainingsContextProvider: React.FC = ({children}) => {
 
     const {openLoader, closeLoader} = useContext(LoaderContext);
+    const {emitNewMessage} = useContext(ToastContext)
 
     const [activeTraining, setActiveTraining] = useState<Training>({} as Training);
     const [trainings, setTrainings] = useState<Training[]>([]);
@@ -169,6 +171,7 @@ const TrainingsContextProvider: React.FC = ({children}) => {
             console.log('Error: ', e);
         } finally {
             closeLoader();
+            emitNewMessage('Initialized new training');
         }
     }
 

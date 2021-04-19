@@ -59,7 +59,17 @@ const TrainingsList: React.FC<Props> = ({startNewTraining, onOpenTrainingData}) 
                                 <p>Training day</p>
                             </ListHeaderItem>
                         </ListHeader>
-                        {trainings.filter(training => training.isFinished).map(training => (
+                        {trainings.length === 0 ? (
+                            <TrainingsListEmpty>
+                                <h1>You haven't done any training yet.</h1>
+                                <PrimaryButton
+                                    color={variables.yellowPrimary}
+                                    onClick={() => startNewTraining()}
+                                >
+                                    Start new training
+                                </PrimaryButton>
+                            </TrainingsListEmpty>
+                        ) : trainings.filter(training => training.isFinished).map(training => (
                             <TrainingIntro
                                 onOpenTrainingData={onOpenTrainingData}
                                 key={training._id}

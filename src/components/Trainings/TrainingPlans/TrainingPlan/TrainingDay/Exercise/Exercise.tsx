@@ -7,10 +7,11 @@ import {ContentType, PopUpContext} from "../../../../../../contexts/PopUpContext
 
 interface Props {
     exercise: TrainingPlanExercise;
-    trainingDayId: string
+    trainingDayId: string;
+    index: number;
 }
 // TODO: add controller here
-const Exercise: React.FC<Props> = ({exercise, trainingDayId}) => {
+const Exercise: React.FC<Props> = ({exercise, trainingDayId, index}) => {
     const {onOpenModal} = useContext(PopUpContext);
 
     const onDescriptionShow = () => {
@@ -45,7 +46,7 @@ const Exercise: React.FC<Props> = ({exercise, trainingDayId}) => {
         <ExercisesWrapper>
             <ExerciseItems>
                 <ExerciseItem width={10}>
-                    <p>1.</p>
+                    <p>{index + 1}.</p>
                 </ExerciseItem>
                 <ExerciseItem width={25}>
                     <p>{exercise.exerciseName}</p>
@@ -62,7 +63,6 @@ const Exercise: React.FC<Props> = ({exercise, trainingDayId}) => {
                             <span key={index}>{num}, </span>
                         )
                     })}]</p>
-                    {/*<p>{exercise.repsInSeries}</p>*/}
 
                 </ExerciseItem>
                 <ExerciseItem width={10}>

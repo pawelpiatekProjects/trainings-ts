@@ -30,10 +30,11 @@ const App: React.FC = () => {
 
         <div className="App">
             <LoaderContextProvider>
-                <TrainingPlanContextProvider>
-                    <TrainingsContextProvider>
-                        <PopUpContextProvider>
-                            <ToastContextProvider>
+                <ToastContextProvider>
+                    <TrainingPlanContextProvider>
+                        <TrainingsContextProvider>
+                            <PopUpContextProvider>
+
                                 <Loader/>
                                 <PopUpController/>
                                 <Toast/>
@@ -87,10 +88,11 @@ const App: React.FC = () => {
                                     <Route path="/" exact component={Intro}/>
                                     <Route path="*" component={PageNotFound}/>
                                 </Switch>
-                            </ToastContextProvider>
-                        </PopUpContextProvider>
-                    </TrainingsContextProvider>
-                </TrainingPlanContextProvider>
+
+                            </PopUpContextProvider>
+                        </TrainingsContextProvider>
+                    </TrainingPlanContextProvider>
+                </ToastContextProvider>
             </LoaderContextProvider>
         </div>
     );

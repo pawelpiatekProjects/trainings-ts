@@ -4,12 +4,14 @@ import * as Yup from 'yup';
 import {post} from '../../services/restService';
 import {RouteComponentProps} from "react-router-dom";
 import {LoaderContext} from "../../contexts/LoaderContext";
+import {ContentType, PopUpContext} from "../../contexts/PopUpContext";
 
 interface Props extends RouteComponentProps{ }
 
 const SignUpController: React.FC<Props> = ({history}) => {
 
     const {openLoader, closeLoader} = useContext(LoaderContext);
+    const {onOpenModal} = useContext(PopUpContext);
 
     const SignUpSchema = Yup.object().shape({
         name: Yup.string()
@@ -51,15 +53,15 @@ const SignUpController: React.FC<Props> = ({history}) => {
             });
 
             console.log(response);
-
-            // todo: Add pop up after sign up with message and redirect button
-            history.push('/dashboard');
-
+            onOpenModal({
+                contentType: ContentType.CreatedAccount
+            });
 
         } catch (e) {
             console.log('Error: ', e);
         } finally {
             closeLoader();
+
         }
     }
     return (
