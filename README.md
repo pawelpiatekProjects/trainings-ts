@@ -47,6 +47,9 @@ Managing user's training plans, Creating user's trainings history
         <li>This feature provides also ability of editing and deleting each item (plans, training days, exercises)</li>
     </ul>
     <li>Trainings history</li>
+    <p>
+      <img  src="https://github.com/pawelpiatekProjects/trainings-ts/blob/master/trainings-list.gif" width=60%/>
+    </p>
     <ul>
         <li>After creating training plan user can start workout by choosing plan and training day. He will redirected to where 
         will be the list of exercises, which he should do during gym training session</li>
