@@ -15,7 +15,7 @@ const SignInController: React.FC<Props> = ({history}) => {
 
     const {onOpenModal} = useContext(PopUpContext);
     const {openLoader, closeLoader} = useContext(LoaderContext);
-    const {isErrorModalOpen, handleErrorModalOpen} = useContext(ErrorContext);
+    const {handleErrorModalOpen} = useContext(ErrorContext);
 
     const SignInSchema = Yup.object().shape({
         email: Yup.string()
@@ -47,10 +47,11 @@ const SignInController: React.FC<Props> = ({history}) => {
             // Adding authorization token to header
             onAddAuthorizationHeader(token);
         } catch (e) {
-            onOpenModal({
-                contentType: ContentType.Error,
-                message: 'Could not to sign in. Please check your email and password'
-            })
+            handleErrorModalOpen('error');
+            // onOpenModal({
+            //     contentType: ContentType.Error,
+            //     message: 'Could not to sign in. Please check your email and password'
+            // })
         } finally {
             closeLoader();
         }

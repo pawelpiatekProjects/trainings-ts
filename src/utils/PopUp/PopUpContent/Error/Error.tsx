@@ -4,6 +4,8 @@ import {ErrorWrapper, ErrorMessage, Button} from './ErrorStyles';
 import {PopUpContext} from "../../../../contexts/PopUpContext";
 import * as variables from '../../../../assets/styles/variables';
 
+// TODO: Remove this component
+
 const Error: React.FC = () => {
     const {popUpConfig, onCloseModal} = useContext(PopUpContext);
     const history = useHistory();

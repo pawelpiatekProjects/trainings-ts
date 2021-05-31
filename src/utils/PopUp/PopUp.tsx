@@ -1,12 +1,10 @@
 import React,{useContext} from 'react';
 import {
     PopUpWrapper,
-    PopUpContent,
-    PopUpText
-} from './PopUpStyles';
+    PopUpContent
+} from '../../assets/styles/customStylesComponents/popUp';
 import {Backdrop} from '../../assets/styles/customStylesComponents/backdrop'
 import {PopUpContext} from "../../contexts/PopUpContext";
-import {ErrorOutline} from '@material-ui/icons';
 
 interface Props {
     isOpen: boolean
