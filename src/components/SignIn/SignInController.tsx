@@ -7,6 +7,7 @@ import {storeAuthenticatedUser} from '../../services/authenticationService';
 import {ContentType, PopUpContext} from "../../contexts/PopUpContext";
 import {LoaderContext} from "../../contexts/LoaderContext";
 import {ErrorContext} from "../../contexts/ErrorContext";
+import {AxiosError} from "axios";
 
 
 interface Props extends RouteComponentProps{ }
@@ -47,11 +48,8 @@ const SignInController: React.FC<Props> = ({history}) => {
             // Adding authorization token to header
             onAddAuthorizationHeader(token);
         } catch (e) {
-            handleErrorModalOpen('error');
-            // onOpenModal({
-            //     contentType: ContentType.Error,
-            //     message: 'Could not to sign in. Please check your email and password'
-            // })
+            const error = e as AxiosError;
+            handleErrorModalOpen(error.response!.data.message);
         } finally {
             closeLoader();
         }
