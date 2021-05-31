@@ -6,6 +6,7 @@ import {RouteComponentProps} from 'react-router-dom';
 import {storeAuthenticatedUser} from '../../services/authenticationService';
 import {ContentType, PopUpContext} from "../../contexts/PopUpContext";
 import {LoaderContext} from "../../contexts/LoaderContext";
+import {ErrorContext} from "../../contexts/ErrorContext";
 
 
 interface Props extends RouteComponentProps{ }
@@ -14,6 +15,7 @@ const SignInController: React.FC<Props> = ({history}) => {
 
     const {onOpenModal} = useContext(PopUpContext);
     const {openLoader, closeLoader} = useContext(LoaderContext);
+    const {isErrorModalOpen, handleErrorModalOpen} = useContext(ErrorContext);
 
     const SignInSchema = Yup.object().shape({
         email: Yup.string()
