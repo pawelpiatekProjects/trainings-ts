@@ -2,6 +2,8 @@ import React, {createContext, useContext, useState} from 'react';
 import {get, post, deleteRequest, put} from '../services/restService';
 import {getUserIdFromStorage} from '../services/authenticationService';
 import {LoaderContext} from "./LoaderContext";
+import {ErrorContext} from "./ErrorContext";
+import {AxiosError} from "axios";
 
 // todo: move emiting new toast here
 
@@ -100,6 +102,7 @@ export const TrainingPlanContext = createContext({} as ContextType);
 const TrainingPlanContextProvider: React.FC = ({children}) => {
 
     const {openLoader, closeLoader} = useContext(LoaderContext);
+    const {handleErrorModalOpen} = useContext(ErrorContext);
 
     const [trainingPlans, setTrainingPlans] = useState<TrainingPlanIntro[]>([]);
     const [openedPlan, setOpenedPlan] = useState<TrainingPlanAll>({} as TrainingPlanAll);
@@ -115,8 +118,10 @@ const TrainingPlanContextProvider: React.FC = ({children}) => {
             setTrainingPlans(data.plans);
 
         } catch (e) {
-            console.log('Error: ', e);
-
+            handleErrorModalOpen({
+                message: 'Error occurred',
+                isCancelButton: true
+            })
         } finally {
             closeLoader();
         }
@@ -134,7 +139,10 @@ const TrainingPlanContextProvider: React.FC = ({children}) => {
             setOpenedPlan(data.plan);
 
         } catch (e) {
-            console.log('Error: ', e);
+            handleErrorModalOpen({
+                message: 'Error occurred',
+                isCancelButton: true
+            })
         } finally {
             closeLoader();
         }
@@ -157,7 +165,10 @@ const TrainingPlanContextProvider: React.FC = ({children}) => {
             });
 
         } catch (e) {
-            console.log('Error: ', e)
+            handleErrorModalOpen({
+                message: 'Error occurred',
+                isCancelButton: true
+            })
         } finally {
             const newTrainingPlans = await get<any>('plans/all');
 
@@ -181,7 +192,10 @@ const TrainingPlanContextProvider: React.FC = ({children}) => {
             });
 
         } catch (e) {
-            console.log('Error: ', e)
+            handleErrorModalOpen({
+                message: 'Error occurred',
+                isCancelButton: true
+            })
         } finally {
             const newTrainingPlans = await get<any>('plans/all');
 
@@ -208,7 +222,10 @@ const TrainingPlanContextProvider: React.FC = ({children}) => {
             });
 
         } catch (e) {
-            console.log('Error: ', e)
+            handleErrorModalOpen({
+                message: 'Error occurred',
+                isCancelButton: true
+            })
         } finally {
             const {data} = await get<any>(`plans/all/${openedPlan._id}`);
 
@@ -233,7 +250,10 @@ const TrainingPlanContextProvider: React.FC = ({children}) => {
             });
 
         } catch (e) {
-            console.log(e);
+            handleErrorModalOpen({
+                message: 'Error occurred',
+                isCancelButton: true
+            })
         } finally {
             const {data} = await get<any>(`plans/all/${openedPlan._id}`);
 
@@ -258,7 +278,10 @@ const TrainingPlanContextProvider: React.FC = ({children}) => {
             });
 
         } catch (e) {
-            console.log(e);
+            handleErrorModalOpen({
+                message: 'Error occurred',
+                isCancelButton: true
+            })
         } finally {
             const {data} = await get<any>(`plans/all/${openedPlan._id}`);
 
@@ -283,7 +306,10 @@ const TrainingPlanContextProvider: React.FC = ({children}) => {
                 name: name
             })
         } catch (e) {
-            console.log('error: ', e);
+            handleErrorModalOpen({
+                message: 'Error occurred',
+                isCancelButton: true
+            })
         } finally {
             const {data} = await get<any>(`plans/all/${openedPlan._id}`);
 

@@ -1,14 +1,11 @@
 import styled from 'styled-components';
-import * as variables from '../../assets/styles/variables';
-import {backdropZIndex} from "../../assets/styles/variables";
-import {GlassmorphismContainer} from "../../components/Dashboard/DashboardStyles";
+import * as variables from '../variables'
 
 interface IWrapper {
     isOpen: boolean;
 }
 
 export const PopUpWrapper = styled.div`
-
   transition: all .4s;
 `;
 
@@ -24,7 +21,7 @@ export const PopUpContent = styled.div<IWrapper>`
   background: ${variables.light};
   width: 40%;
   padding: 3rem;
-  z-index: ${backdropZIndex + 1};
+  z-index: ${variables.backdropZIndex + 1};
   display: flex;
   justify-content: start;
   align-items: center;

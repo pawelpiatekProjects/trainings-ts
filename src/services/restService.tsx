@@ -60,21 +60,25 @@ export function put<T>(endpoint: string, data: DataSchema) {
     });
 }
 
-instance.interceptors.response.use(response => response, error => {
-    console.log('interceptor error`: ', error);
-    if (error.response.status === 401) {
-        const refreshToken = getRefreshTokenFromStorage()!;
-        const userId = getUserIdFromStorage()!;
-        post<any>('auth/refreshToken', {
-            refrshToken: refreshToken,
-            userId: userId
-        }).then(({data: {token, refreshToken, userId}}) => {
-            clearAuthenticatedUSerData();
-            storeAuthenticatedUser(token, userId, refreshToken);
-            onAddAuthorizationHeader(token);
-        })
-
-    }
-})
+// TODO: add fix interceptor
+// instance.interceptors.response.use(response => response, error => {
+//     const token = getTokenFromStorage();
+//     console.log('token in rest service: ', token);
+//     if (token) {
+//         console.log('interceptor error`: ', error);
+//         if (error.response.status === 401 ) {
+//             const refreshToken = getRefreshTokenFromStorage()!;
+//             const userId = getUserIdFromStorage()!;
+//             post<any>('auth/refreshToken', {
+//                 refrshToken: refreshToken,
+//                 userId: userId
+//             }).then(({data: {token, refreshToken, userId}}) => {
+//                 clearAuthenticatedUSerData();
+//                 storeAuthenticatedUser(token, userId, refreshToken);
+//                 onAddAuthorizationHeader(token);
+//             })
+//         }
+//     }
+// })
 
 

@@ -5,6 +5,8 @@ import {post} from '../../services/restService';
 import {RouteComponentProps} from "react-router-dom";
 import {LoaderContext} from "../../contexts/LoaderContext";
 import {ContentType, PopUpContext} from "../../contexts/PopUpContext";
+import {AxiosError} from "axios";
+import {ErrorContext} from "../../contexts/ErrorContext";
 
 interface Props extends RouteComponentProps{ }
 
@@ -12,6 +14,7 @@ const SignUpController: React.FC<Props> = ({history}) => {
 
     const {openLoader, closeLoader} = useContext(LoaderContext);
     const {onOpenModal} = useContext(PopUpContext);
+    const {handleErrorModalOpen} = useContext(ErrorContext);
 
     const SignUpSchema = Yup.object().shape({
         name: Yup.string()
@@ -56,7 +59,12 @@ const SignUpController: React.FC<Props> = ({history}) => {
                 contentType: ContentType.CreatedAccount
             });
         } catch (e) {
-            console.log('Error: ', e);
+            const error = e as AxiosError;
+            console.log('Error: ', error.response);
+            handleErrorModalOpen({
+                message: error.response!.data.message,
+                isCancelButton: false
+            });
         } finally {
             closeLoader();
 
