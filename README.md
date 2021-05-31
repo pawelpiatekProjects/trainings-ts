@@ -19,7 +19,7 @@
   Project description
 </h1>
 
-This app is a gym planer created with React.js and Typescript. This application is made for people who practice at the gym (especially powerlifting). It has two main features:
+This app is a gym platform created with React.js and Typescript. This application is made for people who practice at the gym (especially powerlifting). It has two main features:
 Managing user's training plans, Creating user's trainings history
 
 
@@ -40,31 +40,31 @@ Managing user's training plans, Creating user's trainings history
         <li>User has to enter all data by himself</li>
         <li>Created plans are only available for users who created them</li>
         <ul>
-            <li style="color:#F9C409">⚙ In the future, I am going to add functionality which provides plans sharing ⚙</li>
+            <li style="color:#F9C409">⚙ In the future, I am going to add feature which provides plans sharing ⚙</li>
         </ul>
         <li>Training plans data base is used as a template. User can start new training by picking selected training plan from 
         the list (more information in Trainings section)</li>
-        <li>This feature provides also ability of editing and deleting each item (plans, training days, exercises)</li>
+        <li>This feature also provides an ability of editing and deleting each item (plans, training days, exercises)</li>
     </ul>
     <li>Trainings history</li>
     <p>
       <img  src="https://github.com/pawelpiatekProjects/trainings-ts/blob/master/trainings-list.gif" width=60%/>
     </p>
     <ul>
-        <li>After creating training plan user can start workout by choosing plan and training day. He will redirected to where 
-        will be the list of exercises, which he should do during gym training session</li>
+        <li>After creating training plan user can start workout by choosing plan and training day. He will be redirected to the place where the list of exercises ,
+          which he should do during gym training session will be</li>
         <li>User enter data about single series in each exercises. After confirming them, information are send to the backend and training is updating,
         </li>
     </ul>
     <li style="color:#F9C409">Exercises data base ⚙ During development ⚙</li>
     <ul>
         <li>
-        In the future I want to provide feature which allows to create shared data base of exercises from which user can choose exercises during training plan creation process.
+        In the future I want to provide feature which allows to create shared data base of exercises from user can choose exercises during training plan creation process.
         </li>
     </ul>
     <li style="color:#F9C409">Trainings statistics ⚙ During development ⚙</li>
     <ul>
-        <li>App will collects data from completed trainings and presents them in a user-friendly way (charts etc.)</li>
+        <li>App will collect data from completed trainings and present them in a user-friendly way (charts etc.)</li>
         <li>User can also enter his personal records in powerlifting (squat, bench press, dead lift)</li>
     </ul>
 </ul>
