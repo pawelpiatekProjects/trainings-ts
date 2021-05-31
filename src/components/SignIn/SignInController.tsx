@@ -1,11 +1,10 @@
 import React, {useContext} from 'react';
 import SignIn from "./SignIn";
 import * as Yup from 'yup';
-import {post} from '../../services/restService';
-import { RouteComponentProps} from 'react-router-dom';
+import {onAddAuthorizationHeader, post} from '../../services/restService';
+import {RouteComponentProps} from 'react-router-dom';
 import {storeAuthenticatedUser} from '../../services/authenticationService';
-import {onAddAuthorizationHeader} from '../../services/restService';
-import {PopUpContext} from "../../contexts/PopUpContext";
+import {ContentType, PopUpContext} from "../../contexts/PopUpContext";
 import {LoaderContext} from "../../contexts/LoaderContext";
 
 
@@ -46,9 +45,10 @@ const SignInController: React.FC<Props> = ({history}) => {
             // Adding authorization token to header
             onAddAuthorizationHeader(token);
         } catch (e) {
-            console.log('Error: ', e)
-            // TODO: add fetching http errors
-            // onOpenModal('Could not to sign in. Please check your email and password');
+            onOpenModal({
+                contentType: ContentType.Error,
+                message: 'Could not to sign in. Please check your email and password'
+            })
         } finally {
             closeLoader();
         }

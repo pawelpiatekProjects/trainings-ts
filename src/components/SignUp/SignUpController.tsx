@@ -42,7 +42,6 @@ const SignUpController: React.FC<Props> = ({history}) => {
 
      const onSignUp = async (name: string, lastName: string, userName: string, email: string, password: string) => {
         openLoader();
-
         try {
             const response = await post<any>('auth/signup', {
                 email: email,
@@ -56,7 +55,6 @@ const SignUpController: React.FC<Props> = ({history}) => {
             onOpenModal({
                 contentType: ContentType.CreatedAccount
             });
-
         } catch (e) {
             console.log('Error: ', e);
         } finally {
