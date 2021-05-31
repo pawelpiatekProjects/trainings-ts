@@ -3,6 +3,7 @@ import {post, get} from '../services/restService';
 import {getUserIdFromStorage} from '../services/authenticationService';
 import {LoaderContext} from "./LoaderContext";
 import {ToastContext} from "./ToastContext";
+import {ErrorContext} from "./ErrorContext";
 
 export interface Series {
     _id: string;
@@ -73,6 +74,7 @@ const TrainingsContextProvider: React.FC = ({children}) => {
 
     const {openLoader, closeLoader} = useContext(LoaderContext);
     const {emitNewMessage} = useContext(ToastContext)
+    const {handleErrorModalOpen} = useContext(ErrorContext);
 
     const [activeTraining, setActiveTraining] = useState<Training>({} as Training);
     const [trainings, setTrainings] = useState<Training[]>([]);
@@ -89,7 +91,10 @@ const TrainingsContextProvider: React.FC = ({children}) => {
             setTrainings(trainings);
 
         } catch (e) {
-            console.log('Error: ', e);
+            handleErrorModalOpen({
+                message: 'Error occurred',
+                isCancelButton: true
+            })
         } finally {
             closeLoader();
         }
@@ -103,7 +108,10 @@ const TrainingsContextProvider: React.FC = ({children}) => {
             setOpenedTraining(training);
 
         } catch (e) {
-            console.log('Error:', e)
+            handleErrorModalOpen({
+                message: 'Error occurred',
+                isCancelButton: true
+            })
         } finally {
             closeLoader();
         }
@@ -121,6 +129,10 @@ const TrainingsContextProvider: React.FC = ({children}) => {
             }
         } catch (e) {
             console.log('Error: ', e);
+            // handleErrorModalOpen({
+            //     message: 'Error occurred',
+            //     isCancelButton: true
+            // })
         }
     }
 
@@ -132,7 +144,10 @@ const TrainingsContextProvider: React.FC = ({children}) => {
                 userId: userId
             })
         } catch (e) {
-            console.log('Error: ', e)
+            handleErrorModalOpen({
+                message: 'Error occurred',
+                isCancelButton: true
+            })
         }
 
     }
@@ -149,7 +164,10 @@ const TrainingsContextProvider: React.FC = ({children}) => {
 
             setActiveTraining(training);
         } catch (e) {
-            console.log('Error: ', e)
+            handleErrorModalOpen({
+                message: 'Error occurred',
+                isCancelButton: true
+            })
         }
     }
 
@@ -168,7 +186,10 @@ const TrainingsContextProvider: React.FC = ({children}) => {
 
             setActiveTraining(training);
         } catch (e) {
-            console.log('Error: ', e);
+            handleErrorModalOpen({
+                message: 'Error occurred',
+                isCancelButton: true
+            })
         } finally {
             closeLoader();
             emitNewMessage('Initialized new training');

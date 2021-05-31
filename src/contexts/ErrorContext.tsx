@@ -2,9 +2,14 @@ import React, {createContext, useState} from 'react';
 
 interface ContextType {
     isErrorModalOpen: boolean;
-    errorMessage: string;
-    handleErrorModalOpen: (message: string) => void;
+    errorConfig: ErrorConfig;
+    handleErrorModalOpen: (config: ErrorConfig) => void;
     handleErrorModalClose: () => void;
+}
+
+interface ErrorConfig {
+    message: string;
+    isCancelButton: boolean;
 }
 
 export const ErrorContext = createContext({} as ContextType);
@@ -12,22 +17,29 @@ export const ErrorContext = createContext({} as ContextType);
 const  ErrorContextProvider: React.FC = ({children}) => {
 
     const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
-    const [errorMessage, setErrorMessage] = useState('');
+    const [errorConfig, setErrorConfig] = useState<ErrorConfig>({
+        message: '',
+        isCancelButton: false
+    });
 
-    const handleErrorModalOpen = (message: string) => {
+
+    const handleErrorModalOpen = (config: ErrorConfig) => {
         setIsErrorModalOpen(true);
-        setErrorMessage(message);
+        setErrorConfig(config);
     }
 
     const handleErrorModalClose = () => {
         setIsErrorModalOpen(false);
-        setErrorMessage('');
+        setErrorConfig({
+            message: '',
+            isCancelButton: false
+        });
     }
 
     return (
         <ErrorContext.Provider value={{
             isErrorModalOpen,
-            errorMessage,
+            errorConfig,
             handleErrorModalOpen,
             handleErrorModalClose
         }}>

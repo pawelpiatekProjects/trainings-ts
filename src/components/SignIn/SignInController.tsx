@@ -49,7 +49,10 @@ const SignInController: React.FC<Props> = ({history}) => {
             onAddAuthorizationHeader(token);
         } catch (e) {
             const error = e as AxiosError;
-            handleErrorModalOpen(error.response!.data.message);
+            handleErrorModalOpen({
+                message: error.response!.data.message,
+                isCancelButton: false
+            });
         } finally {
             closeLoader();
         }

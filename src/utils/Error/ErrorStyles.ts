@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 import * as variables from '../../assets/styles/variables';
 
+interface IBottomRow {
+    isOpen: boolean;
+}
+
 export const ErrorWrapper = styled.div`
   width: 100%;
   display: flex;
@@ -19,4 +23,12 @@ export const ErrorHeader = styled.h1`
 
 export const ErrorMessage = styled.p`
 
+`;
+
+export const BottomRow = styled.div<IBottomRow>`
+  display: ${props => props.isOpen ? 'flex' : 'none'};
+  margin-top: 3rem;
+  width: 100%;
+  justify-content: flex-end;
+  align-items: center;
 `;

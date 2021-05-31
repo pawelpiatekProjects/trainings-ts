@@ -61,7 +61,10 @@ const SignUpController: React.FC<Props> = ({history}) => {
         } catch (e) {
             const error = e as AxiosError;
             console.log('Error: ', error.response);
-            handleErrorModalOpen(error.response!.data.message);
+            handleErrorModalOpen({
+                message: error.response!.data.message,
+                isCancelButton: false
+            });
         } finally {
             closeLoader();
 

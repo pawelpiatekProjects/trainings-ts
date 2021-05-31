@@ -20,10 +20,10 @@ import PopUpController from "../../utils/PopUp/PopUpController";
 import TrainingPlanContextProvider from "../../contexts/TrainingPlansContext";
 import Toast from "../../utils/Toast/Toast";
 import Loader from "../../utils/Loader/Loader";
-import Error from '../../utils/Error/Error';
 import LoaderContextProvider from "../../contexts/LoaderContext";
 import TrainingsContextProvider from "../../contexts/TrainingsContext";
 import ErrorContextProvider from "../../contexts/ErrorContext";
+import ErrorController from "../../utils/Error/ErrorController";
 
 
 const App: React.FC = () => {
@@ -36,7 +36,7 @@ const App: React.FC = () => {
                         <TrainingPlanContextProvider>
                             <TrainingsContextProvider>
                                 <PopUpContextProvider>
-                                    <Error/>
+                                    <ErrorController/>
                                     <Loader/>
                                     <PopUpController/>
                                     <Toast/>
