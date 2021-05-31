@@ -11,7 +11,8 @@ interface DataSchema {
 }
 
 const instance = axios.create({
-    baseURL: 'http://localhost:8080/'
+    // baseURL: 'http://localhost:8080/'
+    baseURL: 'https://fitnao.herokuapp.com/'
 });
 
 // Adding authorization token header to axios instance after getting token
