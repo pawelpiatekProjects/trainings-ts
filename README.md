@@ -2,6 +2,7 @@
   ⚙ Application during development ⚙
 
 </h1>
+[Demo](https://epic-lewin-eb5b59.netlify.app/)
 
 <h1 align="center">
   Trainings App
