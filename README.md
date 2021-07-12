@@ -4,6 +4,12 @@
 </h1>
 <a href="https://epic-lewin-eb5b59.netlify.app/" style="text-align: center">Demo</a>
 
+<h3>Demo user</h3>
+<ul>
+  <li>email: test@email.com</li>
+  <li>password: 12345678</li>
+</ul>
+
 <h1 align="center">
   Trainings App
 </h1>
